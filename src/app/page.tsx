@@ -1,5 +1,6 @@
 // import Image from 'next/image';
-import TestComponent from '@/components/TestComponent';
+import TestComponent from '@/components/test-component';
+// import NextExample from './next-example';
 
 export default function Home() {
 	return (
@@ -7,10 +8,13 @@ export default function Home() {
 			<main className="row-start-2 flex flex-col items-center gap-8 sm:items-start">
 				<div id="next-js-boilerplate">
 					<TestComponent />
+					{/* <NextExample /> */}
 				</div>
 			</main>
 
-			<footer className="row-start-3 flex flex-wrap items-center justify-center gap-6"></footer>
+			<footer className="row-start-3 flex flex-wrap items-center justify-center gap-6">
+				footer
+			</footer>
 		</div>
 	);
 }

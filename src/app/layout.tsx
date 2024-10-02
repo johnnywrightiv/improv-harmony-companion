@@ -3,8 +3,6 @@ import localFont from 'next/font/local';
 import { Playfair_Display } from 'next/font/google'; // Example heading font
 import { Pacifico } from 'next/font/google'; // Example decorative font
 import './globals.css';
-import { ThemeProvider } from '@/components/theme-provider';
-import { ThemeToggle } from '@/components/theme-toggle-button';
 
 // Body font (Geist)
 const geistSans = localFont({
@@ -48,10 +46,7 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${pacifico.variable} font-sans antialiased`}
 			>
-				<ThemeProvider>
-					<ThemeToggle />
-					{children}
-				</ThemeProvider>
+				{children}
 			</body>
 		</html>
 	);
