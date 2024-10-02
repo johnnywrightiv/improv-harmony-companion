@@ -48,7 +48,7 @@ export default function RootLayout({
 		// can use suppressHydrationWarning if needed...
 		<html lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${pacifico.variable} font-sans antialiased`}
+				className={`bg-background ${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${pacifico.variable} font-sans antialiased`}
 			>
 				<ReduxProvider>
 					<ThemeProvider>

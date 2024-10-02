@@ -18,35 +18,35 @@ const config: Config = {
 		extend: {
 			colors: {
 				text: {
-					DEFAULT: 'var(--text)',
-					muted: 'var(--text-muted)',
+					DEFAULT: 'rgba(var(--text))', // Default text color
+					muted: 'rgba(var(--text-muted))', // Muted text color
 				},
 				background: {
-					DEFAULT: 'var(--background)',
-					muted: 'var(--background-muted)',
+					DEFAULT: 'rgba(var(--background))', // Default background color
+					muted: 'rgba(var(--background-muted))', // Muted background color
 				},
 				primary: {
-					DEFAULT: 'var(--primary)', // Default primary color
-					light: 'var(--primary-light)', // Lighter version
-					dark: 'var(--primary-dark)', // Darker version
-					muted: 'var(--primary-muted)', // Muted version
+					DEFAULT: 'rgba(var(--primary))', // Default primary color
+					light: 'rgba(var(--primary-light))', // Lighter version
+					dark: 'rgba(var(--primary-dark))', // Darker version
+					muted: 'rgba(var(--primary-muted))', // Muted version
 				},
 				secondary: {
-					DEFAULT: 'var(--secondary)', // Default secondary color
-					light: 'var(--secondary-light)', // Lighter version
-					dark: 'var(--secondary-dark)', // Darker version
-					muted: 'var(--secondary-muted)', // Muted version
+					DEFAULT: 'rgba(var(--secondary))', // Default secondary color
+					light: 'rgba(var(--secondary-light))', // Lighter version
+					dark: 'rgba(var(--secondary-dark))', // Darker version
+					muted: 'rgba(var(--secondary-muted))', // Muted version
 				},
 				accent: {
-					DEFAULT: 'var(--accent)', // Default accent color
-					light: 'var(--accent-light)', // Lighter version
-					dark: 'var(--accent-dark)', // Darker version
-					muted: 'var(--accent-muted)', // Muted version
+					DEFAULT: 'rgba(var(--accent))', // Default accent color
+					light: 'rgba(var(--accent-light))', // Lighter version
+					dark: 'rgba(var(--accent-dark))', // Darker version
+					muted: 'rgba(var(--accent-muted))', // Muted version
 				},
-				gradient: 'var(--gradient)', // Primary > Secondary, Linear 135deg
-				success: 'var(--success)',
-				error: 'var(--error)',
-				warning: 'var(--warning)',
+				gradient: 'rgba(var(--gradient))', // Primary > Secondary, Linear 135deg
+				success: 'rgba(var(--success))',
+				error: 'rgba(var(--error))',
+				warning: 'rgba(var(--warning))',
 			},
 
 			keyframes: {

@@ -5,70 +5,70 @@
 @layer base {
 	:root {
 		/* Light mode variables */
-		--text: rgba(13, 14, 17, 1); /* #0d0e11 */
-		--text-muted: rgba(155, 155, 155, 1); /* #9b9b9b */
+		--text: 13, 14, 17; /* #0d0e11 */
+		--text-muted: 155, 155, 155; /* #9b9b9b */
 
-		--background: rgba(252, 252, 252, 1); /* #fcfcfc */
-		--background-muted: rgba(240, 240, 240, 1); /* #f0f0f0 */
+		--background: 252, 252, 252; /* #fcfcfc */
+		--background-muted: 240, 240, 240; /* #f0f0f0 */
 
-		--primary: rgba(111, 126, 149, 1); /* #6f7e95 */
-		--primary-light: rgba(143, 163, 181, 1); /* #8fa3b5 */
-		--primary-dark: rgba(79, 96, 110, 1); /* #4f606e */
-		--primary-muted: rgba(163, 182, 195, 1); /* #a3b6c3 */
+		--primary: 111, 126, 149; /* #6f7e95 */
+		--primary-light: 143, 163, 181; /* #8fa3b5 */
+		--primary-dark: 79, 96, 110; /* #4f606e */
+		--primary-muted: 163, 182, 195; /* #a3b6c3 */
 
-		--secondary: rgba(181, 171, 191, 1); /* #b5abbf */
-		--secondary-light: rgba(208, 203, 214, 1); /* #d0cbd6 */
-		--secondary-dark: rgba(138, 125, 151, 1); /* #8a7d97 */
-		--secondary-muted: rgba(200, 193, 210, 1); /* #c8c1d2 */
+		--secondary: 181, 171, 191; /* #b5abbf */
+		--secondary-light: 208, 203, 214; /* #d0cbd6 */
+		--secondary-dark: 138, 125, 151; /* #8a7d97 */
+		--secondary-muted: 200, 193, 210; /* #c8c1d2 */
 
-		--accent: rgba(162, 139, 167, 1); /* #a28ba7 */
-		--accent-light: rgba(195, 176, 195, 1); /* #c3b0c3 */
-		--accent-dark: rgba(143, 109, 143, 1); /* #8f6d8f */
-		--accent-muted: rgba(210, 198, 210, 1); /* #d2c6d2 */
+		--accent: 162, 139, 167; /* #a28ba7 */
+		--accent-light: 195, 176, 195; /* #c3b0c3 */
+		--accent-dark: 143, 109, 143; /* #8f6d8f */
+		--accent-muted: 210, 198, 210; /* #d2c6d2 */
 
 		--gradient: linear-gradient(
 			135deg,
-			rgba(111, 126, 149, 1),
-			rgba(181, 171, 191, 1)
+			rgba(var(--primary)),
+			rgba(var(--secondary))
 		); /* #6f7e95 to #b5abbf */
 
-		--success: rgba(90, 196, 93, 1); /* #5ac45d */
-		--error: rgba(245, 90, 78, 1); /* #f55a4e */
-		--warning: rgba(250, 168, 38, 1); /* #ffa726 */
+		--success: 90, 196, 93; /* #5ac45d */
+		--error: 245, 90, 78; /* #f55a4e */
+		--warning: 250, 168, 38; /* #ffa726 */
 	}
 
 	.dark {
 		/* Dark mode variables */
-		--text: rgba(238, 239, 242, 1); /* #eeeff2 */
-		--text-muted: rgba(170, 170, 170, 1); /* #aaaaaa */
+		--text: 238, 239, 242; /* #eeeff2 */
+		--text-muted: 170, 170, 170; /* #aaaaaa */
 
-		--background: rgba(3, 3, 3, 1); /* #030303 */
-		--background-muted: rgba(26, 26, 26, 1); /* #1a1a1a */
+		--background: 3, 3, 3; /* #030303 */
+		--background-muted: 26, 26, 26; /* #1a1a1a */
 
-		--primary: rgba(106, 121, 144, 1); /* #6a7990 */
-		--primary-light: rgba(143, 163, 181, 1); /* #8fa3b5 */
-		--primary-dark: rgba(79, 96, 110, 1); /* #4f606e */
-		--primary-muted: rgba(163, 182, 195, 1); /* #a3b6c3 */
+		--primary: 106, 121, 144; /* #6a7990 */
+		--primary-light: 143, 163, 181; /* #8fa3b5 */
+		--primary-dark: 79, 96, 110; /* #4f606e */
+		--primary-muted: 163, 182, 195; /* #a3b6c3 */
 
-		--secondary: rgba(74, 64, 84, 1); /* #4a4054 */
-		--secondary-light: rgba(112, 103, 112, 1); /* #706770 */
-		--secondary-dark: rgba(46, 43, 53, 1); /* #2e2b35 */
-		--secondary-muted: rgba(181, 170, 177, 1); /* #b5aab1 */
+		--secondary: 74, 64, 84; /* #4a4054 */
+		--secondary-light: 112, 103, 112; /* #706770 */
+		--secondary-dark: 46, 43, 53; /* #2e2b35 */
+		--secondary-muted: 181, 170, 177; /* #b5aab1 */
 
-		--accent: rgba(111, 88, 116, 1); /* #6f5874 */
-		--accent-light: rgba(154, 130, 144, 1); /* #9a8290 */
-		--accent-dark: rgba(76, 62, 81, 1); /* #4c3e51 */
-		--accent-muted: rgba(199, 177, 199, 1); /* #c7b1c7 */
+		--accent: 111, 88, 116; /* #6f5874 */
+		--accent-light: 154, 130, 144; /* #9a8290 */
+		--accent-dark: 76, 62, 81; /* #4c3e51 */
+		--accent-muted: 199, 177, 199; /* #c7b1c7 */
 
 		--gradient: linear-gradient(
 			135deg,
-			rgba(106, 121, 144, 1),
-			rgba(74, 64, 84, 1)
+			rgba(var(--primary)),
+			rgba(var(--secondary))
 		); /* #6a7990 to #4a4054 */
 
-		--success: rgba(90, 196, 93, 1); /* #5ac45d */
-		--error: rgba(245, 90, 78, 1); /* #f55a4e */
-		--warning: rgba(250, 168, 38, 1); /* #ffa726 */
+		--success: 90, 196, 93; /* #5ac45d */
+		--error: 245, 90, 78; /* #f55a4e */
+		--warning: 250, 168, 38; /* #ffa726 */
 	}
 
 	/* Automatically style all heading tags */

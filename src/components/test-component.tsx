@@ -1,9 +1,9 @@
 export default function TestComponent() {
 	return (
-		<div className="space-y-6 p-4">
+		<div className="space-y-6 p-4 text-text">
 			<div>
-				<h1>Heading 1 (Playfair Display)</h1>
-				<h2>Heading 2 (Playfair Display)</h2>
+				<h1 className="text-primary">Heading 1 (Playfair Display)</h1>
+				<h2 className="text-secondary">Heading 2 (Playfair Display)</h2>
 				<h3>Heading 3 (Playfair Display)</h3>
 				<h4>Heading 4 (Playfair Display)</h4>
 				<h5>Heading 5 (Playfair Display)</h5>
