@@ -1,19 +1,36 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import { Playfair_Display } from 'next/font/google'; // Example heading font
+import { Pacifico } from 'next/font/google'; // Example decorative font
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { ThemeToggle } from '@/components/theme-toggle-button';
 
+// Body font (Geist)
 const geistSans = localFont({
 	src: './fonts/GeistVF.woff',
 	variable: '--font-geist-sans',
 	weight: '100 900',
 });
 
+// Mono font
 const geistMono = localFont({
 	src: './fonts/GeistMonoVF.woff',
 	variable: '--font-geist-mono',
 	weight: '100 900',
+});
+
+// Heading font
+const playfair = Playfair_Display({
+	subsets: ['latin'],
+	variable: '--font-heading',
+});
+
+// Decorative font
+const pacifico = Pacifico({
+	weight: '400',
+	subsets: ['latin'],
+	variable: '--font-decorative',
 });
 
 export const metadata: Metadata = {
@@ -27,10 +44,9 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		// can use suppressHydrationWarning if needed on html tag...
-		<html lang="en">
+		<html lang="en" suppressHydrationWarning>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+				className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${pacifico.variable} font-sans antialiased`}
 			>
 				<ThemeProvider>
 					<ThemeToggle />

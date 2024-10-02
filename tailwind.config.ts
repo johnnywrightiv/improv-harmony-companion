@@ -37,14 +37,17 @@ const config: Config = {
 					dark: 'var(--accent-dark)', // Darker version
 					muted: 'var(--accent-muted)', // Muted version
 				},
-				gradient: 'var(--gradient)', // Primary to Secondary, Linear 135deg
+				gradient: 'var(--gradient)', // Primary > Secondary, Linear 135deg
 				success: 'var(--success)',
 				error: 'var(--error)',
 				warning: 'var(--warning)',
 			},
 
 			fontFamily: {
-				sans: ['Arial', 'Helvetica', 'sans-serif'],
+				sans: ['var(--font-geist-sans)', 'Arial', 'sans-serif'],
+				mono: ['var(--font-geist-mono)', 'monospace'],
+				heading: ['var(--font-heading)', 'serif'],
+				decorative: ['var(--font-decorative)', 'cursive'],
 			},
 		},
 	},
