@@ -1,11 +1,17 @@
 // tailwind.config.ts
 import type { Config } from 'tailwindcss';
+import tailwindcssAnimate from 'tailwindcss-animate'; // Import shadcn-ui plugin
 
 const config: Config = {
 	content: [
 		'./src/pages/**/*.{js,ts,jsx,tsx,mdx}',
 		'./src/components/**/*.{js,ts,jsx,tsx,mdx}',
 		'./src/app/**/*.{js,ts,jsx,tsx,mdx}',
+		// Include the paths from shadcn (tailwind.config.js)
+		'./pages/**/*.{ts,tsx}',
+		'./components/**/*.{ts,tsx}',
+		'./app/**/*.{ts,tsx}',
+		'./src/**/*.{ts,tsx}',
 	],
 	darkMode: 'class',
 	theme: {
@@ -43,15 +49,40 @@ const config: Config = {
 				warning: 'var(--warning)',
 			},
 
-			fontFamily: {
-				sans: ['var(--font-geist-sans)', 'Arial', 'sans-serif'],
-				mono: ['var(--font-geist-mono)', 'monospace'],
-				heading: ['var(--font-heading)', 'serif'],
-				decorative: ['var(--font-decorative)', 'cursive'],
+			keyframes: {
+				// Merge animations from shadcn-ui
+				'accordion-down': {
+					from: { height: '0' }, // Use '0' as a string
+					to: { height: 'var(--radix-accordion-content-height)' }, // Keep this as is
+				},
+				'accordion-up': {
+					from: { height: 'var(--radix-accordion-content-height)' }, // Keep this as is
+					to: { height: '0' }, // Use '0' as a string
+				},
+			},
+
+			animation: {
+				'accordion-down': 'accordion-down 0.2s ease-out',
+				'accordion-up': 'accordion-up 0.2s ease-out',
 			},
 		},
+		container: {
+			center: true,
+			padding: '2rem',
+			screens: {
+				'2xl': '1400px',
+			},
+		},
+		fontFamily: {
+			sans: ['var(--font-geist-sans)', 'Arial', 'sans-serif'],
+			mono: ['var(--font-geist-mono)', 'monospace'],
+			heading: ['var(--font-heading)', 'serif'],
+			decorative: ['var(--font-decorative)', 'cursive'],
+		},
 	},
-	plugins: [],
+	plugins: [
+		tailwindcssAnimate, // Add shadcn-ui animation plugin
+	],
 };
 
 export default config;
