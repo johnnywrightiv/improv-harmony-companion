@@ -2,26 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@layer base {
+	:root {
+		/* Light mode variables */
+		--text: #0d0e11;
+		--text-muted: #9b9b9b; /* Muted text color */
+
+		--background: #fcfcfc;
+		--background-muted: #f0f0f0; /* Muted background color */
+
+		--primary: #6f7e95; /* Primary */
+		--primary-light: #8fa3b5; /* Lighter shade of primary */
+		--primary-dark: #4f606e; /* Darker shade of primary */
+		--primary-muted: #a3b6c3; /* Muted primary color */
+
+		--secondary: #b5abbf; /* Secondary */
+		--secondary-light: #d0cbd6; /* Lighter shade of secondary */
+		--secondary-dark: #8a7d97; /* Darker shade of secondary */
+		--secondary-muted: #c8c1d2; /* Muted secondary color */
+
+		--accent: #a28ba7; /* Accent */
+		--accent-light: #c3b0c3; /* Lighter shade of accent */
+		--accent-dark: #8f6d8f; /* Darker shade of accent */
+		--accent-muted: #d2c6d2; /* Muted accent color */
+
+		--gradient: linear-gradient(135deg, #6f7e95, #b5abbf);
+
+		--success: #5ac45d;
+		--error: #f55a4e;
+		--warning: #ffa726;
+	}
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+	:root {
+		/* Dark mode variables */
+		--text: #eeeff2;
+		--text-muted: #aaaaaa; /* Muted text color */
+
+		--background: #030303;
+		--background-muted: #1a1a1a; /* Muted background color */
+
+		--primary: #6a7990; /* Primary */
+		--primary-light: #8fa3b5; /* Lighter shade of primary */
+		--primary-dark: #4f606e; /* Darker shade of primary */
+		--primary-muted: #a3b6c3; /* Muted primary color */
+
+		--secondary: #4a4054; /* Secondary */
+		--secondary-light: #706770; /* Lighter shade of secondary */
+		--secondary-dark: #2e2b35; /* Darker shade of secondary */
+		--secondary-muted: #b5aab1; /* Muted secondary color */
+
+		--accent: #6f5874; /* Accent */
+		--accent-light: #9a8290; /* Lighter shade of accent */
+		--accent-dark: #4c3e51; /* Darker shade of accent */
+		--accent-muted: #c7b1c7; /* Muted accent color */
+
+		--gradient: linear-gradient(135deg, #6a7990, #4a4054);
+
+		--success: #5ac45d;
+		--error: #f55a4e;
+		--warning: #ffa726;
+	}
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+	color: var(--primary);
+	background: var(--background);
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+	.text-balance {
+		text-wrap: balance;
+	}
 }
