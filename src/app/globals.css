@@ -6,32 +6,15 @@
 	:root {
 		/* Light mode variables */
 		--text: 13, 14, 17; /* #0d0e11 */
-		--text-muted: 155, 155, 155; /* #9b9b9b */
-
 		--background: 252, 252, 252; /* #fcfcfc */
-		--background-muted: 240, 240, 240; /* #f0f0f0 */
-
 		--primary: 111, 126, 149; /* #6f7e95 */
-		--primary-light: 143, 163, 181; /* #8fa3b5 */
-		--primary-dark: 79, 96, 110; /* #4f606e */
-		--primary-muted: 163, 182, 195; /* #a3b6c3 */
-
 		--secondary: 181, 171, 191; /* #b5abbf */
-		--secondary-light: 208, 203, 214; /* #d0cbd6 */
-		--secondary-dark: 138, 125, 151; /* #8a7d97 */
-		--secondary-muted: 200, 193, 210; /* #c8c1d2 */
-
 		--accent: 162, 139, 167; /* #a28ba7 */
-		--accent-light: 195, 176, 195; /* #c3b0c3 */
-		--accent-dark: 143, 109, 143; /* #8f6d8f */
-		--accent-muted: 210, 198, 210; /* #d2c6d2 */
-
 		--gradient: linear-gradient(
 			135deg,
-			rgba(var(--primary)),
-			rgba(var(--secondary))
+			var(--primary),
+			var(--secondary)
 		); /* #6f7e95 to #b5abbf */
-
 		--success: 90, 196, 93; /* #5ac45d */
 		--error: 245, 90, 78; /* #f55a4e */
 		--warning: 250, 168, 38; /* #ffa726 */
@@ -40,32 +23,15 @@
 	.dark {
 		/* Dark mode variables */
 		--text: 238, 239, 242; /* #eeeff2 */
-		--text-muted: 170, 170, 170; /* #aaaaaa */
-
 		--background: 3, 3, 3; /* #030303 */
-		--background-muted: 26, 26, 26; /* #1a1a1a */
-
 		--primary: 106, 121, 144; /* #6a7990 */
-		--primary-light: 143, 163, 181; /* #8fa3b5 */
-		--primary-dark: 79, 96, 110; /* #4f606e */
-		--primary-muted: 163, 182, 195; /* #a3b6c3 */
-
 		--secondary: 74, 64, 84; /* #4a4054 */
-		--secondary-light: 112, 103, 112; /* #706770 */
-		--secondary-dark: 46, 43, 53; /* #2e2b35 */
-		--secondary-muted: 181, 170, 177; /* #b5aab1 */
-
 		--accent: 111, 88, 116; /* #6f5874 */
-		--accent-light: 154, 130, 144; /* #9a8290 */
-		--accent-dark: 76, 62, 81; /* #4c3e51 */
-		--accent-muted: 199, 177, 199; /* #c7b1c7 */
-
 		--gradient: linear-gradient(
 			135deg,
-			rgba(var(--primary)),
-			rgba(var(--secondary))
+			var(--primary),
+			var(--secondary)
 		); /* #6a7990 to #4a4054 */
-
 		--success: 90, 196, 93; /* #5ac45d */
 		--error: 245, 90, 78; /* #f55a4e */
 		--warning: 250, 168, 38; /* #ffa726 */

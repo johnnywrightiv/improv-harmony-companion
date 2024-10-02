@@ -43,7 +43,7 @@ const config: Config = {
 					dark: 'rgba(var(--accent-dark))', // Darker version
 					muted: 'rgba(var(--accent-muted))', // Muted version
 				},
-				gradient: 'rgba(var(--gradient))', // Primary > Secondary, Linear 135deg
+				gradient: 'var(--gradient)', // Primary > Secondary, Linear 135deg
 				success: 'rgba(var(--success))',
 				error: 'rgba(var(--error))',
 				warning: 'rgba(var(--warning))',
