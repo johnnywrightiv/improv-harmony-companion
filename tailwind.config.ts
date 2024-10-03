@@ -25,24 +25,9 @@ const config: Config = {
 					DEFAULT: 'rgba(var(--background))', // Default background color
 					muted: 'rgba(var(--background-muted))', // Muted background color
 				},
-				primary: {
-					DEFAULT: 'rgba(var(--primary))', // Default primary color
-					light: 'rgba(var(--primary-light))', // Lighter version
-					dark: 'rgba(var(--primary-dark))', // Darker version
-					muted: 'rgba(var(--primary-muted))', // Muted version
-				},
-				secondary: {
-					DEFAULT: 'rgba(var(--secondary))', // Default secondary color
-					light: 'rgba(var(--secondary-light))', // Lighter version
-					dark: 'rgba(var(--secondary-dark))', // Darker version
-					muted: 'rgba(var(--secondary-muted))', // Muted version
-				},
-				accent: {
-					DEFAULT: 'rgba(var(--accent))', // Default accent color
-					light: 'rgba(var(--accent-light))', // Lighter version
-					dark: 'rgba(var(--accent-dark))', // Darker version
-					muted: 'rgba(var(--accent-muted))', // Muted version
-				},
+				primary: 'rgba(var(--primary))', // Default primary color
+				secondary: 'rgba(var(--secondary))', // Default secondary color
+				accent: 'rgba(var(--accent))', // Default accent color
 				gradient: 'var(--gradient)', // Primary > Secondary, Linear 135deg
 				success: 'rgba(var(--success))',
 				error: 'rgba(var(--error))',

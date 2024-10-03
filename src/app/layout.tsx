@@ -1,22 +1,22 @@
 import type { Metadata } from 'next';
 import { ReduxProvider } from '@/store/provider';
 import { ThemeProvider } from '@/components/theme-provider';
-import { ThemeToggle } from '@/components/theme-toggle-button';
-import './globals.css';
+import { ThemeToggle } from '@/components/theme-toggle';
+import '../styles/globals.css';
 import localFont from 'next/font/local';
 import { Playfair_Display } from 'next/font/google'; // Example heading font
 import { Pacifico } from 'next/font/google'; // Example decorative font
 
 // Body font (Geist)
 const geistSans = localFont({
-	src: './fonts/GeistVF.woff',
+	src: 'fonts/GeistVF.woff',
 	variable: '--font-geist-sans',
 	weight: '100 900',
 });
 
 // Mono font
 const geistMono = localFont({
-	src: './fonts/GeistMonoVF.woff',
+	src: 'fonts/GeistMonoVF.woff',
 	variable: '--font-geist-mono',
 	weight: '100 900',
 });
@@ -48,10 +48,15 @@ export default function RootLayout({
 		// can use suppressHydrationWarning if needed...
 		<html lang="en">
 			<body
-				className={`bg-background ${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${pacifico.variable} font-sans antialiased`}
+				className={`bg-background text-text ${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${pacifico.variable} font-sans antialiased`}
 			>
 				<ReduxProvider>
-					<ThemeProvider>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="system"
+						enableSystem
+						disableTransitionOnChange
+					>
 						<ThemeToggle />
 						{children}
 					</ThemeProvider>

@@ -6,7 +6,9 @@
 	:root {
 		/* Light mode variables */
 		--text: 13, 14, 17; /* #0d0e11 */
+		--text-muted: 100, 100, 100; /* #646464 */
 		--background: 252, 252, 252; /* #fcfcfc */
+		--background-muted: 240, 240, 240; /* #f0f0f0 */
 		--primary: 111, 126, 149; /* #6f7e95 */
 		--secondary: 181, 171, 191; /* #b5abbf */
 		--accent: 162, 139, 167; /* #a28ba7 */
@@ -23,7 +25,9 @@
 	.dark {
 		/* Dark mode variables */
 		--text: 238, 239, 242; /* #eeeff2 */
+		--text-muted: 170, 170, 170; /* #aaaaaa */
 		--background: 3, 3, 3; /* #030303 */
+		--background-muted: 60, 60, 60; /* #3c3c3c */
 		--primary: 106, 121, 144; /* #6a7990 */
 		--secondary: 74, 64, 84; /* #4a4054 */
 		--accent: 111, 88, 116; /* #6f5874 */
@@ -77,9 +81,4 @@
 	.decorative-text {
 		@apply font-decorative text-2xl;
 	}
-}
-
-body {
-	color: var(--primary);
-	background: var(--background);
 }
