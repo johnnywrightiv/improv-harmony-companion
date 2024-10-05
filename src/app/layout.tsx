@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
 import { ReduxProvider } from '@/store/provider';
 import { ThemeProvider } from '@/components/theme-provider';
-import { ThemeToggle } from '@/components/theme-toggle';
+import NavBar from '@/components/nav-bar';
+// import { ThemeToggle } from '@/components/theme-toggle';
+
 import '../styles/globals.css';
+
 import localFont from 'next/font/local';
 import { Playfair_Display } from 'next/font/google'; // Example heading font
 import { Pacifico } from 'next/font/google'; // Example decorative font
@@ -57,7 +60,8 @@ export default function RootLayout({
 						enableSystem
 						disableTransitionOnChange
 					>
-						<ThemeToggle />
+						<NavBar />
+						{/* <ThemeToggle /> */}
 						{children}
 					</ThemeProvider>
 				</ReduxProvider>

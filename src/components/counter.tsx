@@ -2,34 +2,26 @@
 
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { increment, decrement } from '../store/counter-slice'; // Import the actions
-import { RootState } from '../store/store'; // Import RootState from your store
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { increment, decrement } from '@/store/counter-slice';
+import { RootState } from '@/store/store';
 
-const CounterComponent: React.FC = () => {
+export function Counter() {
 	const dispatch = useDispatch();
-
-	// Get the current counter value from the Redux store
 	const count = useSelector((state: RootState) => state.counter.value);
 
 	return (
-		<div style={{ textAlign: 'center', marginTop: '20px' }}>
-			<h1>Counter: {count}</h1>
-			<div>
-				<button
-					onClick={() => dispatch(decrement())}
-					style={{ padding: '10px', fontSize: '16px', marginRight: '10px' }}
-				>
-					-
-				</button>
-				<button
-					onClick={() => dispatch(increment())}
-					style={{ padding: '10px', fontSize: '16px' }}
-				>
-					+
-				</button>
-			</div>
-		</div>
+		<Card>
+			<CardHeader>
+				<CardTitle>Counter: {count}</CardTitle>
+			</CardHeader>
+			<CardContent>
+				<div className="flex justify-center gap-4">
+					<Button onClick={() => dispatch(decrement())}>-</Button>
+					<Button onClick={() => dispatch(increment())}>+</Button>
+				</div>
+			</CardContent>
+		</Card>
 	);
-};
-
-export default CounterComponent;
+}
