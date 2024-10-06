@@ -49,7 +49,7 @@ export default function RootLayout({
 }>) {
 	return (
 		// can use suppressHydrationWarning if needed...
-		<html lang="en">
+		<html suppressHydrationWarning lang="en">
 			<body
 				className={`bg-background text-text ${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${pacifico.variable} font-sans antialiased`}
 			>
