@@ -14,7 +14,7 @@ export default function Profile() {
 			<h5>User Settings</h5>
 			{/* Theme Toggle  */}
 			<ThemeToggle />
-			
+
 			{/* Sign Out Button - in user settings */}
 			<Form>
 				<form
@@ -26,7 +26,7 @@ export default function Profile() {
 					<Button
 						variant="destructive"
 						className={clsx(
-							'flex w-1/8 items-center justify-center gap-2 rounded-md p-3'
+							'w-1/8 flex items-center justify-center gap-2 rounded-md p-3'
 						)}
 						type="submit"
 					>
@@ -35,7 +35,6 @@ export default function Profile() {
 					</Button>
 				</form>
 			</Form>
-
 		</div>
 	);
 }

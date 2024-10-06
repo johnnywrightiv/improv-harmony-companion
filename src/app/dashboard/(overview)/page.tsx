@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import DashboardSkeleton from '@/app/skeletons.tsx';
+import DashboardSkeleton from '@/app/skeletons';
 import DashboardHome from '@/components/dashboard-home';
 
 const ProfilePage = () => {

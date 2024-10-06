@@ -1,7 +1,7 @@
 import AcmeLogo from '@/components/acme-logo';
 import SignupForm from '@/components/signup-form';
 import Link from 'next/link';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
 
 export default function SignupPage() {
 	return (

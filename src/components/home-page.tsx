@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import AcmeLogo from '@/components/acme-logo';
-import { Button } from './ui/button';
+import { Button } from '@/components/ui/button';
 
 export default function Home() {
 	return (
