@@ -52,7 +52,7 @@ function ColorSwatch({ color }: { color: ColorInfo }) {
 
 			const rgbMatch = colorValue.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
 			if (rgbMatch) {
-				const [_, r, g, b] = rgbMatch.map(Number);
+				const [r, g, b] = rgbMatch.map(Number);
 				const hex = rgbToHex(r, g, b);
 				setColorValues({ rgb: colorValue, hex: hex });
 			}

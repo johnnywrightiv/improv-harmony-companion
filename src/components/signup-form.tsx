@@ -11,7 +11,6 @@ import {
 	AlertCircle,
 	ArrowRight,
 	Loader2,
-	UserCircle,
 	AtSign,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
