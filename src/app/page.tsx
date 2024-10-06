@@ -3,7 +3,7 @@ import NavBar from '@/components/nav-bar';
 
 export default function Home() {
 	return (
-		<div className="flex flex-col min-h-screen container mx-auto p-8">
+		<div className="container mx-auto flex min-h-screen flex-col p-8">
 			{/* Main Content */}
 			<main className="flex-grow">
 				<NavBar />
@@ -11,7 +11,7 @@ export default function Home() {
 			</main>
 
 			{/* Footer */}
-			<footer className="mt-8 text-sm text-center text-text-muted">
+			<footer className="mt-8 text-center text-sm text-text-muted">
 				Your footer content
 			</footer>
 		</div>

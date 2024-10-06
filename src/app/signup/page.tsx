@@ -1,9 +1,9 @@
 import AcmeLogo from '@/components/acme-logo';
-import LoginForm from '@/components/login-form';
+import SignupForm from '@/components/signup-form';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 
-export default function LoginPage() {
+export default function SignupPage() {
 	return (
 		<main className="flex items-center justify-center md:h-screen">
 			<div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
@@ -12,16 +12,16 @@ export default function LoginPage() {
 						<AcmeLogo />
 					</Link>
 				</nav>
-				<LoginForm />
+				<SignupForm />
 				<nav className="mt-6 text-center text-sm">
 					<p className="text-text-muted">
-						Don&apos;t have an account?{' '}
-						<Link href="/signup" passHref legacyBehavior>
+						Already have an account?{' '}
+						<Link href="/login" passHref legacyBehavior>
 							<Button
 								variant="link"
 								className="p-0 font-medium text-primary hover:text-accent"
 							>
-								Sign up
+								Log in
 							</Button>
 						</Link>
 					</p>

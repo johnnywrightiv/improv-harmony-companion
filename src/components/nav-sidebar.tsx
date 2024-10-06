@@ -9,7 +9,6 @@ import {
 	File,
 	CircleDollarSign,
 	ChevronLeft,
-	Settings,
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
@@ -33,104 +32,123 @@ export default function NavSidebar() {
 
 	return (
 		<div
-			className={clsx('flex h-full flex-col transition-all duration-300', {
+			className={clsx('flex h-full flex-col p-2 transition-all duration-300', {
 				'md:w-64': isVisible,
-				'md:w-16': !isVisible,
+				'md:w-20': !isVisible,
 			})}
 		>
-			<div className="flex h-full flex-col px-3 py-4 md:px-2">
+			<div className="relative">
+				{/* show/hide button - only visible on md and above */}
+				<Button
+					variant="ghost"
+					onClick={() => dispatch(toggleSidebar())}
+					className={clsx(
+						'top absolute z-10 hidden rounded-full p-2 text-text hover:bg-secondary/30 md:block',
+						{
+							'right-2': isVisible,
+							'left-1/2 -translate-x-1/2': !isVisible,
+						}
+					)}
+				>
+					<ChevronLeft
+						className={clsx('h-6 w-6 transition-transform', {
+							'rotate-180': !isVisible,
+						})}
+					/>
+				</Button>
 
 				{/* Logo Section */}
-				<div className="relative mb-2 flex h-20 items-end justify-start rounded-md bg-gradient-to-br from-primary to-secondary  py-2 md:h-40">
-					<Link href="/">
+				<div
+					className={clsx(
+						'relative mb-2 flex items-center justify-center rounded-md bg-gradient-to-br from-primary to-secondary',
+						{
+							'h-40 p-1': isVisible,
+							'h-30 p-2': !isVisible,
+						}
+					)}
+				>
+					<Link
+						href="/"
+						className={clsx('flex items-center justify-center', {
+							'w-full': isVisible,
+							'mt-8 h-12 w-12 pl-2': !isVisible,
+						})}
+					>
 						<AcmeLogo isVisible={isVisible} />
 					</Link>
-										
-					{/* show/hide button - only visible on md and above */}
-					<Button
-						variant="icon"
-						onClick={() => dispatch(toggleSidebar())}
-						className={clsx(
-							'absolute top-2 hidden rounded-full p-2 text-text hover:bg-accent md:block'
-						)}
-					>
-						<ChevronLeft
-							className={clsx('h-6 w-6 transition-transform', {
-								'rotate-180': !isVisible, // Rotates the Chevron based on sidebar visibility
-							})}
-						/>
-					</Button>
-
 				</div>
+			</div>
 
-				{/* Navigation Links */}
-				<div className="flex grow flex-col justify-between">
-					<div className="hidden md:flex md:grow md:flex-col md:space-y-2">
-						{links.map((link) => {
-							const LinkIcon = link.icon;
-							return (
-								<Link
-									key={link.name}
-									href={link.href}
-									className={clsx(
-										'flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-background/muted p-3 text-sm text-primary font-medium hover:text-text md:flex-none md:justify-start md:p-2 md:px-3',
-										{
-											'bg-secondary/30 text-text': pathname === link.href,
-										}
-									)}
-								>
-									<LinkIcon className="w-6" />
-									{isVisible && <p className="hidden md:block">{link.name}</p>}
-								</Link>
-							);
-						})}
-					</div>
-
-					{/* Mobile bottom navigation */}
-					<div className="fixed bottom-0 left-0 right-0 flex flex-row justify-between space-x-2 border-t border-primary bg-background/muted p-2 md:hidden">
-						{links.map((link) => {
-							const LinkIcon = link.icon;
-							return (
-								<Link
-									key={link.name}
-									href={link.href}
-									className={clsx(
-										'flex h-[48px] grow items-center justify-center rounded-md p-3 text-sm font-medium text-primary hover:text-text hover:bg-secondary/30',
-										{
-											'bg-secondary/30 text-text': pathname === link.href,
-										}
-									)}
-								>
-									<LinkIcon className="w-6" />
-								</Link>
-							);
-						})}
-					</div>
-
-
-					{/* Sign out button - only visible on desktop */}
-					<Form>
-						<form
-							action={async () => {
-								// await signOut();
-							}}
-							className="hidden md:block"
-						>
-							<Button 
-								variant="icon" 
+			{/* Navigation Links */}
+			<div className="flex grow flex-col justify-between">
+				<div className="hidden md:flex md:grow md:flex-col md:space-y-2">
+					{links.map((link) => {
+						const LinkIcon = link.icon;
+						return (
+							<Link
+								key={link.name}
+								href={link.href}
 								className={clsx(
-									'flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium bg-background text-primary hover:text-text hover:bg-secondary/30 md:flex-none md:justify-start md:p-2 md:px-3'
+									'flex h-[48px] items-center rounded-md text-sm font-medium text-primary hover:text-text',
+									{
+										'justify-start gap-2 p-2 px-3': isVisible,
+										'justify-center p-1': !isVisible,
+										'bg-secondary/30 text-text': pathname === link.href,
+									}
 								)}
-								type="submit"
 							>
-								<CirclePower className="w-6" />
-								{isVisible && <div className="hidden md:block">Sign Out</div>}
-							</Button>
-						</form>
-					</Form>
-
-
+								<LinkIcon className="w-6" />
+								{isVisible && <p className="hidden md:block">{link.name}</p>}
+							</Link>
+						);
+					})}
 				</div>
+
+				{/* Mobile bottom navigation */}
+				<div className="bg-background/muted fixed bottom-0 left-0 right-0 flex flex-row justify-between space-x-2 border-t border-primary p-2 md:hidden">
+					{links.map((link) => {
+						const LinkIcon = link.icon;
+						return (
+							<Link
+								key={link.name}
+								href={link.href}
+								className={clsx(
+									'flex h-[48px] grow items-center justify-center rounded-md p-3 text-sm font-medium text-primary hover:bg-secondary/30 hover:text-text',
+									{
+										'bg-secondary/30 text-text': pathname === link.href,
+									}
+								)}
+							>
+								<LinkIcon className="w-6" />
+							</Link>
+						);
+					})}
+				</div>
+
+				{/* Sign out button - only visible on desktop */}
+				<Form>
+					<form
+						action={async () => {
+							// await signOut();
+						}}
+						className="hidden md:block"
+					>
+						<Button
+							variant="ghost"
+							className={clsx(
+								'flex h-[48px] w-full items-center rounded-md bg-background text-sm font-medium text-primary hover:bg-secondary/30 hover:text-text',
+								{
+									'justify-start gap-2 p-2 px-3': isVisible,
+									'justify-center p-1': !isVisible,
+								}
+							)}
+							type="submit"
+						>
+							<CirclePower className="w-6" />
+							{isVisible && <div className="hidden md:block">Sign Out</div>}
+						</Button>
+					</form>
+				</Form>
 			</div>
 		</div>
 	);

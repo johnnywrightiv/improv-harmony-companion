@@ -44,11 +44,15 @@ const config: Config = {
 					from: { height: 'var(--radix-accordion-content-height)' }, // Keep this as is
 					to: { height: '0' }, // Use '0' as a string
 				},
+				shimmer: {
+					'100%': { transform: 'translateX(100%)' },
+				},
 			},
 
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
+				shimmer: 'shimmer 2s infinite',
 			},
 		},
 		container: {

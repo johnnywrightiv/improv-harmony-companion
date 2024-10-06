@@ -1,11 +1,16 @@
 import React from 'react';
-// import NavigateButton from '@/components/navigate-button';
+import Link from 'next/link';
+import { Button } from '../components/ui/button.tsx';
 
 const NotFound = () => {
 	return (
 		<div className="flex min-h-screen flex-col items-center justify-center">
-			<h1 className="text-2xl">404 Page Not Found</h1>
-			{/* <NavigateButton route="/" label="Back to Home Page" /> */}
+			<h1>404 Page Not Found</h1>
+			<nav className="mb-8 flex justify-end">
+				<Button variant="ghost" asChild>
+					<Link href="/">Back to Home</Link>
+				</Button>
+			</nav>
 		</div>
 	);
 };

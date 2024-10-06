@@ -61,7 +61,7 @@
 	}
 
 	h3 {
-		@apply mb-2 text-2xl font-bold;
+		@apply mb-2 text-2xl font-semibold;
 	}
 
 	h4 {

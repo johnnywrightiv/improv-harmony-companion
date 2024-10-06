@@ -1,99 +1,3 @@
-// 'use client';
-
-// import { useTheme } from 'next-themes';
-// import React, { useEffect, useState } from 'react';
-
-// type ColorInfo = {
-// 	name: string;
-// 	bgClass: string;
-// 	textClass: string;
-// };
-
-// const colors: ColorInfo[] = [
-// 	{ name: 'Text', bgClass: 'bg-text', textClass: 'text-text' },
-// 	{
-// 		name: 'Background',
-// 		bgClass: 'bg-background',
-// 		textClass: 'text-background',
-// 	},
-// 	{ name: 'Primary', bgClass: 'bg-primary', textClass: 'text-primary' },
-// 	{ name: 'Success', bgClass: 'bg-success', textClass: 'text-success' },
-// 	{ name: 'Secondary', bgClass: 'bg-secondary', textClass: 'text-secondary' },
-// 	{ name: 'Warning', bgClass: 'bg-warning', textClass: 'text-warning' },
-// 	{ name: 'Accent', bgClass: 'bg-accent', textClass: 'text-accent' },
-// 	{ name: 'Error', bgClass: 'bg-error', textClass: 'text-error' },
-// ];
-
-// function rgbToHex(r: number, g: number, b: number): string {
-// 	return (
-// 		'#' +
-// 		[r, g, b]
-// 			.map((x) => {
-// 				const hex = x.toString(16);
-// 				return hex.length === 1 ? '0' + hex : hex;
-// 			})
-// 			.join('')
-// 	);
-// }
-
-// function ColorSwatch({ color }: { color: ColorInfo }) {
-// 	const { theme } = useTheme();
-// 	const [colorValues, setColorValues] = useState({ rgb: '', hex: '' });
-
-// 	useEffect(() => {
-// 		// Function to get computed color values
-// 		const updateColorValues = () => {
-// 			const testEl = document.createElement('div');
-// 			testEl.className = color.textClass;
-// 			document.body.appendChild(testEl);
-
-// 			const computedStyle = window.getComputedStyle(testEl);
-// 			const colorValue = computedStyle.color;
-// 			document.body.removeChild(testEl);
-
-// 			// Parse RGB values
-// 			const rgbMatch = colorValue.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-// 			if (rgbMatch) {
-// 				const [_, r, g, b] = rgbMatch.map(Number);
-// 				const hex = rgbToHex(r, g, b);
-// 				setColorValues({ rgb: colorValue, hex: hex });
-// 			}
-// 		};
-
-// 		updateColorValues();
-
-// 		// Optional: Update on theme change if theme change event
-// 		window.addEventListener('themeChange', updateColorValues);
-// 		return () => window.removeEventListener('themeChange', updateColorValues);
-// 	}, [color.textClass]);
-
-// 	return (
-// 		<div className="space-y-2">
-// 			<div className={`h-20 rounded-md ${color.bgClass}`} />
-// 			<p className="text-sm font-medium">{color.name}</p>
-// 			<p className="text-text-muted text-xs">
-// 				RGB: <span className={color.textClass}>{colorValues.rgb}</span>
-// 			</p>
-// 			<p className="text-text-muted text-xs">
-// 				HEX: <span className={color.textClass}>{colorValues.hex}</span>
-// 			</p>
-// 		</div>
-// 	);
-// }
-
-// export function ColorSwatches() {
-// 	return (
-// 		<div className="space-y-4">
-// 			<h2 className="text-2xl font-semibold">Colors</h2>
-// 			<div className="grid grid-cols-2 gap-4">
-// 				{colors.map((color) => (
-// 					<ColorSwatch key={color.name} color={color} />
-// 				))}
-// 			</div>
-// 		</div>
-// 	);
-// }
-
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -197,7 +101,7 @@ function ColorSwatch({ color }: { color: ColorInfo }) {
 export function ColorSwatches() {
 	return (
 		<div className="space-y-4">
-			<h2 className="text-2xl font-semibold">Colors</h2>
+			<h2>Colors</h2>
 			<div className="grid grid-cols-2 gap-4">
 				{colors.map((color) => (
 					<ColorSwatch key={color.name} color={color} />

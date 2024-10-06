@@ -1,5 +1,5 @@
-import DashboardSkeleton from '@/app/skeletons';
+import DashboardHomeSkeleton from '@/app/skeletons';
 
 export default function Loading() {
-	return <DashboardSkeleton />;
+	return <DashboardHomeSkeleton />;
 }
