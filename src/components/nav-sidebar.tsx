@@ -45,18 +45,22 @@ export default function NavSidebar() {
 					<Link href="/">
 						<AcmeLogo isVisible={isVisible} />
 					</Link>
-					
+										
 					{/* show/hide button - only visible on md and above */}
-					<button
+					<Button
+						variant="icon"
 						onClick={() => dispatch(toggleSidebar())}
-						className="absolute top-2 hidden rounded-full p-2 text-text hover:bg-accent md:block"
+						className={clsx(
+							'absolute top-2 hidden rounded-full p-2 text-text hover:bg-accent md:block'
+						)}
 					>
 						<ChevronLeft
 							className={clsx('h-6 w-6 transition-transform', {
-								'rotate-180': !isVisible,
+								'rotate-180': !isVisible, // Rotates the Chevron based on sidebar visibility
 							})}
 						/>
-					</button>
+					</Button>
+
 				</div>
 
 				{/* Navigation Links */}
@@ -113,9 +117,9 @@ export default function NavSidebar() {
 							className="hidden md:block"
 						>
 							<Button 
-								variant="ghost" 
+								variant="icon" 
 								className={clsx(
-									'flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium text-primary hover:text-text hover:bg-secondary/30 md:flex-none md:justify-start md:p-2 md:px-3'
+									'flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium bg-background text-primary hover:text-text hover:bg-secondary/30 md:flex-none md:justify-start md:p-2 md:px-3'
 								)}
 								type="submit"
 							>
