@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Play, Pause, Square } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@/components/ui/button';
+import { Toggle } from '@/components/ui/toggle';
 import { togglePlayback, setPlayback } from '@/store/playback-slice';
 import { RootState } from '@/store/store';
 
@@ -19,10 +20,12 @@ export function PlaybackControls() {
 
 	return (
 		<div className="flex gap-2">
-			<Button
+			<Toggle
 				variant="outline"
-				size="icon"
-				onClick={() => dispatch(togglePlayback())}
+				size="sm"
+				pressed={isPlaying}
+				onPressedChange={() => dispatch(togglePlayback())}
+				className="h-10 w-10"
 			>
 				{isPlaying ? (
 					<Pause className="h-[1.2rem] w-[1.2rem]" />
@@ -30,7 +33,7 @@ export function PlaybackControls() {
 					<Play className="h-[1.2rem] w-[1.2rem]" />
 				)}
 				<span className="sr-only">Toggle playback</span>
-			</Button>
+			</Toggle>
 			<Button variant="outline" size="icon" onClick={handleStop}>
 				<Square className="h-[1.2rem] w-[1.2rem]" />
 				<span className="sr-only">Stop</span>

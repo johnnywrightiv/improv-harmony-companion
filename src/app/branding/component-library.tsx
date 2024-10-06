@@ -8,7 +8,14 @@ import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardContent,CardDescription, CardFooter, CardHeader, CardTitle} from '@/components/ui/card';
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from '@/components/ui/card';
 import { Counter } from '@/components/counter';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { PlaybackControls } from '@/components/playback-controls';
@@ -29,7 +36,7 @@ export default function ComponentLibrary() {
 					<div className="space-y-6">
 						{/* Heading 1 */}
 						<div className="flex justify-between">
-							<h1 className="text-primary">Heading 1 PlayfairDisplay</h1>
+							<h1 className="text-primary">H1 (Playfair Display)</h1>
 							<p className="text-sm text-text-muted">3rem</p>
 						</div>
 
@@ -83,16 +90,15 @@ export default function ComponentLibrary() {
 
 						{/* Monospace Text */}
 						<div className="flex justify-between">
-							<p className="font-mono">Monospace Text (Geist Mono)</p>
-							<p className="text-sm text-text-muted">1rem</p>
+							<p className="font-mono text-xs">Monospace (Geist Mono)</p>
+							<p className="text-sm text-text-muted">.75rem</p>
 						</div>
-
 						{/* Decorative Text */}
 						<div className="flex justify-between">
-							<p className="decorative-text text-accent">
+							<p className="decorative-text text-xs text-accent">
 								Decorative Text (Pacifico)
 							</p>
-							<p className="text-sm text-text-muted">1.5rem</p>
+							<p className="text-sm text-text-muted">.75rem</p>
 						</div>
 					</div>
 				</div>
@@ -153,6 +159,7 @@ export default function ComponentLibrary() {
 								<CardContent className="space-y-4">
 									<div className="flex flex-wrap gap-4">
 										<Button>Default Button</Button>
+										<Button variant="test">test gradient</Button>
 										<Button variant="secondary">Secondary</Button>
 										<Button variant="destructive">Destructive</Button>
 										<Button variant="outline">Outline</Button>

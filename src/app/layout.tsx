@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { ReduxProvider } from '@/store/provider';
 import { ThemeProvider } from '@/components/theme-provider';
-import NavBar from '@/components/nav-bar';
-// import { ThemeToggle } from '@/components/theme-toggle';
+// import NavBar from '@/components/nav-bar';
+// Import Navbar here to use it across all page layouts, or use it directly on app/page.tsx to display it only on the "/" page.
 
 import '../styles/globals.css';
 
@@ -60,8 +60,7 @@ export default function RootLayout({
 						enableSystem
 						disableTransitionOnChange
 					>
-						<NavBar />
-						{/* <ThemeToggle /> */}
+						{/* <NavBar /> */}
 						{children}
 					</ThemeProvider>
 				</ReduxProvider>

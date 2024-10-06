@@ -1,12 +1,17 @@
 import HomePage from '@/components/home-page';
+import NavBar from '@/components/nav-bar';
 
 export default function Home() {
 	return (
-		<div className="container mx-auto p-8">
-			<main>
+		<div className="flex flex-col min-h-screen container mx-auto p-8">
+			{/* Main Content */}
+			<main className="flex-grow">
+				<NavBar />
 				<HomePage />
 			</main>
-			<footer className="mt-8 text-center text-text-muted">
+
+			{/* Footer */}
+			<footer className="mt-8 text-sm text-center text-text-muted">
 				Your footer content
 			</footer>
 		</div>

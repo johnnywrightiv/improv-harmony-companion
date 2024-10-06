@@ -3,6 +3,7 @@ import counterReducer from './counter-slice';
 import isPlaying from './playback-slice';
 import searchReducer from './search-slice';
 import sliderReducer from './slider-slice';
+import sidebarReducer from './sidebar-slice';
 
 export const store = configureStore({
 	reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
 		playback: isPlaying,
 		search: searchReducer,
 		slider: sliderReducer,
+		sidebar: sidebarReducer,
 	},
 });
 

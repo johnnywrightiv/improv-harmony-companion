@@ -10,7 +10,8 @@ const buttonVariants = cva(
 		variants: {
 			variant: {
 				default:
-					'bg-gradient-to-r from-cyan-500 to-blue-500 text-text hover:text-text-muted hover:bg-primary/50 active:bg-orange-500',
+					'bg-gradient-to-br from-primary to-secondary text-text hover:text-background hover:bg-primary/50 active:bg-orange-500',
+				test: 'bg-gradient-to-r from-cyan-500 to-blue-500 text-text hover:text-text-muted hover:bg-primary/50 active:bg-orange-500',
 				destructive:
 					'bg-red-500 text-slate-50 hover:bg-red-500/90 dark:bg-red-900 dark:text-slate-50 dark:hover:bg-red-900/90',
 				outline:
@@ -18,7 +19,7 @@ const buttonVariants = cva(
 				secondary:
 					'bg-slate-100 text-slate-900 hover:bg-slate-100/80 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80',
 				ghost:
-					'hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50',
+					'hover:bg-slate-100 hover:text-text-muted dark:hover:bg-slate-800 dark:hover:text-slate-50',
 				link: 'text-slate-900 underline-offset-4 hover:underline dark:text-slate-50',
 			},
 			size: {

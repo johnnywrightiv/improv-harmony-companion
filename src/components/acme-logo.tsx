@@ -1,10 +1,21 @@
 import { Earth } from 'lucide-react';
+import clsx from 'clsx';
 
-export default function AcmeLogo() {
+interface AcmeLogoProps {
+	isVisible?: boolean;
+}
+
+export default function AcmeLogo({ isVisible = true }: AcmeLogoProps) {
 	return (
-		<div className={'align-items-center flex flex-row leading-none text-white'}>
-			<Earth className="h-12 w-12 rotate-[15deg]" />
-			<h1 className="text-[42px]">Acme</h1>
+		<div className={'align-center items-start flex flex-row leading-none text-text '}>
+			<Earth className="h-12 w-12 rotate-[15deg] mr-2" />
+			<h1
+				className={clsx('text-[42px]', {
+					'md:hidden': !isVisible,
+				})}
+			>
+				Acme
+			</h1>
 		</div>
 	);
 }
