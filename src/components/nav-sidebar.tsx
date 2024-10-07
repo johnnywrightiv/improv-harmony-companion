@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import AcmeLogo from '@/components/acme-logo';
 import {
-	CirclePower,
 	CircleUser,
 	House,
 	File,
@@ -16,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleSidebar } from '@/store/sidebar-slice';
 import type { RootState } from '@/store/store';
 import { Button } from './ui/button';
-import { Form } from './ui/form';
+import { SignOut } from '@/components/sign-out';
 
 const links = [
 	{ name: 'Home', href: '/dashboard', icon: House },
@@ -126,29 +125,7 @@ export default function NavSidebar() {
 				</div>
 
 				{/* Sign out button - only visible on desktop */}
-				<Form>
-					<form
-						action={async () => {
-							// await signOut();
-						}}
-						className="hidden md:block"
-					>
-						<Button
-							variant="ghost"
-							className={clsx(
-								'flex h-[48px] w-full items-center rounded-md bg-background text-sm font-medium text-primary hover:bg-secondary/30 hover:text-text',
-								{
-									'justify-start gap-2 p-2 px-3': isVisible,
-									'justify-center p-1': !isVisible,
-								}
-							)}
-							type="submit"
-						>
-							<CirclePower className="w-6" />
-							{isVisible && <div className="hidden md:block">Sign Out</div>}
-						</Button>
-					</form>
-				</Form>
+				<SignOut />
 			</div>
 		</div>
 	);

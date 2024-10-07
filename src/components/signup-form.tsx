@@ -92,15 +92,15 @@ export default function SignupForm() {
 	}, [isAuthenticated, router]);
 
 	async function onSubmit(data: SignupFormValues) {
-  console.log('Signup submitted:', {
-    email: data.email,
-    firstName: data.firstName,
-    lastName: data.lastName,
-    username: data.username,
-    passwordLength: data.password.length, // log password length only, not the password
-  });
-    await signup(data.email, data.password, data.username);
-  }
+		console.log('Signup submitted:', {
+			email: data.email,
+			firstName: data.firstName,
+			lastName: data.lastName,
+			username: data.username,
+			passwordLength: data.password.length, // log password length only, not the password
+		});
+		await signup(data.email, data.password, data.username);
+	}
 
 	return (
 		<div className="mx-auto w-full max-w-md">
@@ -121,7 +121,7 @@ export default function SignupForm() {
 					)}
 
 					<div className="grid grid-cols-2 gap-4">
-            <FormField
+						<FormField
 							control={form.control}
 							name="firstName"
 							render={({ field }) => (
@@ -174,7 +174,7 @@ export default function SignupForm() {
 						/>
 					</div>
 
-          <FormField
+					<FormField
 						control={form.control}
 						name="username"
 						render={({ field }) => (

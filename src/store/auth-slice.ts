@@ -73,6 +73,8 @@ export const { setLoading, setError, loginSuccess, signupSuccess, logout } =
 
 // Async action creators
 export const loginUser =
+	// ESLINT RULE: bypass because "password" is used in useAuth.ts
+	// eslint-disable-next-line no-unused-vars
 	(email: string, password: string) => async (dispatch: AppDispatch) => {
 		try {
 			dispatch(setLoading(true));
