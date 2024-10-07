@@ -3,7 +3,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import {
 	Mail,
 	Key,
@@ -23,6 +24,7 @@ import {
 	FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { useAuth } from '@/lib/hooks/useAuth';
 
 // Sign-up form schema
 const signupSchema = z
@@ -68,7 +70,8 @@ const signupSchema = z
 type SignupFormValues = z.infer<typeof signupSchema>;
 
 export default function SignupForm() {
-	const [isLoading, setIsLoading] = useState(false);
+	const { signup, isLoading, error, isAuthenticated } = useAuth();
+	const router = useRouter();
 
 	const form = useForm<SignupFormValues>({
 		resolver: zodResolver(signupSchema),
@@ -82,35 +85,22 @@ export default function SignupForm() {
 		},
 	});
 
-	async function onSubmit(data: SignupFormValues) {
-		try {
-			setIsLoading(true);
-
-			// Simulate API call - replace with your actual API call
-			await new Promise((resolve) => setTimeout(resolve, 1000));
-
-			console.log('Signup submitted:', {
-				firstName: data.firstName,
-				lastName: data.lastName,
-				username: data.username,
-				email: data.email,
-				passwordLength: data.password.length, // log password length only, not the password
-			});
-
-			// Here you would typically:
-			// 1. Send data to your API
-			// 2. Handle the response
-			// 3. Store tokens/session
-			// 4. Redirect user
-		} catch (error) {
-			console.error('Signup error:', error);
-			// Here you would typically:
-			// 1. Show error message to user
-			// 2. Possibly retry the request
-		} finally {
-			setIsLoading(false);
+	useEffect(() => {
+		if (isAuthenticated) {
+			router.push('/dashboard'); // Or wherever you want to redirect after signup
 		}
-	}
+	}, [isAuthenticated, router]);
+
+	async function onSubmit(data: SignupFormValues) {
+  console.log('Signup submitted:', {
+    email: data.email,
+    firstName: data.firstName,
+    lastName: data.lastName,
+    username: data.username,
+    passwordLength: data.password.length, // log password length only, not the password
+  });
+    await signup(data.email, data.password, data.username);
+  }
 
 	return (
 		<div className="mx-auto w-full max-w-md">
@@ -123,8 +113,15 @@ export default function SignupForm() {
 						</p>
 					</div>
 
+					{error && (
+						<div className="bg-destructive/15 text-destructive flex items-center gap-2 rounded-md p-3 text-sm">
+							<AlertCircle className="h-4 w-4" />
+							{error}
+						</div>
+					)}
+
 					<div className="grid grid-cols-2 gap-4">
-						<FormField
+            <FormField
 							control={form.control}
 							name="firstName"
 							render={({ field }) => (
@@ -177,7 +174,7 @@ export default function SignupForm() {
 						/>
 					</div>
 
-					<FormField
+          <FormField
 						control={form.control}
 						name="username"
 						render={({ field }) => (

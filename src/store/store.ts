@@ -1,17 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
+import authReducer from './auth-slice';
+import sidebarReducer from './sidebar-slice';
+import searchReducer from './search-slice';
 import counterReducer from './counter-slice';
 import isPlaying from './playback-slice';
-import searchReducer from './search-slice';
-import sliderReducer from './slider-slice';
-import sidebarReducer from './sidebar-slice';
 
 export const store = configureStore({
 	reducer: {
-		counter: counterReducer,
-		playback: isPlaying,
+		auth: authReducer,
 		search: searchReducer,
-		slider: sliderReducer,
+		counter: counterReducer,
 		sidebar: sidebarReducer,
+		playback: isPlaying,
 	},
 });
 

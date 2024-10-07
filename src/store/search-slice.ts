@@ -1,25 +1,52 @@
+// import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+// interface SearchState {
+// 	value: string;
+// }
+
+// const initialState: SearchState = {
+// 	value: '',
+// };
+
+// export const searchSlice = createSlice({
+// 	name: 'search',
+// 	initialState,
+// 	reducers: {
+// 		setSearchTerm: (state, action: PayloadAction<string>) => {
+// 			state.value = action.payload;
+// 		},
+// 		clearSearch: (state) => {
+// 			state.value = '';
+// 		},
+// 	},
+// });
+
+// export const { setSearchTerm, clearSearch } = searchSlice.actions;
+// export default searchSlice.reducer;
+
+// store/search-slice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface SearchState {
-	value: string;
+	query: string;
 }
 
 const initialState: SearchState = {
-	value: '',
+	query: '', // Initial empty search query
 };
 
 export const searchSlice = createSlice({
 	name: 'search',
 	initialState,
 	reducers: {
-		setSearchTerm: (state, action: PayloadAction<string>) => {
-			state.value = action.payload;
+		setSearchQuery: (state, action: PayloadAction<string>) => {
+			state.query = action.payload;
 		},
-		clearSearch: (state) => {
-			state.value = '';
+		clearSearchQuery: (state) => {
+			state.query = '';
 		},
 	},
 });
 
-export const { setSearchTerm, clearSearch } = searchSlice.actions;
+export const { setSearchQuery, clearSearchQuery } = searchSlice.actions;
 export default searchSlice.reducer;

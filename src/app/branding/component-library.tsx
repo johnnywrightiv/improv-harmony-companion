@@ -19,6 +19,7 @@ import {
 import { Counter } from '@/components/counter';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { PlaybackControls } from '@/components/playback-controls';
+import { SearchBar } from '@/components/search-bar';
 
 export default function ComponentLibrary() {
 	return (
@@ -274,19 +275,7 @@ export default function ComponentLibrary() {
 									</CardDescription>
 								</CardHeader>
 								<CardContent>
-									<div className="space-y-2">
-										<Label htmlFor="search">Search</Label>
-										<div className="relative flex w-full max-w-sm items-center">
-											<Input
-												id="search"
-												placeholder="Search..."
-												className="pr-20"
-											/>
-											<Button className="absolute right-0 h-full rounded-l-none">
-												<Search className="h-4 w-4" />
-											</Button>
-										</div>
-									</div>
+									<SearchBar />
 								</CardContent>
 							</Card>
 						</section>
