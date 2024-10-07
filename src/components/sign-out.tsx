@@ -5,14 +5,19 @@ import { CirclePower } from 'lucide-react';
 import clsx from 'clsx';
 import type { RootState } from '@/store/store';
 import { useForm } from 'react-hook-form';
+import { useAuth } from '@/lib/hooks/useAuth';
+import { useRouter } from 'next/navigation';
 
 export function SignOut() {
 	const isVisible = useSelector((state: RootState) => state.sidebar.isVisible);
 	const form = useForm();
+	const { logout } = useAuth();
+	const router = useRouter();
 
 	const handleSignOut = async () => {
-		// Implement your sign out logic here
-		// await signOut();
+		console.log('User signed out');
+		logout();
+		router.push('/');
 	};
 
 	return (
