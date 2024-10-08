@@ -16,10 +16,12 @@ export default function LoginPage() {
 				<nav className="mt-6 text-center text-sm">
 					<p className="text-text-muted">
 						Don&apos;t have an account?{' '}
-						<Link href="/signup" passHref legacyBehavior>
+						<Link href="/signup" passHref>
 							<Button
 								variant="link"
 								className="p-0 font-medium text-primary hover:text-accent"
+								aria-label="Sign up for an account"
+								role="link"
 							>
 								Sign up
 							</Button>

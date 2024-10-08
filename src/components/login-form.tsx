@@ -207,12 +207,16 @@ export default function LoginForm() {
 							<FormItem className="flex flex-row items-start space-x-3 space-y-0">
 								<FormControl>
 									<Checkbox
+										id="rememberMe"
 										checked={field.value}
 										onCheckedChange={field.onChange}
+										role="checkbox"
+										aria-checked={field.value}
 									/>
 								</FormControl>
 								<div className="space-y-1 leading-none">
-									<FormLabel>Remember me</FormLabel>
+									<FormLabel htmlFor="rememberMe">Remember me</FormLabel>{' '}
+									{/* Use htmlFor */}
 									<FormDescription>
 										Keep me logged in for 30 days
 									</FormDescription>
@@ -221,16 +225,25 @@ export default function LoginForm() {
 						)}
 					/>
 
-					<Button type="submit" className="w-full" disabled={isLoading}>
+					<Button
+						type="submit"
+						className="w-full"
+						disabled={isLoading}
+						aria-busy={isLoading}
+						aria-label={isLoading ? 'Logging in...' : 'Login'}
+					>
 						{isLoading ? (
 							<>
-								<Loader2 className="mr-2 h-4 w-4 animate-spin" />
+								<Loader2
+									className="mr-2 h-4 w-4 animate-spin"
+									aria-hidden="true"
+								/>{' '}
 								Logging in...
 							</>
 						) : (
 							<>
 								Login
-								<ArrowRight className="ml-2 h-4 w-4" />
+								<ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />{' '}
 							</>
 						)}
 					</Button>
@@ -244,6 +257,7 @@ export default function LoginForm() {
 							Forgot password?
 						</Button>
 					</DialogTrigger>
+
 					<DialogContent>
 						<DialogHeader>
 							<DialogTitle>Reset Password</DialogTitle>
@@ -263,12 +277,14 @@ export default function LoginForm() {
 									name="email"
 									render={({ field }) => (
 										<FormItem>
-											<FormLabel>Email</FormLabel>
+											<FormLabel htmlFor="email">Email</FormLabel>
 											<FormControl>
 												<Input
+													id="email"
 													placeholder="Enter your email"
 													autoComplete="email"
 													{...field}
+													aria-required="true"
 												/>
 											</FormControl>
 											<FormMessage className="text-error" />
@@ -288,16 +304,28 @@ export default function LoginForm() {
 												variant="secondary"
 												className="w-full"
 												onClick={closeResetDialog}
+												aria-label="Close dialog"
 											>
 												Close
 											</Button>
 										</DialogClose>
 									</div>
 								) : (
-									<Button type="submit" className="w-full" disabled={isLoading}>
+									<Button
+										type="submit"
+										className="w-full"
+										disabled={isLoading}
+										aria-busy={isLoading}
+										aria-label={
+											isLoading ? 'Sending reset link...' : 'Send Reset Link'
+										}
+									>
 										{isLoading ? (
 											<>
-												<Loader2 className="mr-2 h-4 w-4 animate-spin" />
+												<Loader2
+													className="mr-2 h-4 w-4 animate-spin"
+													aria-hidden="true"
+												/>
 												Sending...
 											</>
 										) : (

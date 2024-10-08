@@ -20,6 +20,8 @@ export default function SignupPage() {
 							<Button
 								variant="link"
 								className="p-0 font-medium text-primary hover:text-accent"
+								aria-label="Log in to your account"
+								role="link"
 							>
 								Log in
 							</Button>

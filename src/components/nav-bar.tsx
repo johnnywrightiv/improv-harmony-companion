@@ -18,24 +18,39 @@ export default function NavBar() {
 	const pathname = usePathname();
 
 	return (
-		<nav className="mb-4 flex items-center justify-between rounded-b-md border-b border-background-muted px-8 py-4">
+		<nav
+			className="mb-4 flex items-center justify-between rounded-b-md border-b border-background-muted px-8 py-4"
+			aria-label="Main navigation"
+		>
 			{/* Logo Section */}
-			<Link href="/" className="cursor-pointer">
-				<Image src="/circle-logo-black.png" alt="Logo" width={40} height={40} />
+			<Link
+				href="/"
+				className="cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
+				aria-label="Go to homepage"
+			>
+				<Image src="/circle-logo-black.png" alt="" width={40} height={40} />
 			</Link>
 
 			{/* Navigation Links */}
-			<div className="flex gap-2">
+			<ul className="flex list-none gap-2" role="list">
 				{links.map((link) => (
-					<Button
-						key={link.name}
-						variant={pathname === link.href ? 'secondary' : 'ghost'}
-						asChild
-					>
-						<Link href={link.href}>{link.name}</Link>
-					</Button>
+					<li key={link.name}>
+						<Button
+							variant={pathname === link.href ? 'secondary' : 'ghost'}
+							asChild
+						>
+							<Link
+								href={link.href}
+								aria-current={pathname === link.href ? 'page' : undefined}
+								className="focus:outline-none focus:ring-2 focus:ring-primary"
+							>
+								{link.name}
+							</Link>
+						</Button>
+					</li>
 				))}
-			</div>
+			</ul>
+
 			<ThemeToggle />
 		</nav>
 	);

@@ -87,7 +87,7 @@ export default function SignupForm() {
 
 	useEffect(() => {
 		if (isAuthenticated) {
-			router.push('/dashboard'); // Or wherever you want to redirect after signup
+			router.push('/dashboard');
 		}
 	}, [isAuthenticated, router]);
 
@@ -97,7 +97,7 @@ export default function SignupForm() {
 			firstName: data.firstName,
 			lastName: data.lastName,
 			username: data.username,
-			passwordLength: data.password.length, // log password length only, not the password
+			passwordLength: data.password.length, // log password length only, not the password!
 		});
 		await signup(data.email, data.password, data.username);
 	}
@@ -280,16 +280,25 @@ export default function SignupForm() {
 						)}
 					/>
 
-					<Button type="submit" className="w-full" disabled={isLoading}>
+					<Button
+						type="submit"
+						className="w-full"
+						disabled={isLoading}
+						aria-busy={isLoading}
+						aria-label={isLoading ? 'Signing up...' : 'Sign up'}
+					>
 						{isLoading ? (
 							<>
-								<Loader2 className="mr-2 h-4 w-4 animate-spin" />
+								<Loader2
+									className="mr-2 h-4 w-4 animate-spin"
+									aria-hidden="true"
+								/>
 								Signing up...
 							</>
 						) : (
 							<>
 								Sign Up
-								<ArrowRight className="ml-2 h-4 w-4" />
+								<ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />{' '}
 							</>
 						)}
 					</Button>
