@@ -137,7 +137,7 @@ export default function SignupForm() {
 											<User className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-foreground" />
 										</div>
 									</FormControl>
-									<div className="flex gap-2 text-error">
+									<div className="flex gap-2 text-destructive">
 										{form.formState.errors.firstName && (
 											<AlertCircle className="h-4 w-4" />
 										)}
@@ -163,7 +163,7 @@ export default function SignupForm() {
 											<User className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-foreground" />
 										</div>
 									</FormControl>
-									<div className="flex gap-2 text-error">
+									<div className="flex gap-2 text-destructive">
 										{form.formState.errors.lastName && (
 											<AlertCircle className="h-4 w-4" />
 										)}
@@ -190,7 +190,7 @@ export default function SignupForm() {
 										<AtSign className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-foreground" />
 									</div>
 								</FormControl>
-								<div className="flex gap-2 text-error">
+								<div className="flex gap-2 text-destructive">
 									{form.formState.errors.username && (
 										<AlertCircle className="h-4 w-4" />
 									)}
@@ -216,7 +216,7 @@ export default function SignupForm() {
 										<Mail className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-foreground" />
 									</div>
 								</FormControl>
-								<div className="flex gap-2 text-error">
+								<div className="flex gap-2 text-destructive">
 									{form.formState.errors.email && (
 										<AlertCircle className="h-4 w-4" />
 									)}
@@ -243,7 +243,7 @@ export default function SignupForm() {
 										<Key className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-foreground" />
 									</div>
 								</FormControl>
-								<div className="flex gap-2 text-error">
+								<div className="flex gap-2 text-destructive">
 									{form.formState.errors.password && (
 										<AlertCircle className="h-4 w-4" />
 									)}
@@ -270,7 +270,7 @@ export default function SignupForm() {
 										<Key className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-foreground" />
 									</div>
 								</FormControl>
-								<div className="flex gap-2 text-error">
+								<div className="flex gap-2 text-destructive">
 									{form.formState.errors.confirmPassword && (
 										<AlertCircle className="h-4 w-4" />
 									)}

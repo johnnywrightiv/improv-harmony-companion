@@ -139,7 +139,7 @@ export default function LoginForm() {
 					</div>
 
 					{error && (
-						<div className="flex items-center gap-2 rounded-md bg-destructive/15 p-3 text-sm text-error">
+						<div className="flex items-center gap-2 rounded-md bg-destructive/15 p-3 text-sm text-destructive">
 							<AlertCircle className="h-4 w-4" />
 							{error}
 						</div>
@@ -162,7 +162,7 @@ export default function LoginForm() {
 										<Mail className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-foreground" />
 									</div>
 								</FormControl>
-								<div className="flex gap-2 text-error">
+								<div className="flex gap-2 text-destructive">
 									{form.formState.errors.email && (
 										<AlertCircle className="h-4 w-4" />
 									)}
@@ -190,7 +190,7 @@ export default function LoginForm() {
 										<Key className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-foreground" />
 									</div>
 								</FormControl>
-								<div className="flex gap-2 text-error">
+								<div className="flex gap-2 text-destructive">
 									{form.formState.errors.password && (
 										<AlertCircle className="h-4 w-4" />
 									)}
@@ -301,7 +301,7 @@ export default function LoginForm() {
 													tabIndex={0} // Ensure the input is tabbable
 												/>
 											</FormControl>
-											<FormMessage className="text-error" />
+											<FormMessage className="text-destructive" />
 										</FormItem>
 									)}
 								/>

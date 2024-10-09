@@ -6,8 +6,11 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Toggle } from '@/components/ui/toggle';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
 	Card,
 	CardContent,
@@ -16,10 +19,43 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card';
+import {
+	Form,
+	FormControl,
+	FormDescription,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
+} from '@/components/ui/form';
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+	DialogClose,
+} from '@/components/ui/dialog';
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
+import { RadioGroup, RadioGroupItem, } from '@/components/ui/radio-group';
+import { Switch } from '@/components/ui/switch';
+import { Textarea } from '@/components/ui/textarea';
+
+
 import { Counter } from '@/components/counter';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { PlaybackControls } from '@/components/playback-controls';
 import { SearchBar } from '@/components/search-bar';
+import { SignOut } from '@/components/sign-out';
+import LoginForm from '@/components/login-form';
+import SignupForm from '@/components/signup-form';
 
 export default function ComponentLibrary() {
 	return (
@@ -148,163 +184,199 @@ export default function ComponentLibrary() {
 					</TabsList>
 
 					<TabsContent value="atoms" className="space-y-8">
-						{/* Buttons Section */}
-						<section className="space-y-4">
-							<h3>Buttons</h3>
-							<Card>
-								<CardHeader>
-									<CardTitle>Button Variants</CardTitle>
-									<CardDescription>
-										Different styles of buttons for various contexts
-									</CardDescription>
-								</CardHeader>
-								<CardContent className="space-y-4">
-									<div className="flex flex-wrap gap-4">
-										<Button>Default Button</Button>
-										<Button variant="secondary">Secondary</Button>
-										<Button variant="destructive">Destructive</Button>
-										<Button variant="outline">Outline</Button>
-										<Button variant="ghost">Ghost</Button>
-									</div>
-									<div className="flex flex-wrap gap-4">
-										<Button disabled>Disabled</Button>
-										<Button size="sm">Small</Button>
-										<Button size="lg">Large</Button>
-										<Button>
-											<Search className="mr-2 h-4 w-4" /> With Icon
-										</Button>
-									</div>
-								</CardContent>
-							</Card>
-						</section>
+						{/* Buttons */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Buttons</CardTitle>
+								<CardDescription>
+									Various button styles and sizes
+								</CardDescription>
+							</CardHeader>
+							<CardContent className="space-y-4">
+								<div className="flex flex-wrap gap-4">
+									<Button>Default</Button>
+									<Button variant="secondary">Secondary</Button>
+									<Button variant="destructive">Destructive</Button>
+									<Button variant="outline">Outline</Button>
+									<Button variant="ghost">Ghost</Button>
+									<Button disabled>Disabled</Button>
+									<Button size="sm">Small</Button>
+									<Button size="lg">Large</Button>
+									<Button>
+										<Search className="mr-2 h-4 w-4" /> With Icon
+									</Button>
+								</div>
+							</CardContent>
+						</Card>
 
-						{/* Inputs Section */}
-						<section className="space-y-4">
-							<h3>Inputs & Labels</h3>
-							<div className="grid gap-4">
+						{/* Toggle */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Toggle</CardTitle>
+								<CardDescription>A two-state button</CardDescription>
+							</CardHeader>
+							<CardContent className="space-x-4">
+								<Toggle>Toggle</Toggle>
+								<Toggle defaultPressed>Pressed</Toggle>
+								<Toggle disabled>Disabled</Toggle>
+							</CardContent>
+						</Card>
+
+						{/* Inputs & Labels */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Inputs & Labels</CardTitle>
+								<CardDescription>Text input fields</CardDescription>
+							</CardHeader>
+							<CardContent className="space-y-4">
 								<Input placeholder="Default input" />
 								<Input placeholder="Disabled input" disabled />
 								<div className="space-y-2">
 									<Label htmlFor="labeled-input">Labeled Input</Label>
-									<Input id="labeled-input" placeholder="With label" />
+									<Input id="labeled-input" placeholder="Input with label" />
 								</div>
-								<div className="relative">
-									<Input placeholder="With icon" className="pl-8" />
-									<Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" />
-								</div>
-							</div>
-						</section>
+							</CardContent>
+						</Card>
 
-						{/* Sliders Section */}
-						<section className="space-y-4">
-							<h3>Sliders</h3>
-							<Card>
-								<CardHeader>
-									<CardTitle>Slider Variants</CardTitle>
-									<CardDescription>
-										Different styles and configurations of sliders
-									</CardDescription>
-								</CardHeader>
-								<CardContent className="space-y-8">
-									<div className="space-y-4">
-										<div className="space-y-2">
-											<Label>Default Slider</Label>
-											<Slider defaultValue={[50]} max={100} step={1} />
-										</div>
-										<div className="space-y-2">
-											<Label>Range Slider</Label>
-											<Slider defaultValue={[25, 75]} max={100} step={1} />
-										</div>
-										<div className="space-y-2">
-											<Label>Disabled Slider</Label>
-											<Slider defaultValue={[30]} max={100} step={1} disabled />
-										</div>
+						{/* Textarea */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Textarea</CardTitle>
+								<CardDescription>Multi-line text input field</CardDescription>
+							</CardHeader>
+							<CardContent className="space-y-4">
+								<Textarea placeholder="Type your message here." />
+							</CardContent>
+						</Card>
+
+						{/* Checkbox */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Checkbox</CardTitle>
+								<CardDescription>Selectable checkbox inputs</CardDescription>
+							</CardHeader>
+							<CardContent className="space-y-4">
+								<div className="flex items-center space-x-2">
+									<Checkbox id="terms" />
+									<Label htmlFor="terms">Accept terms and conditions</Label>
+								</div>
+								<div className="flex items-center space-x-2">
+									<Checkbox id="disabled" disabled />
+									<Label htmlFor="disabled">Disabled checkbox</Label>
+								</div>
+							</CardContent>
+						</Card>
+
+						{/* Select */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Select</CardTitle>
+								<CardDescription>Dropdown selection component</CardDescription>
+							</CardHeader>
+							<CardContent className="space-y-4">
+								<Select>
+									<SelectTrigger className="w-[180px]">
+										<SelectValue placeholder="Select a fruit" />
+									</SelectTrigger>
+									<SelectContent>
+										<SelectItem value="apple">Apple</SelectItem>
+										<SelectItem value="banana">Banana</SelectItem>
+										<SelectItem value="blueberry">Blueberry</SelectItem>
+										<SelectItem value="grapes">Grapes</SelectItem>
+										<SelectItem value="pineapple">Pineapple</SelectItem>
+									</SelectContent>
+								</Select>
+							</CardContent>
+						</Card>
+
+						{/* Switch */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Switch</CardTitle>
+								<CardDescription>Toggle switch component</CardDescription>
+							</CardHeader>
+							<CardContent className="space-y-4">
+								<div className="flex items-center space-x-2">
+									<Switch id="airplane-mode" />
+									<Label htmlFor="airplane-mode">Airplane Mode</Label>
+								</div>
+							</CardContent>
+						</Card>
+
+						{/* Radio Group */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Radio Group</CardTitle>
+								<CardDescription>Group of radio button inputs</CardDescription>
+							</CardHeader>
+
+							<CardContent className="space-y-4">
+								<RadioGroup defaultValue="comfortable">
+									<div className="flex items-center space-x-2">
+										<RadioGroupItem value="default" id="r1" />
+										<Label htmlFor="r1">Default</Label>
 									</div>
-								</CardContent>
-							</Card>
-						</section>
+									<div className="flex items-center space-x-2">
+										<RadioGroupItem value="comfortable" id="r2" />
+										<Label htmlFor="r2">Comfortable</Label>
+									</div>
+									<div className="flex items-center space-x-2">
+										<RadioGroupItem value="compact" id="r3" />
+										<Label htmlFor="r3">Compact</Label>
+									</div>
+								</RadioGroup>
+							</CardContent>
+						</Card>
 
-						{/* Alerts Section */}
-						<section className="space-y-4">
-							<h3>Alerts</h3>
-							<div className="grid gap-4">
-								<Alert>
-									<AlertTitle>Default Alert</AlertTitle>
-									<AlertDescription>
-										This is a default alert message.
-									</AlertDescription>
-								</Alert>
+						{/* Sliders */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Sliders</CardTitle>
+								<CardDescription>Range input sliders</CardDescription>
+							</CardHeader>
+							<CardContent className="space-y-4">
+								<Slider defaultValue={[50]} max={100} step={1} />
+								<Slider defaultValue={[25, 75]} max={100} step={1} />
+								<Slider defaultValue={[30]} max={100} step={1} disabled />
+							</CardContent>
+						</Card>
 
-								<Alert variant="destructive">
-									<AlertTitle>Error Alert</AlertTitle>
-									<AlertDescription>
-										This is an error alert message.
-									</AlertDescription>
-								</Alert>
+						{/* Avatar */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Avatar</CardTitle>
+								<CardDescription>
+									User profile pictures or placeholders
+								</CardDescription>
+							</CardHeader>
+							<CardContent className="flex gap-4">
+								<Avatar>
+									<AvatarImage
+										src="https://github.com/shadcn.png"
+										alt="@shadcn"
+									/>
+									<AvatarFallback>CN</AvatarFallback>
+								</Avatar>
+								<Avatar>
+									<AvatarFallback>JD</AvatarFallback>
+								</Avatar>
+							</CardContent>
+						</Card>
 
-								<Alert className="border-success bg-success/10">
-									<AlertTitle className="text-success">
-										Success Alert
-									</AlertTitle>
-									<AlertDescription>
-										This is a success alert message.
-									</AlertDescription>
-								</Alert>
-
-								<Alert className="border-warning bg-warning/10">
-									<AlertTitle className="text-warning">
-										Warning Alert
-									</AlertTitle>
-									<AlertDescription>
-										This is a warning alert message.
-									</AlertDescription>
-								</Alert>
-							</div>
-						</section>
-					</TabsContent>
-
-					<TabsContent value="molecules" className="space-y-8">
-						{/* Search Bar Molecule */}
-						<section className="space-y-4">
-							<h3>Search Bar</h3>
-							<Card>
-								<CardHeader>
-									<CardTitle>Search Component</CardTitle>
-									<CardDescription>
-										Combination of input, label, and button atoms
-									</CardDescription>
-								</CardHeader>
-								<CardContent>
-									<SearchBar />
-								</CardContent>
-							</Card>
-						</section>
-
-						{/* Counter Section */}
-						<section className="space-y-4">
-							<h3>Counter</h3>
-							<Card>
-								<CardHeader>
-									<CardTitle>Counter Component</CardTitle>
-									<CardDescription>
-										Interactive counter with Redux integration
-									</CardDescription>
-								</CardHeader>
-								<CardContent>
-									<Counter />
-								</CardContent>
-							</Card>
-						</section>
-
-						{/* Cards Section */}
-						<section className="space-y-4">
-							<h3>Cards</h3>
-							<div className="grid gap-6 md:grid-cols-2">
+						{/* Cards */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Cards</CardTitle>
+								<CardDescription>
+									Versatile container for various types of content
+								</CardDescription>
+							</CardHeader>
+							<CardContent className="space-y-4">
 								<Card>
 									<CardHeader>
 										<CardTitle>Simple Card</CardTitle>
 										<CardDescription>
-											A basic card with header only
+											A basic card with a header
 										</CardDescription>
 									</CardHeader>
 								</Card>
@@ -313,7 +385,7 @@ export default function ComponentLibrary() {
 									<CardHeader>
 										<CardTitle>Card with Content</CardTitle>
 										<CardDescription>
-											A card with header and content
+											A card with a header and content
 										</CardDescription>
 									</CardHeader>
 									<CardContent>
@@ -325,7 +397,7 @@ export default function ComponentLibrary() {
 									<CardHeader>
 										<CardTitle>Card with Footer</CardTitle>
 										<CardDescription>
-											A card with header, content, and footer
+											A card with a header, content, and footer
 										</CardDescription>
 									</CardHeader>
 									<CardContent>
@@ -348,21 +420,185 @@ export default function ComponentLibrary() {
 										<p>This card indicates an error or warning.</p>
 									</CardContent>
 								</Card>
-							</div>
-						</section>
+							</CardContent>
+						</Card>
+
+						{/* Alerts */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Alerts</CardTitle>
+								<CardDescription>Informational alert messages</CardDescription>
+							</CardHeader>
+							<CardContent className="space-y-4">
+								<Alert>
+									<AlertTitle>Default Alert</AlertTitle>
+									<AlertDescription>
+										This is a default alert message.
+									</AlertDescription>
+								</Alert>
+								<Alert className="border-error bg-error/10">
+									<AlertTitle className="text-error">Error Alert</AlertTitle>
+									<AlertDescription>
+										This is an error alert message.
+									</AlertDescription>
+								</Alert>
+								<Alert className="border-warning bg-warning/10">
+									<AlertTitle className="text-warning">
+										Warning Alert
+									</AlertTitle>
+									<AlertDescription>
+										This is a warning alert message.
+									</AlertDescription>
+								</Alert>
+								<Alert className="border-success bg-success/10">
+									<AlertTitle className="text-success">
+										Success Alert
+									</AlertTitle>
+									<AlertDescription>
+										This is a success alert message.
+									</AlertDescription>
+								</Alert>
+							</CardContent>
+						</Card>
+
+						{/* Combobox */}
+						{/* <Card>
+							<CardHeader>
+								<CardTitle>Combobox</CardTitle>
+								<CardDescription>Searchable dropdown selection</CardDescription>
+							</CardHeader>
+							<CardContent className="space-y-4">
+								<Command className="rounded-lg border shadow-md">
+									<CommandInput placeholder="Type a command or search..." />
+									<CommandEmpty>No results found.</CommandEmpty>
+									<CommandGroup heading="Suggestions">
+										<CommandItem>Calendar</CommandItem>
+										<CommandItem>Search Emoji</CommandItem>
+										<CommandItem>Calculator</CommandItem>
+									</CommandGroup>
+								</Command>
+							</CardContent>
+						</Card> */}
 					</TabsContent>
 
-					<TabsContent value="organisms" className="space-y-4">
-						<h3>Example Organism (form/modal/navbar)</h3>
-						<div>...insert code here...</div>
+					<TabsContent value="molecules" className="space-y-8">
+						{/* Search Bar */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Search Bar</CardTitle>
+								<CardDescription>
+									Combination of input and button
+								</CardDescription>
+							</CardHeader>
+							<CardContent>
+								<SearchBar />
+							</CardContent>
+						</Card>
+
+						{/* Counter */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Counter</CardTitle>
+								<CardDescription>
+									Interactive counter with Redux integration
+								</CardDescription>
+							</CardHeader>
+							<CardContent>
+								<Counter />
+							</CardContent>
+						</Card>
+
+						{/* Theme Toggle */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Theme Toggle</CardTitle>
+								<CardDescription>
+									Switch between light and dark themes
+								</CardDescription>
+							</CardHeader>
+							<CardContent>
+								<ThemeToggle />
+							</CardContent>
+						</Card>
+
+						{/* Playback Controls */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Playback Controls</CardTitle>
+								<CardDescription>
+									Audio or video playback control buttons
+								</CardDescription>
+							</CardHeader>
+							<CardContent>
+								<PlaybackControls />
+							</CardContent>
+						</Card>
+
+						{/* Dropdown Menu */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Dropdown Menu</CardTitle>
+								<CardDescription>Expandable menu with options</CardDescription>
+							</CardHeader>
+							<CardContent>
+								<DropdownMenu>
+									<DropdownMenuTrigger asChild>
+										<Button variant="outline">Open Menu</Button>
+									</DropdownMenuTrigger>
+									<DropdownMenuContent>
+										<DropdownMenuItem>Profile</DropdownMenuItem>
+										<DropdownMenuItem>Settings</DropdownMenuItem>
+										<DropdownMenuItem>Logout</DropdownMenuItem>
+									</DropdownMenuContent>
+								</DropdownMenu>
+							</CardContent>
+						</Card>
+
+						{/* Dialog */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Dialog</CardTitle>
+								<CardDescription>
+									Modal dialog for important actions
+								</CardDescription>
+							</CardHeader>
+							<CardContent>
+								<Dialog>
+									<DialogTrigger asChild>
+										<Button variant="outline">Open Dialog</Button>
+									</DialogTrigger>
+									<DialogContent>
+										<DialogHeader>
+											<DialogTitle>Are you sure?</DialogTitle>
+											<DialogDescription>
+												This action cannot be undone.
+											</DialogDescription>
+										</DialogHeader>
+										<div className="flex justify-end space-x-2">
+											<Button variant="outline">Cancel</Button>
+											<Button variant="destructive">Delete</Button>
+										</div>
+									</DialogContent>
+								</Dialog>
+							</CardContent>
+						</Card>
 					</TabsContent>
 
-					<TabsContent value="templates" className="space-y-4">
-						<h3>
-							Templates/Layouts/Skeletons (landing page, first time page,
-							practice page, settings window/page, etc.)
-						</h3>
-						<div>...insert code here...</div>
+					<TabsContent value="organisms" className="space-y-8">
+						{/* Form Example */}
+						<Card>
+							<CardHeader>
+								<CardTitle>Forms (Sign Up Form Example)</CardTitle>
+								<CardDescription>User sign up form component</CardDescription>
+							</CardHeader>
+							<CardContent>
+								<SignupForm />
+							</CardContent>
+						</Card>
+					</TabsContent>
+
+					<TabsContent value="templates" className="space-y-8">
+						nothing yet check back later
 					</TabsContent>
 				</Tabs>
 			</section>
