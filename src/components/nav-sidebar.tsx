@@ -31,10 +31,8 @@ export default function NavSidebar() {
 
 	return (
 		<nav
-			className={clsx('flex h-full flex-col p-2 transition-all duration-300', {
-				'md:w-64': isVisible,
-				'md:w-20': !isVisible,
-			})}
+			className={`flex h-full flex-col p-2 transition-all duration-300
+        ${isVisible ? 'md:w-64' : 'md:w-20'}`}
 			aria-label="Main Navigation"
 		>
 			<div className="relative">
@@ -62,7 +60,7 @@ export default function NavSidebar() {
 						'relative mb-2 flex items-center justify-center rounded-md bg-gradient-to-br from-primary to-secondary',
 						{
 							'h-40 p-1': isVisible,
-							'h-30 p-2': !isVisible,
+							'h-30	 p-2': !isVisible,
 						}
 					)}
 				>
@@ -74,7 +72,7 @@ export default function NavSidebar() {
 						})}
 						aria-label="Go to homepage"
 					>
-						<AcmeLogo isVisible={isVisible} />
+						<AcmeLogo displayText={isVisible} />
 					</Link>
 				</div>
 			</div>
@@ -91,11 +89,12 @@ export default function NavSidebar() {
 								<Link
 									href={link.href}
 									className={clsx(
-										'flex h-[48px] items-center rounded-md text-sm font-medium text-primary hover:text-text focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
+										'flex h-[48px] items-center rounded-md text-sm font-medium text-primary hover:text-text focus:outline-none focus:ring-2 focus:ring-primary',
 										{
 											'justify-start gap-2 p-2 px-3': isVisible,
 											'justify-center p-1': !isVisible,
-											'bg-secondary/30 text-text': pathname === link.href,
+											'bg-secondary/30 text-text hover:text-text':
+												pathname === link.href,
 										}
 									)}
 									aria-current={pathname === link.href ? 'page' : undefined}
@@ -111,8 +110,9 @@ export default function NavSidebar() {
 					})}
 				</ul>
 
+				{/* Mobile Dashboard Nav */}
 				<div
-					className="bg-background/muted fixed bottom-0 left-0 right-0 flex flex-row justify-between space-x-2 border-t border-primary p-2 md:hidden"
+					className="fixed bottom-0 left-0 right-0 z-10 flex flex-row justify-between space-x-2 border-t border-primary bg-background p-2 md:hidden"
 					role="navigation"
 					aria-label="Mobile Navigation"
 				>
@@ -123,7 +123,7 @@ export default function NavSidebar() {
 								key={link.name}
 								href={link.href}
 								className={clsx(
-									'flex h-[48px] grow items-center justify-center rounded-md p-3 text-sm font-medium text-primary hover:bg-secondary/30 hover:text-text focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
+									'flex h-[48px] grow items-center justify-center rounded-md p-3 text-sm font-medium text-primary hover:bg-secondary/30 hover:text-text focus:outline-none focus:ring-1 focus:ring-primary',
 									{
 										'bg-secondary/30 text-text': pathname === link.href,
 									}

@@ -1,10 +1,6 @@
-// Loading Animation
-const shimmer =
-	'before:absolute before:inset-0 before:-translate-x-full before:animate-shimmer before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent';
-
 const Skeleton = ({ className }: { className: string }) => (
 	<div
-		className={`${shimmer} ${className} relative overflow-hidden rounded-md bg-background-muted`}
+		className={`relative overflow-hidden rounded-md bg-background-muted before:absolute before:inset-0 before:-translate-x-full before:animate-shimmer before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent ${className}`}
 	/>
 );
 

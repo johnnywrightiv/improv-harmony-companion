@@ -108,13 +108,13 @@ export default function SignupForm() {
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 					<div className="space-y-2">
 						<h3 className="tracking-tight">Sign Up</h3>
-						<p className="text-muted-foreground text-sm">
+						<p className="text-sm text-muted-foreground">
 							Create an account to get started.
 						</p>
 					</div>
 
 					{error && (
-						<div className="bg-destructive/15 text-destructive flex items-center gap-2 rounded-md p-3 text-sm">
+						<div className="flex items-center gap-2 rounded-md bg-destructive/15 p-3 text-sm text-destructive">
 							<AlertCircle className="h-4 w-4" />
 							{error}
 						</div>
@@ -134,7 +134,7 @@ export default function SignupForm() {
 												{...field}
 												className="pl-10"
 											/>
-											<User className="text-muted-foreground absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2" />
+											<User className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-foreground" />
 										</div>
 									</FormControl>
 									<div className="flex gap-2 text-error">
@@ -160,7 +160,7 @@ export default function SignupForm() {
 												{...field}
 												className="pl-10"
 											/>
-											<User className="text-muted-foreground absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2" />
+											<User className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-foreground" />
 										</div>
 									</FormControl>
 									<div className="flex gap-2 text-error">
@@ -187,7 +187,7 @@ export default function SignupForm() {
 											{...field}
 											className="pl-10"
 										/>
-										<AtSign className="text-muted-foreground absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2" />
+										<AtSign className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-foreground" />
 									</div>
 								</FormControl>
 								<div className="flex gap-2 text-error">
@@ -213,7 +213,7 @@ export default function SignupForm() {
 											{...field}
 											className="pl-10"
 										/>
-										<Mail className="text-muted-foreground absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2" />
+										<Mail className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-foreground" />
 									</div>
 								</FormControl>
 								<div className="flex gap-2 text-error">
@@ -240,7 +240,7 @@ export default function SignupForm() {
 											{...field}
 											className="pl-10"
 										/>
-										<Key className="text-muted-foreground absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2" />
+										<Key className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-foreground" />
 									</div>
 								</FormControl>
 								<div className="flex gap-2 text-error">
@@ -267,7 +267,7 @@ export default function SignupForm() {
 											{...field}
 											className="pl-10"
 										/>
-										<Key className="text-muted-foreground absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2" />
+										<Key className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-foreground" />
 									</div>
 								</FormControl>
 								<div className="flex gap-2 text-error">
@@ -283,6 +283,7 @@ export default function SignupForm() {
 					<Button
 						type="submit"
 						className="w-full"
+						tabIndex={0}
 						disabled={isLoading}
 						aria-busy={isLoading}
 						aria-label={isLoading ? 'Signing up...' : 'Sign up'}

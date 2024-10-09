@@ -1,18 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import AcmeLogo from '@/components/acme-logo';
 import { Button } from '@/components/ui/button';
 
 export default function Home() {
 	return (
-		<div className="flex flex-col">
-			{/* Logo */}
-			<nav className="flex h-auto items-end rounded-lg bg-gradient-to-br from-primary to-secondary p-4">
-				<Link href="/" className="cursor-pointer">
-					<AcmeLogo />
-				</Link>
-			</nav>
-
+		<div className="">
 			{/* Main Columns */}
 			<div className="mt-4 flex grow flex-col gap-4 md:flex-row">
 				{/* Info Card */}
@@ -20,7 +12,7 @@ export default function Home() {
 					<div className="text-xl md:text-3xl md:leading-normal">
 						<h1>Welcome to Acme.</h1>
 						<span>This is the example for the </span>
-						<a href="https://nextjs.org/learn/" className="text-accent">
+						<a href="https://nextjs.org/learn/" className="text-primary">
 							Next.js Learn Course
 						</a>
 						, brought to you by Vercel.

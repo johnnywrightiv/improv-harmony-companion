@@ -133,13 +133,13 @@ export default function LoginForm() {
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 					<div className="space-y-2">
 						<h3 className="tracking-tight">Login</h3>
-						<p className="text-muted-foreground text-sm">
+						<p className="text-sm text-muted-foreground">
 							Enter your email and password to login to your account.
 						</p>
 					</div>
 
 					{error && (
-						<div className="bg-destructive/15 flex items-center gap-2 rounded-md p-3 text-sm text-error">
+						<div className="flex items-center gap-2 rounded-md bg-destructive/15 p-3 text-sm text-error">
 							<AlertCircle className="h-4 w-4" />
 							{error}
 						</div>
@@ -159,7 +159,7 @@ export default function LoginForm() {
 											{...field}
 											className="pl-10"
 										/>
-										<Mail className="text-muted-foreground absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2" />
+										<Mail className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-foreground" />
 									</div>
 								</FormControl>
 								<div className="flex gap-2 text-error">
@@ -187,7 +187,7 @@ export default function LoginForm() {
 											{...field}
 											className="pl-10"
 										/>
-										<Key className="text-muted-foreground absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2" />
+										<Key className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-foreground" />
 									</div>
 								</FormControl>
 								<div className="flex gap-2 text-error">
@@ -204,7 +204,7 @@ export default function LoginForm() {
 						control={form.control}
 						name="rememberMe"
 						render={({ field }) => (
-							<FormItem className="flex flex-row items-start space-x-3 space-y-0">
+							<FormItem className="flex cursor-pointer flex-row items-start space-x-3 space-y-0">
 								<FormControl>
 									<Checkbox
 										id="rememberMe"
@@ -212,11 +212,18 @@ export default function LoginForm() {
 										onCheckedChange={field.onChange}
 										role="checkbox"
 										aria-checked={field.value}
+										tabIndex={0} // Make it focusable via Tab
+										onKeyDown={(e) => {
+											if (e.key === ' ' || e.key === 'Enter') {
+												// Toggle checkbox on Space or Enter key
+												field.onChange(!field.value);
+												e.preventDefault(); // Prevent default behavior (scrolling)
+											}
+										}}
 									/>
 								</FormControl>
 								<div className="space-y-1 leading-none">
-									<FormLabel htmlFor="rememberMe">Remember me</FormLabel>{' '}
-									{/* Use htmlFor */}
+									<FormLabel htmlFor="rememberMe">Remember me</FormLabel>
 									<FormDescription>
 										Keep me logged in for 30 days
 									</FormDescription>
@@ -228,6 +235,7 @@ export default function LoginForm() {
 					<Button
 						type="submit"
 						className="w-full"
+						tabIndex={0}
 						disabled={isLoading}
 						aria-busy={isLoading}
 						aria-label={isLoading ? 'Logging in...' : 'Login'}
@@ -251,17 +259,22 @@ export default function LoginForm() {
 			</Form>
 
 			<div className="mt-4">
-				<Dialog open={resetDialogOpen} onOpenChange={setResetDialogOpen}>
+				<Dialog
+					open={resetDialogOpen}
+					onOpenChange={setResetDialogOpen}
+					aria-labelledby="reset-dialog-title"
+					aria-describedby="reset-dialog-description"
+				>
 					<DialogTrigger asChild>
-						<Button variant="link" className="p-0">
+						<Button variant="link" className="p-0" tabIndex={0}>
 							Forgot password?
 						</Button>
 					</DialogTrigger>
 
 					<DialogContent>
 						<DialogHeader>
-							<DialogTitle>Reset Password</DialogTitle>
-							<DialogDescription>
+							<DialogTitle id="reset-dialog-title">Reset Password</DialogTitle>
+							<DialogDescription id="reset-dialog-description">
 								Enter your email address and we&apos;ll send you a link to reset
 								your password.
 							</DialogDescription>
@@ -285,6 +298,7 @@ export default function LoginForm() {
 													autoComplete="email"
 													{...field}
 													aria-required="true"
+													tabIndex={0} // Ensure the input is tabbable
 												/>
 											</FormControl>
 											<FormMessage className="text-error" />
@@ -305,6 +319,7 @@ export default function LoginForm() {
 												className="w-full"
 												onClick={closeResetDialog}
 												aria-label="Close dialog"
+												tabIndex={0}
 											>
 												Close
 											</Button>

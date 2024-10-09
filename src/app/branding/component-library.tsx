@@ -49,7 +49,7 @@ export default function ComponentLibrary() {
 
 						{/* Heading 3 */}
 						<div className="flex justify-between">
-							<h3>Heading 3 (Playfair Display)</h3>
+							<h3 className="text-accent">Heading 3 (Playfair Display)</h3>
 							<p className="text-sm text-text-muted">1.875rem</p>
 						</div>
 
@@ -77,6 +77,14 @@ export default function ComponentLibrary() {
 							<p className="text-sm text-text-muted">1rem</p>
 						</div>
 
+						{/* Decorative Text */}
+						<div className="flex justify-between">
+							<p className="decorative-text text-sm">
+								Decorative Text (Pacifico)
+							</p>
+							<p className="text-sm text-text-muted">.875rem</p>
+						</div>
+
 						{/* Small Text */}
 						<div className="flex justify-between">
 							<p className="text-sm">Small Text (Geist Sans)</p>
@@ -92,13 +100,6 @@ export default function ComponentLibrary() {
 						{/* Monospace Text */}
 						<div className="flex justify-between">
 							<p className="font-mono text-xs">Monospace (Geist Mono)</p>
-							<p className="text-sm text-text-muted">.75rem</p>
-						</div>
-						{/* Decorative Text */}
-						<div className="flex justify-between">
-							<p className="decorative-text text-xs text-accent">
-								Decorative Text (Pacifico)
-							</p>
 							<p className="text-sm text-text-muted">.75rem</p>
 						</div>
 					</div>
@@ -160,7 +161,6 @@ export default function ComponentLibrary() {
 								<CardContent className="space-y-4">
 									<div className="flex flex-wrap gap-4">
 										<Button>Default Button</Button>
-										<Button variant="test">test gradient</Button>
 										<Button variant="secondary">Secondary</Button>
 										<Button variant="destructive">Destructive</Button>
 										<Button variant="outline">Outline</Button>
