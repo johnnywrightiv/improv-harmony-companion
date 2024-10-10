@@ -15,14 +15,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleSidebar } from '@/store/sidebar-slice';
 import type { RootState } from '@/store/store';
 import { Button } from './ui/button';
-import { SignOut } from '@/components/sign-out';
 
-const links = [
+const mainLinks = [
 	{ name: 'Home', href: '/dashboard', icon: House },
 	{ name: 'Orders', href: '/dashboard/orders', icon: CircleDollarSign },
 	{ name: 'Invoices', href: '/dashboard/invoices', icon: File },
-	{ name: 'Profile', href: '/dashboard/profile', icon: CircleUser },
 ];
+
+const profileLink = {
+	name: 'Profile',
+	href: '/dashboard/profile',
+	icon: CircleUser,
+};
 
 export default function NavSidebar() {
 	const pathname = usePathname();
@@ -78,11 +82,9 @@ export default function NavSidebar() {
 			</div>
 
 			<div className="flex grow flex-col justify-between">
-				<ul
-					className="hidden md:flex md:grow md:flex-col md:space-y-2"
-					role="list"
-				>
-					{links.map((link) => {
+				{/* Main links */}
+				<ul className="hidden md:flex md:flex-col md:space-y-2" role="list">
+					{mainLinks.map((link) => {
 						const LinkIcon = link.icon;
 						return (
 							<li key={link.name}>
@@ -110,13 +112,36 @@ export default function NavSidebar() {
 					})}
 				</ul>
 
+				{/* Profile link at bottom */}
+				<div className="hidden md:block">
+					<Link
+						href={profileLink.href}
+						className={clsx(
+							'flex h-[48px] items-center rounded-md text-sm font-medium text-primary hover:text-text focus:outline-none focus:ring-2 focus:ring-primary',
+							{
+								'justify-start gap-2 p-2 px-3': isVisible,
+								'justify-center p-1': !isVisible,
+								'bg-secondary/30 text-text hover:text-text':
+									pathname === profileLink.href,
+							}
+						)}
+						aria-current={pathname === profileLink.href ? 'page' : undefined}
+					>
+						<profileLink.icon className="w-6" aria-hidden="true" />
+						{isVisible && (
+							<span className="hidden md:block">{profileLink.name}</span>
+						)}
+						<span className="sr-only">{profileLink.name}</span>
+					</Link>
+				</div>
+
 				{/* Mobile Dashboard Nav */}
 				<div
 					className="fixed bottom-0 left-0 right-0 z-10 flex flex-row justify-between space-x-2 border-t border-primary bg-background p-2 md:hidden"
 					role="navigation"
 					aria-label="Mobile Navigation"
 				>
-					{links.map((link) => {
+					{[...mainLinks, profileLink].map((link) => {
 						const LinkIcon = link.icon;
 						return (
 							<Link
@@ -136,8 +161,6 @@ export default function NavSidebar() {
 						);
 					})}
 				</div>
-
-				<SignOut />
 			</div>
 		</nav>
 	);
