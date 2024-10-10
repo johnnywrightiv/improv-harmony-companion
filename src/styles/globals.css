@@ -22,6 +22,10 @@
 		--accent-foreground: 347 5% 15%;
 		--destructive: 0 50% 50%;
 		--destructive-foreground: 347 5% 90%;
+		--warning: 36 100% 46%;
+		--warning-foreground: 347 5% 90%;
+		--success: 123 52% 47%;
+		--success-foreground: 347 5% 90%;
 		--border: 347 20% 59%;
 		--input: 347 20% 50%;
 		--ring: 347 53% 49%;
@@ -30,11 +34,6 @@
 		--chart-3: 7 70% 60%; /* Red-orange */
 		--chart-4: 327 30% 40%; /* Muted pink */
 		--chart-5: 347 40% 70%; /* Light pink */
-
-		/* State variables */
-		--success: 123 52% 57%;
-		--error: 5 89% 63%;
-		--warning: 36 100% 56%;
 
 		/* Additional variables for Tailwind config */
 		--text: 347 5% 10%;
@@ -67,6 +66,10 @@
 		--accent-foreground: 347 5% 90%;
 		--destructive: 0 50% 50%;
 		--destructive-foreground: 347 5% 90%;
+		--warning: 36 100% 45%;
+		--warning-foreground: 347 5% 90%;
+		--success: 123 52% 46%;
+		--success-foreground: 347 5% 90%;
 		--border: 347 20% 50%;
 		--input: 347 20% 50%;
 		--ring: 347 53% 49%;
@@ -75,11 +78,6 @@
 		--chart-3: 7 80% 50%; /* Bright red-orange */
 		--chart-4: 327 40% 50%; /* Deep pink */
 		--chart-5: 347 50% 60%; /* Soft pink */
-
-		/* State variables */
-		--success: 123 52% 47%;
-		--error: 5 89% 53%;
-		--warning: 36 100% 46%;
 
 		/* Additional variables for Tailwind config */
 		--text: 347 5% 90%;

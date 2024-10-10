@@ -22,7 +22,7 @@ export function SearchBar() {
 
 	return (
 		<div className="space-y-2">
-			<Label htmlFor="search">Search</Label>
+			{/* <Label htmlFor="search">Search</Label> */}
 			<div className="relative flex w-full max-w-sm items-center">
 				<Input
 					id="search"

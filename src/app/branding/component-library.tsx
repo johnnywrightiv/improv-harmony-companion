@@ -11,23 +11,16 @@ import { Toggle } from '@/components/ui/toggle';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Switch } from '@/components/ui/switch';
+import { Textarea } from '@/components/ui/textarea';
 import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from '@/components/ui/card';
-import {
-	Form,
-	FormControl,
-	FormDescription,
-	FormField,
-	FormItem,
-	FormLabel,
-	FormMessage,
-} from '@/components/ui/form';
+	Select,
+	SelectTrigger,
+	SelectValue,
+	SelectContent,
+	SelectItem,
+} from '@/components/ui/select';
 import {
 	Dialog,
 	DialogContent,
@@ -35,7 +28,6 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-	DialogClose,
 } from '@/components/ui/dialog';
 import {
 	DropdownMenu,
@@ -43,104 +35,117 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
-import { RadioGroup, RadioGroupItem, } from '@/components/ui/radio-group';
-import { Switch } from '@/components/ui/switch';
-import { Textarea } from '@/components/ui/textarea';
-
 
 import { Counter } from '@/components/counter';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { PlaybackControls } from '@/components/playback-controls';
 import { SearchBar } from '@/components/search-bar';
 import { SignOut } from '@/components/sign-out';
-import LoginForm from '@/components/login-form';
-import SignupForm from '@/components/signup-form';
+import {
+	Card,
+	CardContent,
+	CardHeader,
+	CardTitle,
+	CardDescription,
+	CardFooter,
+} from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
 
 export default function ComponentLibrary() {
 	return (
 		<div className="space-y-8 p-4">
-			{/* Color Section */}
-			<section className="grid grid-cols-2 gap-8">
-				<div className="space-y-4">
+			{/* Color & Type Section */}
+			<section className="flex">
+				<div className="w-1/2 pr-8">
+					<h2 className="mb-4 text-2xl font-bold">Color Swatches</h2>
 					<ColorSwatches />
 				</div>
 
+				<div>
+					<Separator orientation="vertical" />
+				</div>
+
 				{/* Typography Section */}
-				<div className="space-y-6 p-4 text-text">
-					<h2 className="mb-4">Typography</h2>
+				<div className="w-1/2 space-y-6 pl-8">
+					<h2 className="mb-4 text-2xl font-bold">Typography</h2>
 
 					<div className="space-y-6">
 						{/* Heading 1 */}
 						<div className="flex justify-between">
-							<h1 className="text-primary">H1 (Playfair Display)</h1>
-							<p className="text-sm text-text-muted">3rem</p>
+							<h1 className="text-3xl text-primary">H1 (Playfair Display)</h1>
+							<p className="text-sm text-muted-foreground">3rem</p>
 						</div>
 
 						{/* Heading 2 */}
 						<div className="flex justify-between">
-							<h2 className="text-secondary">Heading 2 (Playfair Display)</h2>
-							<p className="text-sm text-text-muted">2.25rem</p>
+							<h2 className="text-2xl text-secondary">
+								Heading 2 (Playfair Display)
+							</h2>
+							<p className="text-sm text-muted-foreground">2.25rem</p>
 						</div>
 
 						{/* Heading 3 */}
 						<div className="flex justify-between">
-							<h3 className="text-accent">Heading 3 (Playfair Display)</h3>
-							<p className="text-sm text-text-muted">1.875rem</p>
+							<h3 className="text-xl text-accent">
+								Heading 3 (Playfair Display)
+							</h3>
+							<p className="text-sm text-muted-foreground">1.875rem</p>
 						</div>
 
 						{/* Heading 4 */}
 						<div className="flex justify-between">
-							<h4>Heading 4 (Playfair Display)</h4>
-							<p className="text-sm text-text-muted">1.5rem</p>
+							<h4 className="text-lg">Heading 4 (Playfair Display)</h4>
+							<p className="text-sm text-muted-foreground">1.5rem</p>
 						</div>
 
 						{/* Heading 5 */}
 						<div className="flex justify-between">
-							<h5>Heading 5 (Playfair Display)</h5>
-							<p className="text-sm text-text-muted">1.25rem</p>
+							<h5 className="text-base">Heading 5 (Playfair Display)</h5>
+							<p className="text-sm text-muted-foreground">1.25rem</p>
 						</div>
 
 						{/* Heading 6 */}
 						<div className="flex justify-between">
-							<h6>Heading 6 (Playfair Display)</h6>
-							<p className="text-sm text-text-muted">1rem</p>
+							<h6 className="text-sm">Heading 6 (Playfair Display)</h6>
+							<p className="text-sm text-muted-foreground">1rem</p>
 						</div>
 
 						{/* Body Text */}
 						<div className="flex justify-between">
 							<p>Body Text (Geist Sans)</p>
-							<p className="text-sm text-text-muted">1rem</p>
+							<p className="text-sm text-muted-foreground">1rem</p>
 						</div>
 
 						{/* Decorative Text */}
 						<div className="flex justify-between">
-							<p className="decorative-text text-sm">
+							<p className="font-decorative text-sm">
 								Decorative Text (Pacifico)
 							</p>
-							<p className="text-sm text-text-muted">.875rem</p>
+							<p className="text-sm text-muted-foreground">.875rem</p>
 						</div>
 
 						{/* Small Text */}
 						<div className="flex justify-between">
 							<p className="text-sm">Small Text (Geist Sans)</p>
-							<p className="text-sm text-text-muted">.875rem</p>
+							<p className="text-sm text-muted-foreground">.875rem</p>
 						</div>
 
 						{/* XS Text */}
 						<div className="flex justify-between">
 							<p className="text-xs">Extra Small Text (Geist Sans)</p>
-							<p className="text-sm text-text-muted">.75rem</p>
+							<p className="text-sm text-muted-foreground">.75rem</p>
 						</div>
 
 						{/* Monospace Text */}
 						<div className="flex justify-between">
 							<p className="font-mono text-xs">Monospace (Geist Mono)</p>
-							<p className="text-sm text-text-muted">.75rem</p>
+							<p className="text-sm text-muted-foreground">.75rem</p>
 						</div>
 					</div>
 				</div>
 			</section>
+
+			<Separator orientation={'horizontal'} />
 
 			{/* Assets Section */}
 			<section className="space-y-4">
@@ -152,9 +157,9 @@ export default function ComponentLibrary() {
 						<p className="text-sm text-text-muted">Primary logo usage</p>
 					</div>
 
-					{/* Controls/Icons section */}
+					{/* Icons & Controls section */}
 					<div>
-						<h3>Icons</h3>
+						<h3>Icons & Controls</h3>
 						<div className="flex gap-4">
 							<ThemeToggle />
 							<PlaybackControls />
@@ -172,145 +177,231 @@ export default function ComponentLibrary() {
 				</div>
 			</section>
 
-			{/* Atomic Design Components */}
-			<section className="space-y-4">
-				<h2>Components</h2>
-				<Tabs defaultValue="atoms" className="w-full">
-					<TabsList>
-						<TabsTrigger value="atoms">Atoms</TabsTrigger>
-						<TabsTrigger value="molecules">Molecules</TabsTrigger>
-						<TabsTrigger value="organisms">Organisms</TabsTrigger>
-						<TabsTrigger value="templates">Templates</TabsTrigger>
-					</TabsList>
+			<Separator orientation={'horizontal'} />
 
-					<TabsContent value="atoms" className="space-y-8">
-						{/* Buttons */}
-						<Card>
+			{/* Atomic Design UI Components Section */}
+			<div className="space-y-8 p-4">
+				<h1 className="mb-6 text-3xl font-bold">UI Component Library</h1>
+				<div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+					{/* Card Example Section */}
+					<section className="space-y-4">
+						<h2 className="text-2xl font-semibold">Card</h2>
+						<Card className="max-w-md">
 							<CardHeader>
-								<CardTitle>Buttons</CardTitle>
-								<CardDescription>
-									Various button styles and sizes
-								</CardDescription>
+								<CardTitle>Card Title</CardTitle>
+								<CardDescription>Card description goes here.</CardDescription>
 							</CardHeader>
-							<CardContent className="space-y-4">
-								<div className="flex flex-wrap gap-4">
-									<Button>Default</Button>
-									<Button variant="secondary">Secondary</Button>
-									<Button variant="destructive">Destructive</Button>
-									<Button variant="outline">Outline</Button>
-									<Button variant="ghost">Ghost</Button>
-									<Button disabled>Disabled</Button>
-									<Button size="sm">Small</Button>
-									<Button size="lg">Large</Button>
-									<Button>
-										<Search className="mr-2 h-4 w-4" /> With Icon
-									</Button>
-								</div>
+							<CardContent>
+								<p>This is the main content of the card.</p>
 							</CardContent>
+							<CardFooter className="flex justify-between">
+								<Button variant="outline">Cancel</Button>
+								<Button>Save</Button>
+							</CardFooter>
 						</Card>
+					</section>
 
-						{/* Toggle */}
-						<Card>
-							<CardHeader>
-								<CardTitle>Toggle</CardTitle>
-								<CardDescription>A two-state button</CardDescription>
-							</CardHeader>
-							<CardContent className="space-x-4">
+					{/* Buttons Section */}
+					<section className="space-y-4">
+						<h2 className="text-2xl font-semibold">Buttons</h2>
+						<div className="grid grid-cols-2 gap-4">
+							<Button>Default</Button>
+							<Button variant="outline">Outline</Button>
+							<Button variant="secondary">Secondary</Button>
+							<Button variant="ghost">Ghost</Button>
+							<Button variant="destructive">Destructive</Button>
+							<Button variant="link">Link</Button>
+							<Button size="sm">Small</Button>
+							<Button size="lg">Large</Button>
+							{/* <Button>Default</Button> */}
+							<Button>
+								<Search className="mr-2 h-4 w-4" /> With Icon
+							</Button>
+							<Button disabled>Disabled</Button>
+						</div>
+					</section>
+
+					{/* Inputs Section */}
+					<section className="space-y-4">
+						<h2 className="text-2xl font-semibold">Inputs</h2>
+						<div className="space-y-2">
+							<Label htmlFor="default-input">Default Input</Label>
+							<Input id="default-input" placeholder="Default input" />
+						</div>
+						<div className="space-y-2">
+							<Label htmlFor="disabled-input">Disabled Input</Label>
+							<Input
+								id="disabled-input"
+								placeholder="Disabled input"
+								disabled
+							/>
+						</div>
+						<div className="space-y-2">
+							<Label htmlFor="textarea">Textarea</Label>
+							<Textarea id="textarea" placeholder="Type your message here." />
+						</div>
+					</section>
+
+					{/* Alerts Section */}
+					<section className="space-y-4">
+						<h2 className="text-2xl font-semibold">Alerts</h2>
+						<div className="grid gap-4">
+							<Alert>
+								<AlertTitle>Default Alert</AlertTitle>
+								<AlertDescription>
+									This is a default alert message.
+								</AlertDescription>
+							</Alert>
+							<Alert variant="destructive">
+								<AlertTitle>Error Alert</AlertTitle>
+								<AlertDescription>
+									This is an error alert message.
+								</AlertDescription>
+							</Alert>
+							<Alert variant="warning">
+								<AlertTitle>Warning Alert</AlertTitle>
+								<AlertDescription>
+									This is a warning alert message.
+								</AlertDescription>
+							</Alert>
+							<Alert variant="success">
+								<AlertTitle>Success Alert</AlertTitle>
+								<AlertDescription>
+									This is a success alert message.
+								</AlertDescription>
+							</Alert>
+						</div>
+					</section>
+
+					{/* Menu and Misc Section */}
+					<section className="space-y-8	">
+						<h3>Menu Helpers & Misc.</h3>
+						<div>
+							<h6>Dropdown Menu</h6>
+							<DropdownMenu>
+								<DropdownMenuTrigger asChild>
+									<Button variant="outline">Open Menu</Button>
+								</DropdownMenuTrigger>
+								<DropdownMenuContent>
+									<DropdownMenuItem>Profile</DropdownMenuItem>
+									<DropdownMenuItem>Settings</DropdownMenuItem>
+									<DropdownMenuItem>Logout</DropdownMenuItem>
+								</DropdownMenuContent>
+							</DropdownMenu>
+						</div>
+						<div>
+							<h6>Modal (Dialog Window)</h6>
+							<Dialog>
+								<DialogTrigger asChild>
+									<Button variant="outline">Open Dialog</Button>
+								</DialogTrigger>
+								<DialogContent>
+									<DialogHeader>
+										<DialogTitle>Example Dialog</DialogTitle>
+										<DialogDescription>
+											This is a dialog component.
+										</DialogDescription>
+									</DialogHeader>
+									<div className="flex justify-end space-x-2">
+										<Button variant="outline">Cancel</Button>
+										<Button>Continue</Button>
+									</div>
+								</DialogContent>
+							</Dialog>
+						</div>
+						<div>
+							<h6>Tab Navigation</h6>
+							<Tabs defaultValue="tab1" className="w-full">
+								<TabsList>
+									<TabsTrigger value="tab1">Tab 1</TabsTrigger>
+									<TabsTrigger value="tab2">Tab 2</TabsTrigger>
+									<TabsTrigger value="tab3">Tab 3</TabsTrigger>
+								</TabsList>
+								<TabsContent value="tab1">Content of Tab 1</TabsContent>
+								<TabsContent value="tab2">Content of Tab 2</TabsContent>
+								<TabsContent value="tab3">Content of Tab 3</TabsContent>
+							</Tabs>
+						</div>
+						<div>
+							<h6>Toggle Button</h6>
+							<div className="flex space-x-4">
 								<Toggle>Toggle</Toggle>
 								<Toggle defaultPressed>Pressed</Toggle>
 								<Toggle disabled>Disabled</Toggle>
-							</CardContent>
-						</Card>
+							</div>
+						</div>
+						<div>
+							<h6>Avatar</h6>
+							<div className="flex space-x-2">
+								<Avatar>
+									<AvatarImage
+										src="https://github.com/shadcn.png"
+										alt="@shadcn"
+									/>
+									<AvatarFallback>CN</AvatarFallback>
+								</Avatar>
+								<Avatar>
+									<AvatarFallback>JD</AvatarFallback>
+								</Avatar>
+							</div>
+						</div>
+					</section>
 
-						{/* Inputs & Labels */}
-						<Card>
-							<CardHeader>
-								<CardTitle>Inputs & Labels</CardTitle>
-								<CardDescription>Text input fields</CardDescription>
-							</CardHeader>
-							<CardContent className="space-y-4">
-								<Input placeholder="Default input" />
-								<Input placeholder="Disabled input" disabled />
-								<div className="space-y-2">
-									<Label htmlFor="labeled-input">Labeled Input</Label>
-									<Input id="labeled-input" placeholder="Input with label" />
+					{/* Additional Form Inputs Section */}
+					<section className="space-y-8">
+						<h3 className="font-semibold">Additional Form Inputs</h3>
+
+						<div>
+							<h6>Select</h6>
+							<Select>
+								<SelectTrigger>
+									<SelectValue placeholder="Select a fruit" />
+								</SelectTrigger>
+								<SelectContent>
+									<SelectItem value="apple">Apple</SelectItem>
+									<SelectItem value="banana">Banana</SelectItem>
+									<SelectItem value="blueberry">Blueberry</SelectItem>
+								</SelectContent>
+							</Select>
+						</div>
+
+						<div className="space-y-4">
+							<div className="space-y-4">
+								<h6>Slider</h6>
+								<Slider defaultValue={[50]} max={100} step={1} />
+								<Slider defaultValue={[25, 75]} max={100} step={1} />
+								<div className="opacity-50">
+									<Slider defaultValue={[30]} max={100} step={1} disabled />
 								</div>
-							</CardContent>
-						</Card>
+							</div>
 
-						{/* Textarea */}
-						<Card>
-							<CardHeader>
-								<CardTitle>Textarea</CardTitle>
-								<CardDescription>Multi-line text input field</CardDescription>
-							</CardHeader>
-							<CardContent className="space-y-4">
-								<Textarea placeholder="Type your message here." />
-							</CardContent>
-						</Card>
-
-						{/* Checkbox */}
-						<Card>
-							<CardHeader>
-								<CardTitle>Checkbox</CardTitle>
-								<CardDescription>Selectable checkbox inputs</CardDescription>
-							</CardHeader>
-							<CardContent className="space-y-4">
-								<div className="flex items-center space-x-2">
-									<Checkbox id="terms" />
-									<Label htmlFor="terms">Accept terms and conditions</Label>
-								</div>
-								<div className="flex items-center space-x-2">
-									<Checkbox id="disabled" disabled />
-									<Label htmlFor="disabled">Disabled checkbox</Label>
-								</div>
-							</CardContent>
-						</Card>
-
-						{/* Select */}
-						<Card>
-							<CardHeader>
-								<CardTitle>Select</CardTitle>
-								<CardDescription>Dropdown selection component</CardDescription>
-							</CardHeader>
-							<CardContent className="space-y-4">
-								<Select>
-									<SelectTrigger className="w-[180px]">
-										<SelectValue placeholder="Select a fruit" />
-									</SelectTrigger>
-									<SelectContent>
-										<SelectItem value="apple">Apple</SelectItem>
-										<SelectItem value="banana">Banana</SelectItem>
-										<SelectItem value="blueberry">Blueberry</SelectItem>
-										<SelectItem value="grapes">Grapes</SelectItem>
-										<SelectItem value="pineapple">Pineapple</SelectItem>
-									</SelectContent>
-								</Select>
-							</CardContent>
-						</Card>
-
-						{/* Switch */}
-						<Card>
-							<CardHeader>
-								<CardTitle>Switch</CardTitle>
-								<CardDescription>Toggle switch component</CardDescription>
-							</CardHeader>
-							<CardContent className="space-y-4">
+							<div className="space-y-4">
+								<h6 className="font-semibold">Switch</h6>
 								<div className="flex items-center space-x-2">
 									<Switch id="airplane-mode" />
 									<Label htmlFor="airplane-mode">Airplane Mode</Label>
 								</div>
-							</CardContent>
-						</Card>
+								<div className="flex items-center space-x-2">
+									<Switch id="disabled-switch" disabled />
+									<Label htmlFor="disabled-switch">Disabled Switch</Label>
+								</div>
+							</div>
 
-						{/* Radio Group */}
-						<Card>
-							<CardHeader>
-								<CardTitle>Radio Group</CardTitle>
-								<CardDescription>Group of radio button inputs</CardDescription>
-							</CardHeader>
+							<div className="space-x-2">
+								<h6>Checkbox</h6>
+								<div className="space-x-2">
+									<Checkbox id="terms" />
+									<Label htmlFor="terms">Accept terms and conditions</Label>
+								</div>
+								<div className="space-x-2">
+									<Checkbox disabled id="terms" />
+									<Label htmlFor="terms">Accept terms and conditions</Label>
+								</div>
+							</div>
 
-							<CardContent className="space-y-4">
+							<div className="space-x-2">
+								<h6>Radio Group</h6>
+
 								<RadioGroup defaultValue="comfortable">
 									<div className="flex items-center space-x-2">
 										<RadioGroupItem value="default" id="r1" />
@@ -325,283 +416,42 @@ export default function ComponentLibrary() {
 										<Label htmlFor="r3">Compact</Label>
 									</div>
 								</RadioGroup>
-							</CardContent>
-						</Card>
+							</div>
 
-						{/* Sliders */}
-						<Card>
-							<CardHeader>
-								<CardTitle>Sliders</CardTitle>
-								<CardDescription>Range input sliders</CardDescription>
-							</CardHeader>
-							<CardContent className="space-y-4">
-								<Slider defaultValue={[50]} max={100} step={1} />
-								<Slider defaultValue={[25, 75]} max={100} step={1} />
-								<Slider defaultValue={[30]} max={100} step={1} disabled />
-							</CardContent>
-						</Card>
+							<div className="flex items-center space-x-2"></div>
+						</div>
+					</section>
 
-						{/* Avatar */}
-						<Card>
-							<CardHeader>
-								<CardTitle>Avatar</CardTitle>
-								<CardDescription>
-									User profile pictures or placeholders
-								</CardDescription>
-							</CardHeader>
-							<CardContent className="flex gap-4">
-								<Avatar>
-									<AvatarImage
-										src="https://github.com/shadcn.png"
-										alt="@shadcn"
-									/>
-									<AvatarFallback>CN</AvatarFallback>
-								</Avatar>
-								<Avatar>
-									<AvatarFallback>JD</AvatarFallback>
-								</Avatar>
-							</CardContent>
-						</Card>
+					{/* Custom Components Section */}
+					<section className="col-span-full">
+						<Separator orientation={'horizontal'} />
 
-						{/* Cards */}
-						<Card>
-							<CardHeader>
-								<CardTitle>Cards</CardTitle>
-								<CardDescription>
-									Versatile container for various types of content
-								</CardDescription>
-							</CardHeader>
-							<CardContent className="space-y-4">
-								<Card>
-									<CardHeader>
-										<CardTitle>Simple Card</CardTitle>
-										<CardDescription>
-											A basic card with a header
-										</CardDescription>
-									</CardHeader>
-								</Card>
-
-								<Card>
-									<CardHeader>
-										<CardTitle>Card with Content</CardTitle>
-										<CardDescription>
-											A card with a header and content
-										</CardDescription>
-									</CardHeader>
-									<CardContent>
-										<p>This is the main content area of the card.</p>
-									</CardContent>
-								</Card>
-
-								<Card>
-									<CardHeader>
-										<CardTitle>Card with Footer</CardTitle>
-										<CardDescription>
-											A card with a header, content, and footer
-										</CardDescription>
-									</CardHeader>
-									<CardContent>
-										<p>This card has a footer with actions.</p>
-									</CardContent>
-									<CardFooter className="flex justify-between">
-										<Button variant="ghost">Cancel</Button>
-										<Button>Save</Button>
-									</CardFooter>
-								</Card>
-
-								<Card className="border-error">
-									<CardHeader>
-										<CardTitle className="text-error">Error Card</CardTitle>
-										<CardDescription>
-											A card styled to show an error state
-										</CardDescription>
-									</CardHeader>
-									<CardContent>
-										<p>This card indicates an error or warning.</p>
-									</CardContent>
-								</Card>
-							</CardContent>
-						</Card>
-
-						{/* Alerts */}
-						<Card>
-							<CardHeader>
-								<CardTitle>Alerts</CardTitle>
-								<CardDescription>Informational alert messages</CardDescription>
-							</CardHeader>
-							<CardContent className="space-y-4">
-								<Alert>
-									<AlertTitle>Default Alert</AlertTitle>
-									<AlertDescription>
-										This is a default alert message.
-									</AlertDescription>
-								</Alert>
-								<Alert className="border-error bg-error/10">
-									<AlertTitle className="text-error">Error Alert</AlertTitle>
-									<AlertDescription>
-										This is an error alert message.
-									</AlertDescription>
-								</Alert>
-								<Alert className="border-warning bg-warning/10">
-									<AlertTitle className="text-warning">
-										Warning Alert
-									</AlertTitle>
-									<AlertDescription>
-										This is a warning alert message.
-									</AlertDescription>
-								</Alert>
-								<Alert className="border-success bg-success/10">
-									<AlertTitle className="text-success">
-										Success Alert
-									</AlertTitle>
-									<AlertDescription>
-										This is a success alert message.
-									</AlertDescription>
-								</Alert>
-							</CardContent>
-						</Card>
-
-						{/* Combobox */}
-						{/* <Card>
-							<CardHeader>
-								<CardTitle>Combobox</CardTitle>
-								<CardDescription>Searchable dropdown selection</CardDescription>
-							</CardHeader>
-							<CardContent className="space-y-4">
-								<Command className="rounded-lg border shadow-md">
-									<CommandInput placeholder="Type a command or search..." />
-									<CommandEmpty>No results found.</CommandEmpty>
-									<CommandGroup heading="Suggestions">
-										<CommandItem>Calendar</CommandItem>
-										<CommandItem>Search Emoji</CommandItem>
-										<CommandItem>Calculator</CommandItem>
-									</CommandGroup>
-								</Command>
-							</CardContent>
-						</Card> */}
-					</TabsContent>
-
-					<TabsContent value="molecules" className="space-y-8">
-						{/* Search Bar */}
-						<Card>
-							<CardHeader>
-								<CardTitle>Search Bar</CardTitle>
-								<CardDescription>
-									Combination of input and button
-								</CardDescription>
-							</CardHeader>
-							<CardContent>
+						<h2>Custom Components</h2>
+						<div className="flex items-end justify-around">
+							<div>
+								<h6>Search Bar (w/ Redux)</h6>
 								<SearchBar />
-							</CardContent>
-						</Card>
-
-						{/* Counter */}
-						<Card>
-							<CardHeader>
-								<CardTitle>Counter</CardTitle>
-								<CardDescription>
-									Interactive counter with Redux integration
-								</CardDescription>
-							</CardHeader>
-							<CardContent>
+							</div>
+							<div>
+								<h6>Counter (w/ Redux)</h6>
 								<Counter />
-							</CardContent>
-						</Card>
-
-						{/* Theme Toggle */}
-						<Card>
-							<CardHeader>
-								<CardTitle>Theme Toggle</CardTitle>
-								<CardDescription>
-									Switch between light and dark themes
-								</CardDescription>
-							</CardHeader>
-							<CardContent>
-								<ThemeToggle />
-							</CardContent>
-						</Card>
-
-						{/* Playback Controls */}
-						<Card>
-							<CardHeader>
-								<CardTitle>Playback Controls</CardTitle>
-								<CardDescription>
-									Audio or video playback control buttons
-								</CardDescription>
-							</CardHeader>
-							<CardContent>
+							</div>
+							<div>
+								<h6>Playback Controls</h6>
 								<PlaybackControls />
-							</CardContent>
-						</Card>
-
-						{/* Dropdown Menu */}
-						<Card>
-							<CardHeader>
-								<CardTitle>Dropdown Menu</CardTitle>
-								<CardDescription>Expandable menu with options</CardDescription>
-							</CardHeader>
-							<CardContent>
-								<DropdownMenu>
-									<DropdownMenuTrigger asChild>
-										<Button variant="outline">Open Menu</Button>
-									</DropdownMenuTrigger>
-									<DropdownMenuContent>
-										<DropdownMenuItem>Profile</DropdownMenuItem>
-										<DropdownMenuItem>Settings</DropdownMenuItem>
-										<DropdownMenuItem>Logout</DropdownMenuItem>
-									</DropdownMenuContent>
-								</DropdownMenu>
-							</CardContent>
-						</Card>
-
-						{/* Dialog */}
-						<Card>
-							<CardHeader>
-								<CardTitle>Dialog</CardTitle>
-								<CardDescription>
-									Modal dialog for important actions
-								</CardDescription>
-							</CardHeader>
-							<CardContent>
-								<Dialog>
-									<DialogTrigger asChild>
-										<Button variant="outline">Open Dialog</Button>
-									</DialogTrigger>
-									<DialogContent>
-										<DialogHeader>
-											<DialogTitle>Are you sure?</DialogTitle>
-											<DialogDescription>
-												This action cannot be undone.
-											</DialogDescription>
-										</DialogHeader>
-										<div className="flex justify-end space-x-2">
-											<Button variant="outline">Cancel</Button>
-											<Button variant="destructive">Delete</Button>
-										</div>
-									</DialogContent>
-								</Dialog>
-							</CardContent>
-						</Card>
-					</TabsContent>
-
-					<TabsContent value="organisms" className="space-y-8">
-						{/* Form Example */}
-						<Card>
-							<CardHeader>
-								<CardTitle>Forms (Sign Up Form Example)</CardTitle>
-								<CardDescription>User sign up form component</CardDescription>
-							</CardHeader>
-							<CardContent>
-								<SignupForm />
-							</CardContent>
-						</Card>
-					</TabsContent>
-
-					<TabsContent value="templates" className="space-y-8">
-						nothing yet check back later
-					</TabsContent>
-				</Tabs>
-			</section>
+							</div>
+							<div>
+								<h6>Light/Dark Mode</h6>
+								<ThemeToggle />
+							</div>
+							<div>
+								<h6>Sign Out (Sidebar)</h6>
+								<SignOut />
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
 		</div>
 	);
 }

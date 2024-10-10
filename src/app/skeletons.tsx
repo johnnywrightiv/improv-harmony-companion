@@ -1,8 +1,4 @@
-const Skeleton = ({ className }: { className: string }) => (
-	<div
-		className={`relative overflow-hidden rounded-md bg-background-muted before:absolute before:inset-0 before:-translate-x-full before:animate-shimmer before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent ${className}`}
-	/>
-);
+import { Skeleton } from '@/components/ui/skeleton';
 
 export function DashboardSkeleton() {
 	return (

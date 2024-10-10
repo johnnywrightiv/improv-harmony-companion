@@ -17,11 +17,15 @@ const colors: ColorInfo[] = [
 		textClass: 'text-background',
 	},
 	{ name: 'Primary', bgClass: 'bg-primary', textClass: 'text-primary' },
-	{ name: 'Success', bgClass: 'bg-success', textClass: 'text-success' },
+	{
+		name: 'Destructive (error)',
+		bgClass: 'bg-destructive',
+		textClass: 'text-destructive-foreground',
+	},
 	{ name: 'Secondary', bgClass: 'bg-secondary', textClass: 'text-secondary' },
 	{ name: 'Warning', bgClass: 'bg-warning', textClass: 'text-warning' },
 	{ name: 'Accent', bgClass: 'bg-accent', textClass: 'text-accent' },
-	{ name: 'Error', bgClass: 'bg-error', textClass: 'text-error' },
+	{ name: 'Success', bgClass: 'bg-success', textClass: 'text-success' },
 ];
 
 function rgbToHsl(r: number, g: number, b: number): [number, number, number] {

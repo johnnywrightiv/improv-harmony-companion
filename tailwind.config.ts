@@ -54,9 +54,14 @@ const config: Config = {
 					DEFAULT: 'hsl(var(--destructive))',
 					foreground: 'hsl(var(--destructive-foreground))',
 				},
-				success: 'hsl(var(--success))',
-				error: 'hsl(var(--error))',
-				warning: 'hsl(var(--warning))',
+				warning: {
+					DEFAULT: 'hsl(var(--warning))',
+					foreground: 'hsl(var(--warning-foreground))',
+				},
+				success: {
+					DEFAULT: 'hsl(var(--success))',
+					foreground: 'hsl(var(--success-foreground))',
+				},
 				chart: {
 					1: 'hsl(var(--chart-1))',
 					2: 'hsl(var(--chart-2))',
