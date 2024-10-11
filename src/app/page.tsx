@@ -1,4 +1,4 @@
-import HomePage from '@/components/home-page';
+import LandingPage from '@/components/landing-page';
 import NavBar from '@/components/nav-bar';
 
 export default function Home() {
@@ -7,7 +7,7 @@ export default function Home() {
 			{/* Main Content */}
 			<main className="flex-grow">
 				<NavBar />
-				<HomePage />
+				<LandingPage />
 			</main>
 
 			{/* Footer */}
