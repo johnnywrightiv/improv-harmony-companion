@@ -9,8 +9,17 @@ type ColorInfo = {
 	textClass: string;
 };
 
+type ColorValues = {
+	hsl: string;
+	hex: string;
+};
+
 const colors: ColorInfo[] = [
-	{ name: 'Text', bgClass: 'bg-text', textClass: 'text-text' },
+	{
+		name: 'Foreground',
+		bgClass: 'bg-foreground',
+		textClass: 'text-foreground',
+	},
 	{
 		name: 'Background',
 		bgClass: 'bg-background',
@@ -18,9 +27,9 @@ const colors: ColorInfo[] = [
 	},
 	{ name: 'Primary', bgClass: 'bg-primary', textClass: 'text-primary' },
 	{
-		name: 'Destructive (error)',
+		name: 'Destructive',
 		bgClass: 'bg-destructive',
-		textClass: 'text-destructive-foreground',
+		textClass: 'text-destructive',
 	},
 	{ name: 'Secondary', bgClass: 'bg-secondary', textClass: 'text-secondary' },
 	{ name: 'Warning', bgClass: 'bg-warning', textClass: 'text-warning' },
@@ -73,11 +82,6 @@ function rgbToHex(r: number, g: number, b: number): string {
 	);
 }
 
-type ColorValues = {
-	hsl: string;
-	hex: string;
-};
-
 function ColorSwatch({ color }: { color: ColorInfo }) {
 	const [colorValues, setColorValues] = useState<ColorValues>({
 		hsl: '',
@@ -122,29 +126,32 @@ function ColorSwatch({ color }: { color: ColorInfo }) {
 
 	return (
 		<div className="space-y-2">
-			<div
-				className={`h-20 rounded-md border-2 border-background-muted ${color.bgClass}`}
-			/>
+			{color.name === 'Foreground' ? (
+				<div
+					className="h-20 rounded-md border-2 border-border/50"
+					style={{ backgroundColor: colorValues.hsl }}
+				/>
+			) : (
+				<div
+					className={`h-20 rounded-md border-2 border-border/50 ${color.bgClass}`}
+				/>
+			)}
 			<p className="text-sm font-medium">{color.name}</p>
-			<p className="text-xs text-text-muted">
+			<p className="text-xs text-muted-foreground">
 				HSL:{' '}
 				<span
 					className={
-						color.name === 'Background' || color.bgClass === 'bg-background'
-							? 'text-text'
-							: color.textClass
+						color.name === 'Background' ? 'text-foreground' : color.textClass
 					}
 				>
 					{colorValues.hsl}
 				</span>
 			</p>
-			<p className="text-xs text-text-muted">
+			<p className="text-xs text-muted-foreground">
 				HEX:{' '}
 				<span
 					className={
-						color.name === 'Background' || color.bgClass === 'bg-background'
-							? 'text-text'
-							: color.textClass
+						color.name === 'Background' ? 'text-foreground' : color.textClass
 					}
 				>
 					{colorValues.hex}

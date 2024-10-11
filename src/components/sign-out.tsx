@@ -23,7 +23,7 @@ export function SignOut() {
 				<Button
 					variant="ghost"
 					className={clsx(
-						'flex h-[48px] items-center justify-start gap-2 rounded-md bg-background p-2 px-3 text-sm font-medium text-primary hover:bg-secondary/30 hover:text-text'
+						'flex h-[48px] items-center justify-start gap-2 rounded-md border border-border bg-background p-2 px-3 text-sm font-medium text-muted-foreground hover:bg-secondary/30 hover:text-card-foreground'
 					)}
 					type="submit"
 				>

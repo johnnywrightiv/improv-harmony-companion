@@ -58,7 +58,7 @@ export default function NavBar() {
 				{/* Mobile Menu Button */}
 				<button
 					onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-					className="text-background dark:text-text md:hidden"
+					className="text-foreground md:hidden"
 					aria-expanded={mobileMenuOpen}
 					aria-controls="mobile-menu"
 				>
@@ -77,7 +77,7 @@ export default function NavBar() {
           ${mobileMenuOpen ? 'max-h-96' : 'max-h-0'}`}
 			>
 				<div
-					className={`rounded-lg bg-background-muted p-4 transition-all duration-300
+					className={`rounded-lg bg-card p-4 transition-all duration-300
           ${mobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'}`}
 				>
 					<ul className="flex flex-col gap-2">

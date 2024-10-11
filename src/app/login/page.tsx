@@ -18,7 +18,7 @@ export default function LoginPage() {
 				<LoginForm />
 
 				<nav className="mt-6 text-center text-sm">
-					<p className="text-text-muted">
+					<p className="text-muted-foreground">
 						Don&apos;t have an account?{' '}
 						<Button
 							variant="link"

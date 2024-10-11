@@ -27,10 +27,10 @@ const DashboardHome = () => {
 					</AvatarFallback>
 				</Avatar>
 				<div>
-					<h1 className="text-2xl font-bold text-text">
+					<h1 className="text-2xl font-bold text-primary">
 						{userData.profile.displayName}
 					</h1>
-					<p className="text-text-muted">@{userData.username}</p>
+					<p className="text-muted-foreground">@{userData.username}</p>
 				</div>
 			</div>
 
@@ -47,32 +47,34 @@ const DashboardHome = () => {
 								<p className="text-2xl font-bold">
 									{userData.stats.totalSessions}
 								</p>
-								<p className="text-sm text-text-muted">Total Sessions</p>
+								<p className="text-sm text-muted-foreground">Total Sessions</p>
 							</div>
 							<div>
 								<p className="text-2xl font-bold">
 									{userData.stats.totalLoops}
 								</p>
-								<p className="text-sm text-text-muted">Total Loops</p>
+								<p className="text-sm text-muted-foreground">Total Loops</p>
 							</div>
 							<div>
 								<p className="text-2xl font-bold">
 									{userData.stats.avgSessionDuration}
 								</p>
-								<p className="text-sm text-text-muted">Avg. Session Duration</p>
+								<p className="text-sm text-muted-foreground">
+									Avg. Session Duration
+								</p>
 							</div>
 						</CardContent>
 					</Card>
 					<div className="space-y-4">
 						<h2 className="text-xl font-semibold">Tools</h2>
 						<div className="grid grid-cols-3 gap-4">
-							<Button variant="outline" className="h-16">
+							<Button variant="secondary" className="h-16 border border-border">
 								<Music className="mr-2 h-4 w-4" /> Loop Generator
 							</Button>
-							<Button variant="outline" className="h-16">
+							<Button variant="secondary" className="h-16 border border-border">
 								<Clock className="mr-2 h-4 w-4" /> Metronome
 							</Button>
-							<Button variant="outline" className="h-16">
+							<Button variant="secondary" className="h-16 border border-border">
 								<Music className="mr-2 h-4 w-4" /> Tuner
 							</Button>
 						</div>
@@ -84,11 +86,13 @@ const DashboardHome = () => {
 					<Card>
 						<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
 							<h2 className="text-sm font-medium">Quick Settings</h2>
-							<Settings className="h-4 w-4 text-text-muted" />
+							<Settings className="h-4 w-4 text-muted-foreground" />
 						</CardHeader>
 						<CardContent>
 							{/* Add quick settings controls here */}
-							<p className="text-sm text-text-muted">Adjust your preferences</p>
+							<p className="text-sm text-muted-foreground">
+								Adjust your preferences
+							</p>
 						</CardContent>
 					</Card>
 					<div className="space-y-4">
@@ -97,14 +101,16 @@ const DashboardHome = () => {
 							<Link
 								href={`/loops/${loop.id}`}
 								key={loop.id}
-								className="flex items-center space-x-4 rounded-md p-2 hover:bg-background-muted"
+								className="flex items-center space-x-4 rounded-md p-2 hover:bg-secondary"
 							>
 								<div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary">
 									<Music className="h-6 w-6 text-background" />
 								</div>
 								<div className="flex-grow">
 									<p className="font-medium">{loop.name}</p>
-									<p className="text-sm text-text-muted">{loop.duration}</p>
+									<p className="text-sm text-muted-foreground">
+										{loop.duration}
+									</p>
 								</div>
 							</Link>
 						))}

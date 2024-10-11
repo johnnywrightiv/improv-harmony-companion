@@ -11,7 +11,7 @@ export default function Home() {
 			</main>
 
 			{/* Footer */}
-			<footer className="mt-8 text-center text-sm text-text-muted">
+			<footer className="mt-8 text-center text-sm text-muted-foreground">
 				Your footer content
 			</footer>
 		</div>

@@ -50,6 +50,7 @@ import {
 	CardFooter,
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import Link from 'next/link';
 
 export default function ComponentLibrary() {
 	return (
@@ -154,7 +155,7 @@ export default function ComponentLibrary() {
 					{/* Logo section */}
 					<div>
 						<h3>Logo</h3>
-						<p className="text-sm text-text-muted">Primary logo usage</p>
+						<p className="text-sm text-muted-foreground">Primary logo usage</p>
 					</div>
 
 					{/* Icons & Controls section */}
@@ -164,15 +165,17 @@ export default function ComponentLibrary() {
 							<ThemeToggle />
 							<PlaybackControls />
 						</div>
-						<p className="mt-2 text-sm text-text-muted">
-							Control icons using Lucide React icons
+						<p className="mt-2 text-sm text-muted-foreground">
+							Control icons using Lucide React icons. (define style)
 						</p>
 					</div>
 
 					{/* Additional section */}
 					<div>
 						<h3>Images & Misc. Assets</h3>
-						<p className="text-sm text-text-muted">Any other relevant assets</p>
+						<p className="text-sm text-muted-foreground">
+							Any other relevant assets
+						</p>
 					</div>
 				</div>
 			</section>
@@ -182,6 +185,14 @@ export default function ComponentLibrary() {
 			{/* Atomic Design UI Components Section */}
 			<div className="space-y-8 p-4">
 				<h1 className="mb-6 text-3xl font-bold">UI Component Library</h1>
+				<p className="text-sm text-muted-foreground">
+					* add new or remove unused components/ui/{'{elements}'} from{' '}
+					<Button size="sm" variant="link" asChild>
+						<Link href="https://ui.shadcn.com/docs/components/button">
+							shadcn components/ui
+						</Link>
+					</Button>
+				</p>
 				<div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 					{/* Card Example Section */}
 					<section className="space-y-4">
@@ -445,7 +456,7 @@ export default function ComponentLibrary() {
 								<ThemeToggle />
 							</div>
 							<div>
-								<h6>Sign Out (Sidebar)</h6>
+								<h6>Sign Out</h6>
 								<SignOut />
 							</div>
 						</div>

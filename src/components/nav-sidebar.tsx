@@ -44,7 +44,7 @@ export default function NavSidebar() {
 					variant="ghost"
 					onClick={() => dispatch(toggleSidebar())}
 					className={clsx(
-						'top absolute z-10 hidden rounded-full p-2 text-text hover:bg-secondary/30 md:block',
+						'top text-foreground absolute z-10 hidden rounded-full p-2 hover:bg-secondary/30 md:block',
 						{
 							'right-2': isVisible,
 							'left-1/2 -translate-x-1/2': !isVisible,
@@ -91,11 +91,11 @@ export default function NavSidebar() {
 								<Link
 									href={link.href}
 									className={clsx(
-										'flex h-[48px] items-center rounded-md text-sm font-medium text-primary hover:text-text focus:outline-none focus:ring-2 focus:ring-primary',
+										'flex h-[48px] items-center rounded-md text-sm font-medium text-muted-foreground hover:text-card-foreground focus:outline-none focus:ring-2 focus:ring-primary',
 										{
 											'justify-start gap-2 p-2 px-3': isVisible,
 											'justify-center p-1': !isVisible,
-											'bg-secondary/30 text-text hover:text-text':
+											'hover:text-foreground bg-secondary/30  text-primary hover:text-primary':
 												pathname === link.href,
 										}
 									)}
@@ -117,12 +117,12 @@ export default function NavSidebar() {
 					<Link
 						href={profileLink.href}
 						className={clsx(
-							'flex h-[48px] items-center rounded-md text-sm font-medium text-primary hover:text-text focus:outline-none focus:ring-2 focus:ring-primary',
+							'flex h-[48px] items-center rounded-md text-sm font-medium text-muted-foreground hover:text-card-foreground focus:outline-none focus:ring-2 focus:ring-primary',
 							{
 								'justify-start gap-2 p-2 px-3': isVisible,
 								'justify-center p-1': !isVisible,
-								'bg-secondary/30 text-text hover:text-text':
-									pathname === profileLink.href,
+								'bg-secondary/30  hover:text-primary text-primary':
+									pathname === profileLink.href, // Active state
 							}
 						)}
 						aria-current={pathname === profileLink.href ? 'page' : undefined}
@@ -148,9 +148,10 @@ export default function NavSidebar() {
 								key={link.name}
 								href={link.href}
 								className={clsx(
-									'flex h-[48px] grow items-center justify-center rounded-md p-3 text-sm font-medium text-primary hover:bg-secondary/30 hover:text-text focus:outline-none focus:ring-1 focus:ring-primary',
+									'flex h-[48px] grow items-center justify-center rounded-md p-3 text-sm font-medium text-muted-foreground hover:bg-secondary/30 hover:text-card-foreground focus:outline-none focus:ring-1 focus:ring-primary',
 									{
-										'bg-secondary/30 text-text': pathname === link.href,
+										'bg-secondary/30 text-primary hover:text-primary':
+											pathname === link.href, // Active state
 									}
 								)}
 								aria-current={pathname === link.href ? 'page' : undefined}

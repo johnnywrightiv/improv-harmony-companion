@@ -3,9 +3,8 @@
 @tailwind utilities;
 
 @layer base {
-	/* Light Mode */
+	/* Red - Light Mode */
 	:root {
-		/* Existing variables */
 		--background: 347 13% 95%;
 		--foreground: 347 5% 10%;
 		--card: 347 13% 90%;
@@ -29,32 +28,36 @@
 		--border: 347 20% 59%;
 		--input: 347 20% 50%;
 		--ring: 347 53% 49%;
+		--radius: 0.75rem;
+
+		/* DO NOT DELETE - Additional custom variables in use */
 		--chart-1: 347 60% 60%; /* Brighter red */
 		--chart-2: 327 50% 50%; /* Pink-red */
 		--chart-3: 7 70% 60%; /* Red-orange */
 		--chart-4: 327 30% 40%; /* Muted pink */
 		--chart-5: 347 40% 70%; /* Light pink */
 
-		/* Additional variables for Tailwind config */
-		--text: 347 5% 10%;
-		--text-muted: 347 5% 40%;
-		--background-muted: 347 13% 90%;
+		--destructive: 0 50% 50%;
+		--destructive-foreground: 347 5% 90%;
+		--warning: 36 100% 46%;
+		--warning-foreground: 347 5% 90%;
+		--success: 123 52% 47%;
+		--success-foreground: 347 5% 90%;
+
 		--gradient: linear-gradient(
 			135deg,
 			hsl(var(--primary)),
 			hsl(var(--secondary))
 		);
-
-		--radius: 0.75rem;
 	}
 
-	/* Dark Mode */
+	/* Red - Dark Mode */
 	.dark {
 		--background: 347 13% 10%;
 		--foreground: 347 5% 90%;
 		--card: 347 13% 10%;
 		--card-foreground: 347 5% 90%;
-		--popover: 347 13% 5%;
+		--popover: 347 13% 10%;
 		--popover-foreground: 347 5% 90%;
 		--primary: 347 53% 49%;
 		--primary-foreground: 0 0% 100%;
@@ -64,32 +67,200 @@
 		--muted-foreground: 347 5% 60%;
 		--accent: 309 13% 25%;
 		--accent-foreground: 347 5% 90%;
-		--destructive: 0 50% 50%;
-		--destructive-foreground: 347 5% 90%;
-		--warning: 36 100% 45%;
-		--warning-foreground: 347 5% 90%;
-		--success: 123 52% 46%;
-		--success-foreground: 347 5% 90%;
 		--border: 347 20% 50%;
 		--input: 347 20% 50%;
 		--ring: 347 53% 49%;
+		--radius: 0.75rem;
+
+		/* DO NOT DELETE - Additional custom variables in use */
 		--chart-1: 347 70% 50%; /* Vibrant red */
 		--chart-2: 327 60% 60%; /* Bright pink-red */
 		--chart-3: 7 80% 50%; /* Bright red-orange */
 		--chart-4: 327 40% 50%; /* Deep pink */
 		--chart-5: 347 50% 60%; /* Soft pink */
 
-		/* Additional variables for Tailwind config */
-		--text: 347 5% 90%;
-		--text-muted: 347 5% 60%;
-		--background-muted: 347 13% 15%;
+		--destructive: 0 50% 50%;
+		--destructive-foreground: 347 5% 90%;
+		--warning: 36 100% 46%;
+		--warning-foreground: 347 5% 90%;
+		--success: 123 52% 47%;
+		--success-foreground: 347 5% 90%;
+
 		--gradient: linear-gradient(
 			135deg,
 			hsl(var(--primary)),
 			hsl(var(--secondary))
 		);
+	}
 
-		--radius: 0.75rem;
+	/* Purple - Light Mode */
+	:root {
+		--background: 262 8% 95%;
+		--foreground: 262 5% 10%;
+		--card: 262 8% 91%;
+		--card-foreground: 262 5% 15%;
+		--popover: 262 8% 95%;
+		--popover-foreground: 262 95% 10%;
+		--primary: 262 84% 45%;
+		--primary-foreground: 0 0% 100%;
+		--secondary: 262 10% 90%;
+		--secondary-foreground: 0 0% 0%;
+		--muted: 224 10% 91%;
+		--muted-foreground: 262 5% 40%;
+		--accent: 224 10% 90%;
+		--accent-foreground: 262 5% 15%;
+		--border: 262 20% 82%;
+		--input: 262 20% 50%;
+		--ring: 262 84% 45%;
+		--radius: 1rem;
+
+		/* DO NOT DELETE - Additional custom variables in use */
+		--chart-1: 12 76% 61%;
+		--chart-2: 173 58% 39%;
+		--chart-3: 197 37% 24%;
+		--chart-4: 43 74% 66%;
+		--chart-5: 27 87% 67%;
+
+		--destructive: 0 50% 50%;
+		--destructive-foreground: 262 5% 91%;
+		--warning: 36 100% 46%;
+		--warning-foreground: 347 5% 90%;
+		--success: 123 52% 47%;
+		--success-foreground: 347 5% 90%;
+
+		--gradient: linear-gradient(
+			135deg,
+			hsl(var(--primary)),
+			hsl(var(--secondary))
+		);
+	}
+
+	/* Purple - Dark Mode */
+	.dark {
+		--background: 262 10% 10%;
+		--foreground: 262 5% 91%;
+		--card: 262 8% 10%;
+		--card-foreground: 262 5% 91%;
+		--popover: 262 10% 10%;
+		--popover-foreground: 262 5% 91%;
+		--primary: 262 84% 45%;
+		--primary-foreground: 0 0% 100%;
+		--secondary: 262 10% 20%;
+		--secondary-foreground: 0 0% 100%;
+		--muted: 224 10% 25%;
+		--muted-foreground: 262 5% 65%;
+		--accent: 224 10% 25%;
+		--accent-foreground: 262 5% 91%;
+		--destructive: 0 50% 50%;
+		--destructive-foreground: 262 5% 91%;
+		--border: 262 20% 50%;
+		--input: 262 20% 50%;
+		--ring: 262 84% 45%;
+		--radius: 1rem;
+
+		/* DO NOT DELETE - Additional custom variables in use */
+		--destructive: 0 50% 50%;
+		--destructive-foreground: 347 5% 90%;
+		--warning: 36 100% 46%;
+		--warning-foreground: 347 5% 90%;
+		--success: 123 52% 47%;
+		--success-foreground: 347 5% 90%;
+
+		--chart-1: 220 70% 50%;
+		--chart-2: 160 60% 45%;
+		--chart-3: 30 80% 55%;
+		--chart-4: 280 65% 60%;
+		--chart-5: 340 75% 55%;
+
+		--gradient: linear-gradient(
+			135deg,
+			hsl(var(--primary)),
+			hsl(var(--secondary))
+		);
+	}
+
+	/* Orange - Light Mode */
+	:root {
+		--background: 36 17% 95%;
+		--foreground: 36 5% 10%;
+		--card: 36 17% 90%;
+		--card-foreground: 36 5% 15%;
+		--popover: 36 17% 95%;
+		--popover-foreground: 36 95% 10%;
+		--primary: 36 83% 39%;
+		--primary-foreground: 0 0% 100%;
+		--secondary: 36 17% 70%;
+		--secondary-foreground: 0 0% 0%;
+		--muted: -2 17% 85%;
+		--muted-foreground: 36 5% 40%;
+		--accent: -2 17% 80%;
+		--accent-foreground: 36 5% 15%;
+		--border: 36 20% 50%;
+		--input: 36 20% 46%;
+		--ring: 36 83% 39%;
+		--radius: 0.5rem;
+
+		/* DO NOT DELETE - Additional custom variables in use */
+		--chart-1: 347 60% 60%; /* Brighter red */
+		--chart-2: 327 50% 50%; /* Pink-red */
+		--chart-3: 7 70% 60%; /* Red-orange */
+		--chart-4: 327 30% 40%; /* Muted pink */
+		--chart-5: 347 40% 70%; /* Light pink */
+
+		--destructive: 0 50% 50%;
+		--destructive-foreground: 347 5% 90%;
+		--warning: 36 100% 46%;
+		--warning-foreground: 347 5% 90%;
+		--success: 123 52% 47%;
+		--success-foreground: 347 5% 90%;
+
+		--gradient: linear-gradient(
+			135deg,
+			hsl(var(--primary)),
+			hsl(var(--secondary))
+		);
+	}
+
+	/* Orange - Dark Mode */
+	.dark {
+		--background: 36 17% 10%;
+		--foreground: 36 5% 90%;
+		--card: 36 17% 10%;
+		--card-foreground: 36 5% 90%;
+		--popover: 36 17% 5%;
+		--popover-foreground: 36 5% 90%;
+		--primary: 36 83% 39%;
+		--primary-foreground: 0 0% 100%;
+		--secondary: 36 17% 20%;
+		--secondary-foreground: 0 0% 100%;
+		--muted: -2 17% 25%;
+		--muted-foreground: 36 5% 60%;
+		--accent: -2 17% 25%;
+		--accent-foreground: 36 5% 90%;
+		--border: 36 20% 46%;
+		--input: 36 20% 46%;
+		--ring: 36 83% 39%;
+		--radius: 0.5rem;
+
+		/* DO NOT DELETE - Additional custom variables in use */
+		--chart-1: 347 70% 50%; /* Vibrant red */
+		--chart-2: 327 60% 60%; /* Bright pink-red */
+		--chart-3: 7 80% 50%; /* Bright red-orange */
+		--chart-4: 327 40% 50%; /* Deep pink */
+		--chart-5: 347 50% 60%; /* Soft pink */
+
+		--destructive: 0 50% 50%;
+		--destructive-foreground: 347 5% 90%;
+		--warning: 36 100% 46%;
+		--warning-foreground: 347 5% 90%;
+		--success: 123 52% 47%;
+		--success-foreground: 347 5% 90%;
+
+		--gradient: linear-gradient(
+			135deg,
+			hsl(var(--primary)),
+			hsl(var(--secondary))
+		);
 	}
 
 	/* Automatically style all heading tags */
@@ -131,5 +302,11 @@
 @layer components {
 	.decorative-text {
 		@apply font-decorative text-2xl;
+	}
+}
+
+@keyframes shimmer {
+	100% {
+		transform: translateX(100%);
 	}
 }
