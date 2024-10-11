@@ -121,7 +121,7 @@ export default function NavSidebar() {
 							{
 								'justify-start gap-2 p-2 px-3': isVisible,
 								'justify-center p-1': !isVisible,
-								'bg-secondary/30  hover:text-primary text-primary':
+								'bg-secondary/30  text-primary hover:text-primary':
 									pathname === profileLink.href, // Active state
 							}
 						)}
