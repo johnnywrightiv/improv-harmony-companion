@@ -36,10 +36,8 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { Counter } from '@/components/counter';
 import { ThemeSelect } from '@/components/theme-selector';
 import { PlaybackControls } from '@/components/playback-controls';
-import { SearchBar } from '@/components/search-bar';
 import { SignOut } from '@/components/sign-out';
 import {
 	Card,
@@ -439,14 +437,6 @@ export default function ComponentLibrary() {
 
 						<h2>Custom Components</h2>
 						<div className="flex items-end justify-around">
-							<div>
-								<h6>Search Bar (w/ Redux)</h6>
-								<SearchBar />
-							</div>
-							<div>
-								<h6>Counter (w/ Redux)</h6>
-								<Counter />
-							</div>
 							<div>
 								<h6>Playback Controls</h6>
 								<PlaybackControls />
