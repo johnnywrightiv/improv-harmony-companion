@@ -3,7 +3,9 @@ import authReducer from './auth-slice';
 import sidebarReducer from './sidebar-slice';
 import searchReducer from './search-slice';
 import counterReducer from './counter-slice';
-import isPlaying from './playback-slice';
+import playbackReducer from './playback-slice';
+import practiceConfigReducer from './practice-config-slice';
+import timerReducer from './timer-slice';
 
 export const store = configureStore({
 	reducer: {
@@ -11,7 +13,9 @@ export const store = configureStore({
 		search: searchReducer,
 		counter: counterReducer,
 		sidebar: sidebarReducer,
-		playback: isPlaying,
+		playback: playbackReducer,
+		practiceConfig: practiceConfigReducer,
+		timer: timerReducer,
 	},
 });
 

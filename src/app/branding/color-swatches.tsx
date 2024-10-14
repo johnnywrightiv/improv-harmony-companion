@@ -128,12 +128,12 @@ function ColorSwatch({ color }: { color: ColorInfo }) {
 		<div className="space-y-2">
 			{color.name === 'Foreground' ? (
 				<div
-					className="h-20 rounded-md border-2 border-border/50"
+					className="h-20 rounded-[--radius] border-2 border-border/50"
 					style={{ backgroundColor: colorValues.hsl }}
 				/>
 			) : (
 				<div
-					className={`h-20 rounded-md border-2 border-border/50 ${color.bgClass}`}
+					className={`h-20 rounded-[--radius] border-2 border-border/50 ${color.bgClass}`}
 				/>
 			)}
 			<p className="text-sm font-medium">{color.name}</p>

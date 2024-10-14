@@ -114,7 +114,7 @@ export default function SignupForm() {
 					</div>
 
 					{error && (
-						<div className="flex items-center gap-2 rounded-md bg-destructive/15 p-3 text-sm text-destructive">
+						<div className="flex items-center gap-2 rounded-[--radius] bg-destructive/15 p-3 text-sm text-destructive">
 							<AlertCircle className="h-4 w-4" />
 							{error}
 						</div>

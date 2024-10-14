@@ -5,17 +5,30 @@ import { Play, Pause, Square } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@/components/ui/button';
 import { Toggle } from '@/components/ui/toggle';
-import { togglePlayback, setPlayback } from '@/store/playback-slice';
+import { play, pause, stop } from '@/store/playback-slice';
+import { setStatus, reset } from '@/store/timer-slice';
 import { RootState } from '@/store/store';
 
-export function PlaybackControls() {
+export const PlaybackControls: React.FC = () => {
 	const dispatch = useDispatch();
-	const isPlaying = useSelector((state: RootState) => state.playback.isPlaying);
+	const playbackStatus = useSelector(
+		(state: RootState) => state.playback.status
+	);
+
+	const handlePlayPause = () => {
+		if (playbackStatus === 'playing') {
+			dispatch(pause());
+			dispatch(setStatus('paused'));
+		} else {
+			dispatch(play());
+			dispatch(setStatus('playing'));
+		}
+	};
 
 	const handleStop = () => {
-		dispatch(setPlayback(false));
-		// might want to add additional reset logic here
-		// for example, tracking time or progress
+		dispatch(stop());
+		dispatch(reset());
+		dispatch(setStatus('stopped'));
 	};
 
 	return (
@@ -23,11 +36,11 @@ export function PlaybackControls() {
 			<Toggle
 				variant="outline"
 				size="sm"
-				pressed={isPlaying}
-				onPressedChange={() => dispatch(togglePlayback())}
+				pressed={playbackStatus === 'playing'}
+				onPressedChange={handlePlayPause}
 				className="h-10 w-10"
 			>
-				{isPlaying ? (
+				{playbackStatus === 'playing' ? (
 					<Pause className="h-[1.2rem] w-[1.2rem]" />
 				) : (
 					<Play className="h-[1.2rem] w-[1.2rem]" />
@@ -40,4 +53,4 @@ export function PlaybackControls() {
 			</Button>
 		</div>
 	);
-}
+};

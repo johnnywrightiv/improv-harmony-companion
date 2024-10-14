@@ -37,7 +37,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 import { Counter } from '@/components/counter';
-import { ThemeToggle } from '@/components/theme-toggle';
+import { ThemeSelect } from '@/components/theme-selector';
 import { PlaybackControls } from '@/components/playback-controls';
 import { SearchBar } from '@/components/search-bar';
 import { SignOut } from '@/components/sign-out';
@@ -162,7 +162,7 @@ export default function ComponentLibrary() {
 					<div>
 						<h3>Icons & Controls</h3>
 						<div className="flex gap-4">
-							<ThemeToggle />
+							<ThemeSelect />
 							<PlaybackControls />
 						</div>
 						<p className="mt-2 text-sm text-muted-foreground">
@@ -453,7 +453,7 @@ export default function ComponentLibrary() {
 							</div>
 							<div>
 								<h6>Light/Dark Mode</h6>
-								<ThemeToggle />
+								<ThemeSelect />
 							</div>
 							<div>
 								<h6>Sign Out</h6>

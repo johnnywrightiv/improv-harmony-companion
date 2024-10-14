@@ -1,25 +1,34 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface PlaybackState {
-	isPlaying: boolean;
+	status: 'playing' | 'paused' | 'stopped';
 }
 
 const initialState: PlaybackState = {
-	isPlaying: false,
+	status: 'stopped',
 };
 
 export const playbackSlice = createSlice({
 	name: 'playback',
 	initialState,
 	reducers: {
-		togglePlayback: (state) => {
-			state.isPlaying = !state.isPlaying;
+		play: (state) => {
+			state.status = 'playing';
 		},
-		setPlayback: (state, action: PayloadAction<boolean>) => {
-			state.isPlaying = action.payload;
+		pause: (state) => {
+			state.status = 'paused';
+		},
+		stop: (state) => {
+			state.status = 'stopped';
+		},
+		setPlaybackStatus: (
+			state,
+			action: PayloadAction<PlaybackState['status']>
+		) => {
+			state.status = action.payload;
 		},
 	},
 });
 
-export const { togglePlayback, setPlayback } = playbackSlice.actions;
+export const { play, pause, stop, setPlaybackStatus } = playbackSlice.actions;
 export default playbackSlice.reducer;

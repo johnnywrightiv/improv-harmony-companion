@@ -8,7 +8,7 @@ export default function LoginPage() {
 		<main className="flex min-h-screen w-full items-start justify-center overflow-auto bg-background py-8 md:items-center">
 			<div className="relative mx-auto w-full max-w-[400px] p-4">
 				<div className="mb-6">
-					<nav className="flex h-20 w-full items-end rounded-lg bg-gradient-to-br from-primary to-secondary p-3">
+					<nav className="flex h-20 w-full items-end rounded-[--radius] bg-gradient-to-br from-primary to-secondary p-3">
 						<Link href="/" className="cursor-pointer">
 							<AcmeLogo />
 						</Link>

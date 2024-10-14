@@ -1,21 +1,48 @@
 import React from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Card, CardHeader, CardContent } from '@/components/ui/card';
+import {
+	Card,
+	CardHeader,
+	CardContent,
+	CardFooter,
+} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-
-// Import icons from lucide-react
-import { Settings, Music, Clock } from 'lucide-react';
-
-// Import placeholder data
+import RecentSessions from '@/components/recent-sessions';
+import { Settings, Drum, Guitar, Clock } from 'lucide-react';
 import placeholderData from '@/data/placeholder-data.json';
+import { setPlaybackStatus } from '@/store/playback-slice';
+import { setMode, setStatus, setDuration } from '@/store/timer-slice';
+import ProgressOverview from './progress-overview';
 
 const DashboardHome = () => {
-	const userData = placeholderData.users[0]; // Assuming we're using the first user
+	const userData = placeholderData.users[0];
+	const router = useRouter();
+	const dispatch = useDispatch();
+
+	const handleQuickStart = () => {
+		dispatch(setPlaybackStatus('playing'));
+		dispatch(setMode('stopwatch'));
+		dispatch(setStatus('playing'));
+		dispatch(setDuration(0));
+		router.push('/dashboard/practice');
+	};
+	const handleNewSession = () => {
+		router.push('/dashboard/practice?config=open');
+	};
+
+	const handleMetronome = () => {
+		dispatch(setPlaybackStatus('playing'));
+		dispatch(setMode('stopwatch'));
+		dispatch(setStatus('playing'));
+		// Add any additional metronome-specific logic here
+	};
 
 	return (
-		<div className="mx-auto w-full max-w-6xl space-y-8 p-4">
+		<div className="mx-auto w-full max-w-6xl space-y-8">
 			{/* Header */}
+			<ProgressOverview />
 			<div className="flex items-center space-x-4">
 				<Avatar className="h-16 w-16">
 					<AvatarImage
@@ -40,7 +67,7 @@ const DashboardHome = () => {
 				<div className="space-y-6 lg:col-span-2">
 					<Card>
 						<CardHeader>
-							<h2 className="text-xl font-semibold">Stats</h2>
+							<h2 className="">Practice</h2>
 						</CardHeader>
 						<CardContent className="grid grid-cols-3 gap-4">
 							<div>
@@ -64,18 +91,37 @@ const DashboardHome = () => {
 								</p>
 							</div>
 						</CardContent>
+						<CardFooter>
+							{/* Button Container */}
+							<div className="flex w-full flex-col gap-4 sm:flex-row">
+								<Button onClick={handleQuickStart} className="w-full sm:w-1/2">
+									Quick Start
+								</Button>
+								<Button
+									onClick={handleNewSession}
+									variant="outline"
+									className="w-full sm:w-1/2"
+								>
+									New Session
+								</Button>
+							</div>
+						</CardFooter>
 					</Card>
 					<div className="space-y-4">
 						<h2 className="text-xl font-semibold">Tools</h2>
 						<div className="grid grid-cols-3 gap-4">
-							<Button variant="secondary" className="h-16 border border-border">
-								<Music className="mr-2 h-4 w-4" /> Loop Generator
+							<Button
+								variant="secondary"
+								className="h-16 border border-border"
+								onClick={handleMetronome}
+							>
+								<Drum className="mr-2 h-4 w-4" /> Metronome
 							</Button>
 							<Button variant="secondary" className="h-16 border border-border">
-								<Clock className="mr-2 h-4 w-4" /> Metronome
+								<Clock className="mr-2 h-4 w-4" /> Timer
 							</Button>
 							<Button variant="secondary" className="h-16 border border-border">
-								<Music className="mr-2 h-4 w-4" /> Tuner
+								<Guitar className="mr-2 h-4 w-4" /> Tuner
 							</Button>
 						</div>
 					</div>
@@ -95,26 +141,7 @@ const DashboardHome = () => {
 							</p>
 						</CardContent>
 					</Card>
-					<div className="space-y-4">
-						<h2 className="text-xl font-semibold">Recent Loops</h2>
-						{userData.recentLoops.map((loop) => (
-							<Link
-								href={`/loops/${loop.id}`}
-								key={loop.id}
-								className="flex items-center space-x-4 rounded-md p-2 hover:bg-secondary"
-							>
-								<div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary">
-									<Music className="h-6 w-6 text-background" />
-								</div>
-								<div className="flex-grow">
-									<p className="font-medium">{loop.name}</p>
-									<p className="text-sm text-muted-foreground">
-										{loop.duration}
-									</p>
-								</div>
-							</Link>
-						))}
-					</div>
+					<RecentSessions />
 				</div>
 			</div>
 		</div>

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { ThemeToggle } from '@/components/theme-toggle';
+import { ThemeSelect } from '@/components/theme-selector';
 import AcmeLogo from '@/components/acme-logo';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
@@ -22,7 +22,7 @@ export default function NavBar() {
 
 	return (
 		<div className="mb-4">
-			<nav className="flex h-auto items-center justify-between rounded-lg bg-gradient-to-br from-primary to-secondary p-4">
+			<nav className="flex h-auto items-center justify-between rounded-[--radius] bg-gradient-to-br from-primary to-secondary p-4">
 				{/* Logo Section */}
 				<Link href="/" className="cursor-pointer" aria-label="Go to homepage">
 					<AcmeLogo displayText={false} />
@@ -67,7 +67,7 @@ export default function NavBar() {
 
 				{/* Theme Toggle */}
 				<div className="hidden md:block">
-					<ThemeToggle />
+					<ThemeSelect />
 				</div>
 			</nav>
 
@@ -77,7 +77,7 @@ export default function NavBar() {
           ${mobileMenuOpen ? 'max-h-96' : 'max-h-0'}`}
 			>
 				<div
-					className={`rounded-lg bg-card p-4 transition-all duration-300
+					className={`rounded-[--radius] bg-card p-4 transition-all duration-300
           ${mobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'}`}
 				>
 					<ul className="flex flex-col gap-2">
@@ -119,7 +119,7 @@ export default function NavBar() {
 							transform: mobileMenuOpen ? 'translateY(0)' : 'translateY(1rem)',
 						}}
 					>
-						<ThemeToggle />
+						<ThemeSelect />
 					</div>
 				</div>
 			</div>

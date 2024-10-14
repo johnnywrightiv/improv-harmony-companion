@@ -5,8 +5,8 @@ import AcmeLogo from '@/components/acme-logo';
 import {
 	CircleUser,
 	House,
-	File,
-	CircleDollarSign,
+	ChartColumnBig,
+	Music,
 	ChevronLeft,
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
@@ -18,13 +18,13 @@ import { Button } from './ui/button';
 
 const mainLinks = [
 	{ name: 'Home', href: '/dashboard', icon: House },
-	{ name: 'Orders', href: '/dashboard/orders', icon: CircleDollarSign },
-	{ name: 'Invoices', href: '/dashboard/invoices', icon: File },
+	{ name: 'Practice', href: '/dashboard/practice', icon: Music },
+	{ name: 'Progress', href: '/dashboard/progress', icon: ChartColumnBig },
 ];
 
-const profileLink = {
-	name: 'Profile',
-	href: '/dashboard/profile',
+const settingsLink = {
+	name: 'Settings',
+	href: '/dashboard/settings',
 	icon: CircleUser,
 };
 
@@ -44,7 +44,7 @@ export default function NavSidebar() {
 					variant="ghost"
 					onClick={() => dispatch(toggleSidebar())}
 					className={clsx(
-						'top text-foreground absolute z-10 hidden rounded-full p-2 hover:bg-secondary/30 md:block',
+						'top text-foreground absolute z-10 hidden rounded-[--radius] p-2 hover:bg-secondary/30 md:block',
 						{
 							'right-2': isVisible,
 							'left-1/2 -translate-x-1/2': !isVisible,
@@ -61,7 +61,7 @@ export default function NavSidebar() {
 
 				<div
 					className={clsx(
-						'relative mb-2 flex items-center justify-center rounded-md bg-gradient-to-br from-primary to-secondary',
+						'relative mb-2 flex items-center justify-center rounded-[--radius] bg-gradient-to-br from-primary to-secondary',
 						{
 							'h-40 p-1': isVisible,
 							'h-30	 p-2': !isVisible,
@@ -91,11 +91,11 @@ export default function NavSidebar() {
 								<Link
 									href={link.href}
 									className={clsx(
-										'flex h-[48px] items-center rounded-md text-sm font-medium text-muted-foreground hover:text-card-foreground focus:outline-none focus:ring-2 focus:ring-primary',
+										'flex h-[48px] items-center rounded-[--radius] text-sm font-medium text-muted-foreground hover:text-card-foreground focus:outline-none focus:ring-2 focus:ring-primary',
 										{
 											'justify-start gap-2 p-2 px-3': isVisible,
 											'justify-center p-1': !isVisible,
-											'hover:text-foreground bg-secondary/30  text-primary hover:text-primary':
+											'hover:text-foreground bg-secondary/30  text-primary ring-1 ring-ring hover:text-primary':
 												pathname === link.href,
 										}
 									)}
@@ -112,26 +112,26 @@ export default function NavSidebar() {
 					})}
 				</ul>
 
-				{/* Profile link at bottom */}
+				{/* Settings link at bottom */}
 				<div className="hidden md:block">
 					<Link
-						href={profileLink.href}
+						href={settingsLink.href}
 						className={clsx(
-							'flex h-[48px] items-center rounded-md text-sm font-medium text-muted-foreground hover:text-card-foreground focus:outline-none focus:ring-2 focus:ring-primary',
+							'flex h-[48px] items-center rounded-[--radius] text-sm font-medium text-muted-foreground hover:text-card-foreground focus:outline-none focus:ring-2 focus:ring-primary',
 							{
 								'justify-start gap-2 p-2 px-3': isVisible,
 								'justify-center p-1': !isVisible,
-								'bg-secondary/30  text-primary hover:text-primary':
-									pathname === profileLink.href, // Active state
+								'bg-secondary/30  text-primary ring-1 ring-ring hover:text-primary':
+									pathname === settingsLink.href, // Active state
 							}
 						)}
-						aria-current={pathname === profileLink.href ? 'page' : undefined}
+						aria-current={pathname === settingsLink.href ? 'page' : undefined}
 					>
-						<profileLink.icon className="w-6" aria-hidden="true" />
+						<settingsLink.icon className="w-6" aria-hidden="true" />
 						{isVisible && (
-							<span className="hidden md:block">{profileLink.name}</span>
+							<span className="hidden md:block">{settingsLink.name}</span>
 						)}
-						<span className="sr-only">{profileLink.name}</span>
+						<span className="sr-only">{settingsLink.name}</span>
 					</Link>
 				</div>
 
@@ -141,14 +141,14 @@ export default function NavSidebar() {
 					role="navigation"
 					aria-label="Mobile Navigation"
 				>
-					{[...mainLinks, profileLink].map((link) => {
+					{[...mainLinks, settingsLink].map((link) => {
 						const LinkIcon = link.icon;
 						return (
 							<Link
 								key={link.name}
 								href={link.href}
 								className={clsx(
-									'flex h-[48px] grow items-center justify-center rounded-md p-3 text-sm font-medium text-muted-foreground hover:bg-secondary/30 hover:text-card-foreground focus:outline-none focus:ring-1 focus:ring-primary',
+									'flex h-[48px] grow items-center justify-center rounded-[--radius] p-3 text-sm font-medium text-muted-foreground hover:bg-secondary/30 hover:text-card-foreground focus:outline-none focus:ring-1 focus:ring-primary',
 									{
 										'bg-secondary/30 text-primary hover:text-primary':
 											pathname === link.href, // Active state

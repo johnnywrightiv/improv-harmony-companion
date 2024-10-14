@@ -8,7 +8,7 @@ export default function LandingPage() {
 			{/* Main Columns */}
 			<div className="mt-2 flex flex-col gap-8 py-4 md:flex-row md:gap-8">
 				{/* Info Card */}
-				<div className="text-foreground flex flex-col justify-center gap-8 rounded-lg border border-border/50 bg-secondary/50 px-8 py-10 shadow-lg md:w-[45%] md:px-12">
+				<div className="text-foreground flex flex-col justify-center gap-8 rounded-[--radius] border border-border/50 bg-secondary/50 px-8 py-10 shadow-lg md:w-[45%] md:px-12">
 					<div className="space-y-4 text-xl md:text-3xl md:leading-relaxed">
 						<h1>Welcome to Acme.</h1>
 						<p>
@@ -40,14 +40,14 @@ export default function LandingPage() {
 						src="/hero-desktop.png"
 						width={1000}
 						height={760}
-						className="hidden rounded-lg md:block"
+						className="hidden rounded-[--radius] md:block"
 						alt="Screenshots of the app showing desktop version"
 					/>
 					<Image
 						src="/hero-mobile.png"
 						width={560}
 						height={620}
-						className="block rounded-lg md:hidden"
+						className="block rounded-[--radius] md:hidden"
 						alt="Screenshot of the app showing mobile version"
 					/>
 				</div>
