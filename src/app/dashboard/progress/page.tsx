@@ -9,7 +9,7 @@ export default function Practice() {
 	return (
 		<div className="space-y-8">
 			<ProgressOverview />
-			<h4 className='text-center'>Calendar Component Here?</h4>
+			<h4 className="text-center">Calendar Component Here?</h4>
 			<Card>
 				<CardHeader>
 					<h2 className="">Practice Stats</h2>

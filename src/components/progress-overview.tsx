@@ -14,7 +14,7 @@ export default function ProgressOverview() {
 	return (
 		<div className="w-full space-y-4 rounded-[--radius] border border-border bg-secondary p-3 shadow-lg">
 			<Link href="/dashboard/progress" className="block">
-				<div className="text-center hover:">
+				<div className="hover: text-center">
 					<h3 className="text-foreground font-semibold">
 						{progress}% of the way to your goal this week
 					</h3>

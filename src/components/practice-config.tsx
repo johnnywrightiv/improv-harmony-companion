@@ -28,6 +28,7 @@ import { setMode, setStatus, setDuration } from '@/store/timer-slice';
 
 interface PracticeConfigProps {
 	initialOpen: boolean;
+	// eslint-disable-next-line no-unused-vars
 	onOpenChange: (open: boolean) => void;
 }
 

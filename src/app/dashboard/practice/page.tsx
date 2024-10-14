@@ -1,4 +1,4 @@
-'use client'; //needed for open config props with useEffect 
+'use client'; //needed for open config props with useEffect
 
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';

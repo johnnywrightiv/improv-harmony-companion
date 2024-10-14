@@ -7,7 +7,6 @@ const UserSettings = () => {
 		<div className="space-y-4">
 			<ThemeSelect />
 			<SignOutButton />
-
 		</div>
 	);
 };
