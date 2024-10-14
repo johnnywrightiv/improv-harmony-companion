@@ -21,7 +21,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 			>
 				<NavSidebar />
 			</div>
-			<div className="flex-grow px-6 py-12 pb-[76px] md:overflow-y-auto md:pb-6">
+			<div className="flex-grow px-6 md:py-12 pb-[76px] md:overflow-y-auto md:pb-6">
 				{children}
 			</div>
 		</div>

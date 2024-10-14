@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { useAuth } from '@/lib/hooks/useAuth';
 import { useRouter } from 'next/navigation';
 
-export function SignOut() {
+export function SignOutButton() {
 	const form = useForm();
 	const { logout } = useAuth();
 	const router = useRouter();

@@ -38,7 +38,7 @@ import {
 
 import { ThemeSelect } from '@/components/theme-selector';
 import { PlaybackControls } from '@/components/playback-controls';
-import { SignOut } from '@/components/sign-out';
+import { SignOutButton } from '@/components/sign-out-button';
 import {
 	Card,
 	CardContent,
@@ -447,7 +447,7 @@ export default function ComponentLibrary() {
 							</div>
 							<div>
 								<h6>Sign Out</h6>
-								<SignOut />
+								<SignOutButton />
 							</div>
 						</div>
 					</section>

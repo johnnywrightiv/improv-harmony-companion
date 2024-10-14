@@ -3,7 +3,6 @@
 import * as React from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
-
 import { Button } from '@/components/ui/button';
 import {
 	DropdownMenu,
@@ -11,6 +10,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import clsx from 'clsx';
 
 export function ThemeSelect() {
 	const { setTheme } = useTheme();
@@ -18,10 +18,15 @@ export function ThemeSelect() {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button variant="outline" size="sm" className="h-10 w-10">
-					<Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-					<Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-					<span className="sr-only">Toggle theme</span>
+				<Button
+					variant="ghost"
+					className={clsx(
+						'flex h-[48px] items-center justify-start gap-2 rounded-[--radius] border border-border bg-background p-2 px-3 text-sm font-medium text-muted-foreground hover:bg-secondary/30 hover:text-card-foreground'
+					)}
+				>
+					<Sun className="h-6 w-6 rotate-0 scale-100  dark:-rotate-90 dark:scale-0" />
+					<Moon className="absolute h-6 w-6 rotate-90 scale-0  dark:rotate-0 dark:scale-100" />
+					<div>Theme</div>
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end">
