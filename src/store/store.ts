@@ -3,6 +3,7 @@ import authReducer from './auth-slice';
 import sidebarReducer from './sidebar-slice';
 import playbackReducer from './playback-slice';
 import practiceConfigReducer from './practice-config-slice';
+import sessionReviewReducer from './session-review-slice';
 import timerReducer from './timer-slice';
 
 export const store = configureStore({
@@ -12,6 +13,7 @@ export const store = configureStore({
 		playback: playbackReducer,
 		practiceConfig: practiceConfigReducer,
 		timer: timerReducer,
+		sessionReview: sessionReviewReducer,
 	},
 });
 

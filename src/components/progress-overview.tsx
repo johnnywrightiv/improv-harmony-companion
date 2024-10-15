@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export default function ProgressOverview() {
 	const progress = 35; // Example progress percentage
-	const daysOfWeek = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+	const daysOfWeek = ['M', 'T', 'W', 'Th', 'F', 'Sa', 'Su'];
 
 	// Example daily progress data (0-40)
 	const dailyProgress = [40, 0, 40, 10, 25, 36, 0];

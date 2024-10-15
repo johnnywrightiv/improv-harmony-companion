@@ -1,13 +1,22 @@
-'use client'; //needed for open config props with useEffect
+'use client';
 
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useSearchParams } from 'next/navigation';
 import { RootState } from '@/store/store';
-import PracticeConfig from '@/components/practice-config';
+import PracticeConfig from '@/components/practice-config-window';
 import PracticeSession from '@/components/practice-session';
 import RecentSessions from '@/components/recent-sessions';
+import SessionReviewModal from '@/components/session-review-modal';
 import { Button } from '@/components/ui/button';
+import {
+	Dialog,
+	DialogContent,
+	DialogHeader,
+	DialogTitle,
+	DialogFooter,
+} from '@/components/ui/dialog';
+import { setPlaybackStatus } from '@/store/playback-slice';
 
 interface PracticeSessionPlaceholderProps {}
 
@@ -25,11 +34,18 @@ const PracticeSessionPlaceholder: React.FC<
 );
 
 const Practice: React.FC = () => {
-	const [isConfigOpen, setIsConfigOpen] = React.useState(false);
+	const [isConfigOpen, setIsConfigOpen] = useState(false);
+	const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+	const [isLogSessionPromptOpen, setIsLogSessionPromptOpen] = useState(false);
 	const playbackStatus = useSelector(
 		(state: RootState) => state.playback.status
 	);
+	const { status: timerStatus } = useSelector(
+		(state: RootState) => state.timer
+	);
+	const dispatch = useDispatch();
 	const searchParams = useSearchParams();
+	// const router = useRouter();
 
 	useEffect(() => {
 		if (searchParams.get('config') === 'open') {
@@ -37,8 +53,28 @@ const Practice: React.FC = () => {
 		}
 	}, [searchParams]);
 
+	useEffect(() => {
+		if (playbackStatus === 'stopped' && timerStatus === 'stopped') {
+			setIsLogSessionPromptOpen(true);
+			dispatch(setPlaybackStatus('stopped'));
+		}
+	}, [playbackStatus, timerStatus, dispatch]);
+
 	const handleConfigOpen = () => {
 		setIsConfigOpen(true);
+	};
+
+	const handleLogSessionPromptClose = (willLog: boolean) => {
+		setIsLogSessionPromptOpen(false);
+		if (willLog) {
+			setIsReviewModalOpen(true);
+		} else {
+			// router.push('/dashboard');
+		}
+	};
+
+	const handleReviewClose = () => {
+		setIsReviewModalOpen(false);
 	};
 
 	return (
@@ -57,6 +93,30 @@ const Practice: React.FC = () => {
 					</div>
 					<RecentSessions />
 				</>
+			)}
+			<SessionReviewModal
+				isOpen={isReviewModalOpen}
+				onClose={handleReviewClose}
+			/>
+			{isLogSessionPromptOpen && (
+				<Dialog
+					open={isLogSessionPromptOpen}
+					onOpenChange={() => handleLogSessionPromptClose(false)}
+				>
+					<DialogContent>
+						<DialogHeader>
+							<DialogTitle>Would you like to log this session?</DialogTitle>
+						</DialogHeader>
+						<DialogFooter>
+							<Button onClick={() => handleLogSessionPromptClose(false)}>
+								No
+							</Button>
+							<Button onClick={() => handleLogSessionPromptClose(true)}>
+								Yes
+							</Button>
+						</DialogFooter>
+					</DialogContent>
+				</Dialog>
 			)}
 		</div>
 	);

@@ -26,8 +26,8 @@ const initialState: PracticeConfigState = {
 	skillFocus: 'technique',
 };
 
-export const practiceConfigSlice = createSlice({
-	name: 'practiceConfig',
+export const PracticeConfigSlice = createSlice({
+	name: 'PracticeConfig',
 	initialState,
 	reducers: {
 		updateConfig: (
@@ -40,5 +40,5 @@ export const practiceConfigSlice = createSlice({
 	},
 });
 
-export const { updateConfig, resetConfig } = practiceConfigSlice.actions;
-export default practiceConfigSlice.reducer;
+export const { updateConfig, resetConfig } = PracticeConfigSlice.actions;
+export default PracticeConfigSlice.reducer;
