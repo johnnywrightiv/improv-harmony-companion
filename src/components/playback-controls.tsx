@@ -1,5 +1,3 @@
-'use client';
-
 import * as React from 'react';
 import { Play, Pause, Square } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Toggle } from '@/components/ui/toggle';
 import { play, pause, stop } from '@/store/playback-slice';
 import { setStatus, reset } from '@/store/timer-slice';
+import { setDuration } from '@/store/session-details-slice';
 import { RootState } from '@/store/store';
 
 export const PlaybackControls: React.FC = () => {
@@ -14,6 +13,7 @@ export const PlaybackControls: React.FC = () => {
 	const playbackStatus = useSelector(
 		(state: RootState) => state.playback.status
 	);
+	const { practiceDuration } = useSelector((state: RootState) => state.timer);
 
 	const handlePlayPause = () => {
 		if (playbackStatus === 'playing') {
@@ -26,6 +26,7 @@ export const PlaybackControls: React.FC = () => {
 	};
 
 	const handleStop = () => {
+		dispatch(setDuration(practiceDuration));
 		dispatch(stop());
 		dispatch(reset());
 		dispatch(setStatus('stopped'));

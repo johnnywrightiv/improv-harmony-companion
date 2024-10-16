@@ -17,6 +17,11 @@ import {
 	DialogFooter,
 } from '@/components/ui/dialog';
 import { setPlaybackStatus } from '@/store/playback-slice';
+import {
+	setDuration,
+	setIsActive,
+	resetSessionDetails,
+} from '@/store/session-details-slice';
 
 interface PracticeSessionPlaceholderProps {}
 
@@ -40,12 +45,14 @@ const Practice: React.FC = () => {
 	const playbackStatus = useSelector(
 		(state: RootState) => state.playback.status
 	);
-	const { status: timerStatus } = useSelector(
+	const { status: timerStatus, practiceDuration } = useSelector(
 		(state: RootState) => state.timer
+	);
+	const { duration: sessionDuration, isActive } = useSelector(
+		(state: RootState) => state.sessionDetails
 	);
 	const dispatch = useDispatch();
 	const searchParams = useSearchParams();
-	// const router = useRouter();
 
 	useEffect(() => {
 		if (searchParams.get('config') === 'open') {
@@ -54,11 +61,21 @@ const Practice: React.FC = () => {
 	}, [searchParams]);
 
 	useEffect(() => {
-		if (playbackStatus === 'stopped' && timerStatus === 'stopped') {
-			setIsLogSessionPromptOpen(true);
-			dispatch(setPlaybackStatus('stopped'));
+		if (playbackStatus === 'playing' || timerStatus === 'playing') {
+			dispatch(setIsActive(true));
 		}
 	}, [playbackStatus, timerStatus, dispatch]);
+
+	useEffect(() => {
+		if (isActive && playbackStatus === 'stopped' && timerStatus === 'stopped') {
+			if (practiceDuration > 0) {
+				dispatch(setDuration(practiceDuration));
+			}
+			setIsLogSessionPromptOpen(true);
+			dispatch(setPlaybackStatus('stopped'));
+			dispatch(setIsActive(false));
+		}
+	}, [isActive, playbackStatus, timerStatus, practiceDuration, dispatch]);
 
 	const handleConfigOpen = () => {
 		setIsConfigOpen(true);
@@ -69,12 +86,13 @@ const Practice: React.FC = () => {
 		if (willLog) {
 			setIsReviewModalOpen(true);
 		} else {
-			// router.push('/dashboard');
+			dispatch(resetSessionDetails());
 		}
 	};
 
 	const handleReviewClose = () => {
 		setIsReviewModalOpen(false);
+		dispatch(resetSessionDetails());
 	};
 
 	return (
@@ -97,6 +115,7 @@ const Practice: React.FC = () => {
 			<SessionReviewModal
 				isOpen={isReviewModalOpen}
 				onClose={handleReviewClose}
+				sessionDuration={sessionDuration}
 			/>
 			{isLogSessionPromptOpen && (
 				<Dialog

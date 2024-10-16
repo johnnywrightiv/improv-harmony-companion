@@ -1,4 +1,3 @@
-// components/session-review-modal.tsx
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
@@ -18,19 +17,18 @@ import { Save } from 'lucide-react';
 interface SessionReviewModalProps {
 	isOpen: boolean;
 	onClose: () => void;
+	sessionDuration: number;
 }
 
 const SessionReviewModal: React.FC<SessionReviewModalProps> = ({
 	isOpen,
 	onClose,
+	sessionDuration,
 }) => {
 	const dispatch = useDispatch();
 	const router = useRouter();
 	const practiceConfig = useSelector(
 		(state: RootState) => state.practiceConfig
-	);
-	const practiceDuration = useSelector(
-		(state: RootState) => state.timer.practiceDuration
 	);
 	const [rating, setRating] = useState<number>(0);
 	const [comments, setComments] = useState<string>('');
@@ -41,10 +39,17 @@ const SessionReviewModal: React.FC<SessionReviewModalProps> = ({
 				rating,
 				comments,
 				...practiceConfig,
-				practiceDuration,
+				practiceDuration: sessionDuration,
 			})
 		);
 		alert(`${practiceConfig.sessionName} session saved`);
+		onClose();
+	};
+
+	const formatDuration = (duration: number): string => {
+		const minutes = Math.floor(duration / 60);
+		const seconds = duration % 60;
+		return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 	};
 
 	const emojis = ['😞', '😐', '🙂', '😊', '😃'];
@@ -91,10 +96,7 @@ const SessionReviewModal: React.FC<SessionReviewModalProps> = ({
 							<li>Time Signature: {practiceConfig.timeSignature}</li>
 							<li>Tempo: {practiceConfig.tempo} BPM</li>
 							<li>Session Name: {practiceConfig.sessionName}</li>
-							<li>
-								Duration: {Math.floor(practiceDuration / 60)}:
-								{(practiceDuration % 60).toString().padStart(2, '0')}
-							</li>
+							<li>Duration: {formatDuration(sessionDuration)}</li>
 						</ul>
 					</div>
 				</div>

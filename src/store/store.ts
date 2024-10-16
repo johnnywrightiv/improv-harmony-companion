@@ -5,6 +5,7 @@ import playbackReducer from './playback-slice';
 import practiceConfigReducer from './practice-config-slice';
 import sessionReviewReducer from './session-review-slice';
 import timerReducer from './timer-slice';
+import sessionDetailsReducer from './session-details-slice';
 
 export const store = configureStore({
 	reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
 		practiceConfig: practiceConfigReducer,
 		timer: timerReducer,
 		sessionReview: sessionReviewReducer,
+		sessionDetails: sessionDetailsReducer,
 	},
 });
 
