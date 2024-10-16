@@ -6,8 +6,12 @@ import { Button } from '@/components/ui/button';
 import RecentSessions from '@/components/recent-sessions';
 import { Settings } from 'lucide-react';
 import placeholderData from '@/data/placeholder-data.json';
-import { setPlaybackStatus } from '@/store/playback-slice';
-import { setMode, setStatus, setDuration } from '@/store/timer-slice';
+import {
+	updateConfig,
+	setTimerMode,
+	setTimerStatus,
+	setTimerDuration,
+} from '@/store/practice-session-slice';
 import ProgressOverview from './progress-overview';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 
@@ -17,17 +21,16 @@ const DashboardHome = () => {
 	const dispatch = useDispatch();
 
 	const handleQuickStart = () => {
-		dispatch(setPlaybackStatus('playing'));
-		dispatch(setMode('stopwatch'));
-		dispatch(setStatus('playing'));
-		dispatch(setDuration(0));
+		dispatch(updateConfig({ isActive: true }));
+		dispatch(setTimerMode('stopwatch'));
+		dispatch(setTimerStatus('playing'));
+		dispatch(setTimerDuration(0));
 		router.push('/dashboard/practice');
 	};
 
 	const handleNewSession = () => {
 		router.push('/dashboard/practice?config=open');
 	};
-
 	return (
 		<div className="mx-auto w-full max-w-6xl space-y-8">
 			{/* Header */}

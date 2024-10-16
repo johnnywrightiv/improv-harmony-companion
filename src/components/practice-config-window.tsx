@@ -1,5 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
+import {
+	updateConfig,
+	setTimerMode,
+	setTimerStatus,
+	setTimerDuration,
+} from '@/store/practice-session-slice';
+
 import {
 	Sheet,
 	SheetContent,
@@ -21,10 +29,6 @@ import {
 } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
-import { updateConfig, resetConfig } from '@/store/practice-config-slice';
-import { RootState } from '@/store/store';
-import { setPlaybackStatus } from '@/store/playback-slice';
-import { setMode, setStatus, setDuration } from '@/store/timer-slice';
 
 interface PracticeConfigProps {
 	initialOpen: boolean;
@@ -37,7 +41,9 @@ const PracticeConfig: React.FC<PracticeConfigProps> = ({
 	onOpenChange,
 }) => {
 	const dispatch = useDispatch();
-	const config = useSelector((state: RootState) => state.practiceConfig);
+	const config = useSelector(
+		(state: RootState) => state.practiceSession.config
+	);
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		dispatch(updateConfig({ [e.target.id]: e.target.value }));
@@ -58,10 +64,9 @@ const PracticeConfig: React.FC<PracticeConfigProps> = ({
 	const handleSubmit = (event: React.FormEvent) => {
 		event.preventDefault();
 		console.log('Practice session configuration:', config);
-		dispatch(setPlaybackStatus('playing'));
-		dispatch(setMode('countdown'));
-		dispatch(setDuration(Number(config.sessionDuration) * 60)); // Convert minutes to seconds
-		dispatch(setStatus('playing'));
+		dispatch(setTimerStatus('playing'));
+		dispatch(setTimerMode('countdown'));
+		dispatch(setTimerDuration(Number(config.sessionDuration) * 60)); // Convert minutes to seconds
 		onOpenChange(false);
 	};
 
@@ -69,10 +74,10 @@ const PracticeConfig: React.FC<PracticeConfigProps> = ({
 		<Sheet open={initialOpen} onOpenChange={onOpenChange}>
 			<SheetContent side="right" className="w-full sm:w-[540px] sm:max-w-full">
 				<SheetHeader>
-					<SheetTitle>Configure Practice Session</SheetTitle>
 					<SheetDescription>
 						Customize your practice session parameters.
 					</SheetDescription>
+					<SheetTitle>Configure Practice Session</SheetTitle>
 				</SheetHeader>
 				<form onSubmit={handleSubmit}>
 					<ScrollArea className="h-[calc(100vh-12rem)] pr-4">
@@ -202,13 +207,13 @@ const PracticeConfig: React.FC<PracticeConfigProps> = ({
 						</div>
 					</ScrollArea>
 					<SheetFooter className="mt-4">
-						<Button
+						{/* <Button
 							type="button"
 							variant="outline"
 							onClick={() => dispatch(resetConfig())}
 						>
 							Reset
-						</Button>
+						</Button> */}
 						<Button type="submit">Start Session</Button>
 					</SheetFooter>
 				</form>

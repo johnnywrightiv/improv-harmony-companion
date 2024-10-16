@@ -3,33 +3,24 @@ import { Play, Pause, Square } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@/components/ui/button';
 import { Toggle } from '@/components/ui/toggle';
-import { play, pause, stop } from '@/store/playback-slice';
-import { setStatus, reset } from '@/store/timer-slice';
-import { setDuration } from '@/store/session-details-slice';
+import { setTimerStatus, resetTimer } from '@/store/practice-session-slice';
 import { RootState } from '@/store/store';
 
 export const PlaybackControls: React.FC = () => {
 	const dispatch = useDispatch();
-	const playbackStatus = useSelector(
-		(state: RootState) => state.playback.status
-	);
-	const { practiceDuration } = useSelector((state: RootState) => state.timer);
+	const { playback } = useSelector((state: RootState) => state.practiceSession);
 
 	const handlePlayPause = () => {
-		if (playbackStatus === 'playing') {
-			dispatch(pause());
-			dispatch(setStatus('paused'));
+		if (playback.status === 'playing') {
+			dispatch(setTimerStatus('paused'));
 		} else {
-			dispatch(play());
-			dispatch(setStatus('playing'));
+			dispatch(setTimerStatus('playing'));
 		}
 	};
 
 	const handleStop = () => {
-		dispatch(setDuration(practiceDuration));
-		dispatch(stop());
-		dispatch(reset());
-		dispatch(setStatus('stopped'));
+		dispatch(setTimerStatus('stopped'));
+		dispatch(resetTimer());
 	};
 
 	return (
@@ -37,11 +28,11 @@ export const PlaybackControls: React.FC = () => {
 			<Toggle
 				variant="outline"
 				size="sm"
-				pressed={playbackStatus === 'playing'}
+				pressed={playback.status === 'playing'}
 				onPressedChange={handlePlayPause}
 				className="h-10 w-10"
 			>
-				{playbackStatus === 'playing' ? (
+				{playback.status === 'playing' ? (
 					<Pause className="h-[1.2rem] w-[1.2rem]" />
 				) : (
 					<Play className="h-[1.2rem] w-[1.2rem]" />

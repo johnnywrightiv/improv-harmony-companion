@@ -15,13 +15,13 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogFooter,
+	DialogDescription,
 } from '@/components/ui/dialog';
-import { setPlaybackStatus } from '@/store/playback-slice';
 import {
-	setDuration,
-	setIsActive,
-	resetSessionDetails,
-} from '@/store/session-details-slice';
+	setTimerStatus,
+	resetSession,
+	updateConfig,
+} from '@/store/practice-session-slice';
 
 interface PracticeSessionPlaceholderProps {}
 
@@ -42,14 +42,8 @@ const Practice: React.FC = () => {
 	const [isConfigOpen, setIsConfigOpen] = useState(false);
 	const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
 	const [isLogSessionPromptOpen, setIsLogSessionPromptOpen] = useState(false);
-	const playbackStatus = useSelector(
-		(state: RootState) => state.playback.status
-	);
-	const { status: timerStatus, practiceDuration } = useSelector(
-		(state: RootState) => state.timer
-	);
-	const { duration: sessionDuration, isActive } = useSelector(
-		(state: RootState) => state.sessionDetails
+	const { playback, timer, config } = useSelector(
+		(state: RootState) => state.practiceSession
 	);
 	const dispatch = useDispatch();
 	const searchParams = useSearchParams();
@@ -61,21 +55,31 @@ const Practice: React.FC = () => {
 	}, [searchParams]);
 
 	useEffect(() => {
-		if (playbackStatus === 'playing' || timerStatus === 'playing') {
-			dispatch(setIsActive(true));
+		if (playback.status === 'playing' || timer.status === 'playing') {
+			dispatch(updateConfig({ isActive: true }));
 		}
-	}, [playbackStatus, timerStatus, dispatch]);
+	}, [playback.status, timer.status, dispatch]);
 
 	useEffect(() => {
-		if (isActive && playbackStatus === 'stopped' && timerStatus === 'stopped') {
-			if (practiceDuration > 0) {
-				dispatch(setDuration(practiceDuration));
+		if (
+			config.isActive &&
+			playback.status === 'stopped' &&
+			timer.status === 'stopped'
+		) {
+			if (timer.practiceDuration > 0) {
+				dispatch(updateConfig({ sessionDuration: timer.practiceDuration }));
 			}
 			setIsLogSessionPromptOpen(true);
-			dispatch(setPlaybackStatus('stopped'));
-			dispatch(setIsActive(false));
+			dispatch(setTimerStatus('stopped'));
+			dispatch(updateConfig({ isActive: false }));
 		}
-	}, [isActive, playbackStatus, timerStatus, practiceDuration, dispatch]);
+	}, [
+		config.isActive,
+		playback.status,
+		timer.status,
+		timer.practiceDuration,
+		dispatch,
+	]);
 
 	const handleConfigOpen = () => {
 		setIsConfigOpen(true);
@@ -86,18 +90,18 @@ const Practice: React.FC = () => {
 		if (willLog) {
 			setIsReviewModalOpen(true);
 		} else {
-			dispatch(resetSessionDetails());
+			dispatch(resetSession());
 		}
 	};
 
 	const handleReviewClose = () => {
 		setIsReviewModalOpen(false);
-		dispatch(resetSessionDetails());
+		dispatch(resetSession());
 	};
 
 	return (
 		<div className="grid gap-4">
-			{playbackStatus === 'playing' || playbackStatus === 'paused' ? (
+			{playback.status === 'playing' || playback.status === 'paused' ? (
 				<PracticeSession />
 			) : (
 				<>
@@ -115,7 +119,6 @@ const Practice: React.FC = () => {
 			<SessionReviewModal
 				isOpen={isReviewModalOpen}
 				onClose={handleReviewClose}
-				sessionDuration={sessionDuration}
 			/>
 			{isLogSessionPromptOpen && (
 				<Dialog
@@ -124,15 +127,26 @@ const Practice: React.FC = () => {
 				>
 					<DialogContent>
 						<DialogHeader>
-							<DialogTitle>Would you like to log this session?</DialogTitle>
+							<DialogTitle>
+								Session Complete! - Update your progress?
+							</DialogTitle>
+							<DialogDescription>
+								Log sessions to contribute to your progress and to save your
+								loops.
+							</DialogDescription>
 						</DialogHeader>
 						<DialogFooter>
-							<Button onClick={() => handleLogSessionPromptClose(false)}>
-								No
-							</Button>
-							<Button onClick={() => handleLogSessionPromptClose(true)}>
-								Yes
-							</Button>
+							<div className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+								<Button
+									variant="outline"
+									onClick={() => handleLogSessionPromptClose(false)}
+								>
+									No
+								</Button>
+								<Button onClick={() => handleLogSessionPromptClose(true)}>
+									Yes
+								</Button>
+							</div>
 						</DialogFooter>
 					</DialogContent>
 				</Dialog>
