@@ -12,7 +12,7 @@ import {
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleSidebar } from '@/store/sidebar-slice';
+import { toggleSidebar } from '@/store/ui-slice';
 import type { RootState } from '@/store/store';
 import { Button } from './ui/button';
 
@@ -31,7 +31,7 @@ const settingsLink = {
 export default function NavSidebar() {
 	const pathname = usePathname();
 	const dispatch = useDispatch();
-	const isVisible = useSelector((state: RootState) => state.sidebar.isVisible);
+	const isVisible = useSelector((state: RootState) => state.ui.sidebarVisible);
 
 	return (
 		<nav

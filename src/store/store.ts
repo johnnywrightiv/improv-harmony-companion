@@ -1,15 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from './auth-slice';
-import sidebarReducer from './sidebar-slice';
-import practiceSessionReducer from './practice-session-slice';
-import sessionReviewReducer from './session-review-slice';
+import authReducer from '@/store/auth-slice';
+import userReducer from '@/store/user-slice';
+import loopReducer from '@/store/loop-slice';
+import sessionReducer from '@/store/session-slice';
+import reviewReducer from '@/store/review-slice';
+import uiReducer from '@/store/ui-slice';
 
 export const store = configureStore({
 	reducer: {
 		auth: authReducer,
-		sidebar: sidebarReducer,
-		practiceSession: practiceSessionReducer,
-		sessionReview: sessionReviewReducer,
+		user: userReducer,
+		loops: loopReducer,
+		sessions: sessionReducer,
+		reviews: reviewReducer,
+		ui: uiReducer,
 	},
 });
 

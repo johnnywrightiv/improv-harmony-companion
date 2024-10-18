@@ -21,7 +21,7 @@ import {
 	setTimerStatus,
 	resetSession,
 	updateConfig,
-} from '@/store/practice-session-slice';
+} from '@/store/session-slice';
 
 interface PracticeSessionPlaceholderProps {}
 
@@ -43,7 +43,7 @@ const Practice: React.FC = () => {
 	const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
 	const [isLogSessionPromptOpen, setIsLogSessionPromptOpen] = useState(false);
 	const { playback, timer, config } = useSelector(
-		(state: RootState) => state.practiceSession
+		(state: RootState) => state.sessions
 	);
 	const dispatch = useDispatch();
 	const searchParams = useSearchParams();

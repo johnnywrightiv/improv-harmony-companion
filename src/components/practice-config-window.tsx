@@ -6,7 +6,7 @@ import {
 	setTimerMode,
 	setTimerStatus,
 	setTimerDuration,
-} from '@/store/practice-session-slice';
+} from '@/store/session-slice';
 
 import {
 	Sheet,
@@ -41,9 +41,7 @@ const PracticeConfig: React.FC<PracticeConfigProps> = ({
 	onOpenChange,
 }) => {
 	const dispatch = useDispatch();
-	const config = useSelector(
-		(state: RootState) => state.practiceSession.config
-	);
+	const config = useSelector((state: RootState) => state.sessions.config);
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		dispatch(updateConfig({ [e.target.id]: e.target.value }));

@@ -11,7 +11,7 @@ import {
 	setTimerMode,
 	setTimerStatus,
 	setTimerDuration,
-} from '@/store/practice-session-slice';
+} from '@/store/session-slice';
 import ProgressOverview from './progress-overview';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 

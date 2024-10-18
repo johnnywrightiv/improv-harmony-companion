@@ -3,12 +3,12 @@ import { Play, Pause, Square } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@/components/ui/button';
 import { Toggle } from '@/components/ui/toggle';
-import { setTimerStatus, resetTimer } from '@/store/practice-session-slice';
+import { setTimerStatus, resetTimer } from '@/store/session-slice';
 import { RootState } from '@/store/store';
 
 export const PlaybackControls: React.FC = () => {
 	const dispatch = useDispatch();
-	const { playback } = useSelector((state: RootState) => state.practiceSession);
+	const { playback } = useSelector((state: RootState) => state.sessions);
 
 	const handlePlayPause = () => {
 		if (playback.status === 'playing') {

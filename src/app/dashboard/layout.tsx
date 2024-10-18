@@ -6,7 +6,7 @@ import type { RootState } from '@/store/store';
 import clsx from 'clsx';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-	const isVisible = useSelector((state: RootState) => state.sidebar.isVisible);
+	const isVisible = useSelector((state: RootState) => state.ui.sidebarVisible);
 
 	return (
 		<div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
