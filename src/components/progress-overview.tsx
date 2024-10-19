@@ -7,7 +7,7 @@ import Link from 'next/link';
 import placeholderData from '@/data/placeholder-data.json';
 
 export default function ProgressOverview() {
-	const user = placeholderData.users[2];
+	const user = placeholderData.users[0];
 	const { dailyGoal, weeklyGoal, dailyProgress, weeklyProgress } =
 		user.stats.goalTracking;
 
