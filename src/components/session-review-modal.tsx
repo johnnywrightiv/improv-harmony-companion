@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { RootState } from '@/store/store';
-import { saveSessionReview } from '@/store/session-review-slice';
+import { addReview } from '@/store/review-slice';
 import { clearCompletedSession } from '@/store/session-slice';
 import {
 	Dialog,
@@ -32,15 +32,14 @@ const SessionReviewModal: React.FC<SessionReviewModalProps> = ({
 	);
 	const [rating, setRating] = useState<number>(0);
 	const [comments, setComments] = useState<string>('');
-	// const config = useSelector((state: RootState) => state.sessions.config);
-	// const practiceDuration = useSelector(
-	// 	(state: RootState) => state.sessions.timer.practiceDuration
-	// );
 
 	const handleSave = () => {
 		if (completedSession) {
 			dispatch(
-				saveSessionReview({
+				addReview({
+					reviewId: Date.now().toString(), // Generate a unique ID
+					sessionId: completedSession.sessionName, // You might want to use a more unique identifier
+					userId: 'current-user-id', // Replace with actual user ID
 					rating,
 					comments,
 					...completedSession,

@@ -1,16 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface ReviewState {
-	reviews: Review[];
-	currentReview: Review | null;
-}
-
 interface Review {
 	reviewId: string;
 	sessionId: string;
 	userId: string;
-	notes: string;
 	rating: number;
+	comments: string;
+	sessionName: string;
+	keySignature: string;
+	timeSignature: string;
+	tempo: number;
+	practiceDuration: number;
+}
+
+interface ReviewState {
+	reviews: Review[];
+	currentReview: Review | null;
 }
 
 const initialState: ReviewState = {

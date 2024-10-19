@@ -1,9 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { useSearchParams } from 'next/navigation';
-import { RootState } from '@/store/store';
 import PracticeConfig from '@/components/practice-config-window';
 import PracticeSession from '@/components/practice-session';
 import RecentSessions from '@/components/recent-sessions';
@@ -19,10 +17,11 @@ import {
 } from '@/components/ui/dialog';
 import {
 	updateConfig,
-	resetSessionAfterReview,
+	resetSession,
 	clearCompletedSession,
-	endSession,
+	completeSession,
 } from '@/store/session-slice';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks/redux-hooks';
 
 interface PracticeSessionPlaceholderProps {}
 
@@ -43,10 +42,8 @@ const Practice: React.FC = () => {
 	const [isConfigOpen, setIsConfigOpen] = useState(false);
 	const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
 	const [isLogSessionPromptOpen, setIsLogSessionPromptOpen] = useState(false);
-	const { playback, timer, config } = useSelector(
-		(state: RootState) => state.sessions
-	);
-	const dispatch = useDispatch();
+	const { playback, timer, config } = useAppSelector((state) => state.sessions);
+	const dispatch = useAppDispatch();
 	const searchParams = useSearchParams();
 
 	useEffect(() => {
@@ -67,7 +64,7 @@ const Practice: React.FC = () => {
 			playback.status === 'stopped' &&
 			timer.status === 'stopped'
 		) {
-			dispatch(endSession());
+			dispatch(completeSession());
 			setIsLogSessionPromptOpen(true);
 		}
 	}, [config.isActive, playback.status, timer.status, dispatch]);
@@ -81,14 +78,14 @@ const Practice: React.FC = () => {
 		if (willLog) {
 			setIsReviewModalOpen(true);
 		} else {
-			dispatch(resetSessionAfterReview());
+			dispatch(resetSession());
 			dispatch(clearCompletedSession());
 		}
 	};
 
 	const handleReviewClose = () => {
 		setIsReviewModalOpen(false);
-		dispatch(resetSessionAfterReview());
+		dispatch(resetSession());
 		dispatch(clearCompletedSession());
 	};
 

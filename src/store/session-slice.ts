@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AppThunk } from './store';
 
 interface SessionState {
-	sessions: Session[];
-	currentSession: Session | null;
 	config: {
 		sessionName: string;
 		keySignature: string;
@@ -37,29 +36,26 @@ interface SessionState {
 		tempo: number;
 		sessionName: string;
 	} | null;
-}
-
-interface Session {
-	sessionId: string;
-	userId: string;
-	loopId: string;
-	name: string;
-	playback: {
-		status: 'playing' | 'paused' | 'stopped';
-		currentPlayTime: number;
-		totalDuration: number;
-	};
-	practiceType: string;
-	timestamps: {
-		startTime: string;
-		endTime: string;
-	};
-	isSaved: boolean;
+	sessions: Array<{
+		sessionId: string;
+		userId: string;
+		loopId: string;
+		name: string;
+		playback: {
+			status: 'playing' | 'paused' | 'stopped';
+			currentPlayTime: number;
+			totalDuration: number;
+		};
+		practiceType: string;
+		timestamps: {
+			startTime: string;
+			endTime: string;
+		};
+		isSaved: boolean;
+	}>;
 }
 
 const initialState: SessionState = {
-	sessions: [],
-	currentSession: null,
 	config: {
 		sessionName: '',
 		keySignature: '',
@@ -88,6 +84,7 @@ const initialState: SessionState = {
 		volume: 50,
 	},
 	completedSession: null,
+	sessions: [],
 };
 
 const sessionSlice = createSlice({
@@ -111,14 +108,6 @@ const sessionSlice = createSlice({
 		) => {
 			state.timer.status = action.payload;
 			state.playback.status = action.payload;
-			if (action.payload === 'stopped') {
-				state.timer.currentTime =
-					state.timer.mode === 'stopwatch' ? 0 : state.timer.duration;
-				state.timer.practiceDuration =
-					state.timer.mode === 'stopwatch'
-						? state.timer.currentTime
-						: state.timer.duration - state.timer.currentTime;
-			}
 		},
 		setTimerDuration: (state, action: PayloadAction<number>) => {
 			state.timer.duration = action.payload;
@@ -140,32 +129,13 @@ const sessionSlice = createSlice({
 			state.timer.status = 'stopped';
 			state.timer.currentTime =
 				state.timer.mode === 'stopwatch' ? 0 : state.timer.duration;
-			state.timer.practiceDuration = 0;
+			// state.timer.practiceDuration = 0;
 		},
 		toggleMetronome: (state) => {
 			state.metronome.isActive = !state.metronome.isActive;
 		},
 		setMetronomeVolume: (state, action: PayloadAction<number>) => {
 			state.metronome.volume = action.payload;
-		},
-		resetSession: () => initialState,
-
-		setSessions: (state, action: PayloadAction<Session[]>) => {
-			state.sessions = action.payload;
-		},
-		addSession: (state, action: PayloadAction<Session>) => {
-			state.sessions.push(action.payload);
-		},
-		updateSession: (state, action: PayloadAction<Session>) => {
-			const index = state.sessions.findIndex(
-				(session) => session.sessionId === action.payload.sessionId
-			);
-			if (index !== -1) {
-				state.sessions[index] = action.payload;
-			}
-		},
-		setCurrentSession: (state, action: PayloadAction<Session | null>) => {
-			state.currentSession = action.payload;
 		},
 		endSession: (state) => {
 			state.completedSession = {
@@ -175,17 +145,32 @@ const sessionSlice = createSlice({
 				tempo: state.config.tempo,
 				sessionName: state.config.sessionName,
 			};
-			state.timer.status = 'paused'; // maybe paused?
-			state.playback.status = 'paused'; // maybe paused?
 			state.config.isActive = false;
 		},
-
-		resetSessionAfterReview: (state) => {
-			return { ...initialState, completedSession: state.completedSession };
+		finalizeSession: (state) => {
+			state.timer.status = 'stopped';
+			state.playback.status = 'stopped';
+			state.timer.currentTime =
+				state.timer.mode === 'stopwatch' ? 0 : state.timer.duration;
+			state.timer.practiceDuration = 0;
 		},
-
+		resetSession: () => initialState,
 		clearCompletedSession: (state) => {
 			state.completedSession = null;
+		},
+		addSession: (state, action: PayloadAction<SessionState['sessions'][0]>) => {
+			state.sessions.push(action.payload);
+		},
+		updateSession: (
+			state,
+			action: PayloadAction<SessionState['sessions'][0]>
+		) => {
+			const index = state.sessions.findIndex(
+				(session) => session.sessionId === action.payload.sessionId
+			);
+			if (index !== -1) {
+				state.sessions[index] = action.payload;
+			}
 		},
 	},
 });
@@ -199,14 +184,18 @@ export const {
 	resetTimer,
 	toggleMetronome,
 	setMetronomeVolume,
+	endSession,
+	finalizeSession,
 	resetSession,
-	setSessions,
+	clearCompletedSession,
 	addSession,
 	updateSession,
-	setCurrentSession,
-	endSession,
-	resetSessionAfterReview,
-	clearCompletedSession,
 } = sessionSlice.actions;
+
+// Thunk action
+export const completeSession = (): AppThunk => (dispatch) => {
+	dispatch(endSession());
+	dispatch(finalizeSession());
+};
 
 export default sessionSlice.reducer;
