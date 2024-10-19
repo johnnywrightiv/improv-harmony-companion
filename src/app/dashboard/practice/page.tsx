@@ -18,9 +18,10 @@ import {
 	DialogDescription,
 } from '@/components/ui/dialog';
 import {
-	setTimerStatus,
-	resetSession,
 	updateConfig,
+	resetSessionAfterReview,
+	clearCompletedSession,
+	endSession,
 } from '@/store/session-slice';
 
 interface PracticeSessionPlaceholderProps {}
@@ -66,20 +67,10 @@ const Practice: React.FC = () => {
 			playback.status === 'stopped' &&
 			timer.status === 'stopped'
 		) {
-			if (timer.practiceDuration > 0) {
-				dispatch(updateConfig({ sessionDuration: timer.practiceDuration }));
-			}
+			dispatch(endSession());
 			setIsLogSessionPromptOpen(true);
-			dispatch(setTimerStatus('stopped'));
-			dispatch(updateConfig({ isActive: false }));
 		}
-	}, [
-		config.isActive,
-		playback.status,
-		timer.status,
-		timer.practiceDuration,
-		dispatch,
-	]);
+	}, [config.isActive, playback.status, timer.status, dispatch]);
 
 	const handleConfigOpen = () => {
 		setIsConfigOpen(true);
@@ -90,13 +81,15 @@ const Practice: React.FC = () => {
 		if (willLog) {
 			setIsReviewModalOpen(true);
 		} else {
-			dispatch(resetSession());
+			dispatch(resetSessionAfterReview());
+			dispatch(clearCompletedSession());
 		}
 	};
 
 	const handleReviewClose = () => {
 		setIsReviewModalOpen(false);
-		dispatch(resetSession());
+		dispatch(resetSessionAfterReview());
+		dispatch(clearCompletedSession());
 	};
 
 	return (

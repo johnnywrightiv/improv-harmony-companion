@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { RootState } from '@/store/store';
 import { saveSessionReview } from '@/store/session-review-slice';
+import { clearCompletedSession } from '@/store/session-slice';
 import {
 	Dialog,
 	DialogContent,
@@ -26,24 +27,29 @@ const SessionReviewModal: React.FC<SessionReviewModalProps> = ({
 }) => {
 	const dispatch = useDispatch();
 	const router = useRouter();
-	const config = useSelector((state: RootState) => state.sessions.config);
-	const practiceDuration = useSelector(
-		(state: RootState) => state.sessions.timer.practiceDuration
+	const completedSession = useSelector(
+		(state: RootState) => state.sessions.completedSession
 	);
 	const [rating, setRating] = useState<number>(0);
 	const [comments, setComments] = useState<string>('');
+	// const config = useSelector((state: RootState) => state.sessions.config);
+	// const practiceDuration = useSelector(
+	// 	(state: RootState) => state.sessions.timer.practiceDuration
+	// );
 
 	const handleSave = () => {
-		dispatch(
-			saveSessionReview({
-				rating,
-				comments,
-				...config,
-				practiceDuration,
-			})
-		);
-		alert(`${config.sessionName} session saved`);
-		onClose();
+		if (completedSession) {
+			dispatch(
+				saveSessionReview({
+					rating,
+					comments,
+					...completedSession,
+				})
+			);
+			alert(`${completedSession.sessionName} session saved`);
+			dispatch(clearCompletedSession());
+			onClose();
+		}
 	};
 
 	const formatDuration = (duration: number): string => {
@@ -96,13 +102,17 @@ const SessionReviewModal: React.FC<SessionReviewModalProps> = ({
 
 					<div>
 						<h3 className="mb-2">Session details:</h3>
-						<ul>
-							<li>Key Signature: {config.keySignature}</li>
-							<li>Time Signature: {config.timeSignature}</li>
-							<li>Tempo: {config.tempo} BPM</li>
-							<li>Session Name: {config.sessionName}</li>
-							<li>Duration: {formatDuration(practiceDuration)}</li>
-						</ul>
+						{completedSession && (
+							<ul>
+								<li>Key Signature: {completedSession.keySignature}</li>
+								<li>Time Signature: {completedSession.timeSignature}</li>
+								<li>Tempo: {completedSession.tempo} BPM</li>
+								<li>Session Name: {completedSession.sessionName}</li>
+								<li>
+									Duration: {formatDuration(completedSession.practiceDuration)}
+								</li>
+							</ul>
+						)}
 					</div>
 				</div>
 				<DialogFooter>

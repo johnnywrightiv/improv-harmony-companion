@@ -30,6 +30,13 @@ interface SessionState {
 		isActive: boolean;
 		volume: number;
 	};
+	completedSession: {
+		practiceDuration: number;
+		keySignature: string;
+		timeSignature: string;
+		tempo: number;
+		sessionName: string;
+	} | null;
 }
 
 interface Session {
@@ -80,6 +87,7 @@ const initialState: SessionState = {
 		isActive: false,
 		volume: 50,
 	},
+	completedSession: null,
 };
 
 const sessionSlice = createSlice({
@@ -159,6 +167,26 @@ const sessionSlice = createSlice({
 		setCurrentSession: (state, action: PayloadAction<Session | null>) => {
 			state.currentSession = action.payload;
 		},
+		endSession: (state) => {
+			state.completedSession = {
+				practiceDuration: state.timer.practiceDuration,
+				keySignature: state.config.keySignature,
+				timeSignature: state.config.timeSignature,
+				tempo: state.config.tempo,
+				sessionName: state.config.sessionName,
+			};
+			state.timer.status = 'paused'; // maybe paused?
+			state.playback.status = 'paused'; // maybe paused?
+			state.config.isActive = false;
+		},
+
+		resetSessionAfterReview: (state) => {
+			return { ...initialState, completedSession: state.completedSession };
+		},
+
+		clearCompletedSession: (state) => {
+			state.completedSession = null;
+		},
 	},
 });
 
@@ -176,6 +204,9 @@ export const {
 	addSession,
 	updateSession,
 	setCurrentSession,
+	endSession,
+	resetSessionAfterReview,
+	clearCompletedSession,
 } = sessionSlice.actions;
 
 export default sessionSlice.reducer;
