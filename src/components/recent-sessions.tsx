@@ -1,35 +1,51 @@
+'use client';
+
 import React from 'react';
-
-// Import placeholder data
+import { NotebookPen } from 'lucide-react';
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from '@/components/ui/card';
 import placeholderData from '@/data/placeholder-data.json';
-
-// Import icons from lucide-react
-import { Music } from 'lucide-react';
-
-import Link from 'next/link';
+import ListItem from './list-item';
 
 const RecentSessions = () => {
-	const userData = placeholderData.users[0]; // Assuming we're using the first user
+	const userData = placeholderData.users[0];
+	const allSessions = placeholderData.sessions;
+
+	const handleSessionClick = (sessionId: string) => {
+		const session = allSessions.find((s) => s.sessionId === sessionId);
+		if (session) {
+			alert(`Session: ${session.name}`);
+		}
+	};
 
 	return (
-		<div className="space-y-4">
-			<h2 className="text-xl font-semibold">Recent Loops</h2>
-			{userData.recentLoops.map((loop) => (
-				<Link
-					href={`/loops/${loop.id}`}
-					key={loop.id}
-					className="flex items-center space-x-4 rounded-[--radius] p-2 hover:bg-secondary"
-				>
-					<div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary">
-						<Music className="h-6 w-6 text-background" />
-					</div>
-					<div className="flex-grow">
-						<p className="font-medium">{loop.name}</p>
-						<p className="text-sm text-muted-foreground">{loop.duration}</p>
-					</div>
-				</Link>
-			))}
-		</div>
+		<Card>
+			<CardHeader>
+				<CardTitle>Recent Sessions</CardTitle>
+				<CardDescription>Your latest practice sessions</CardDescription>
+			</CardHeader>
+			<CardContent>
+				{userData.stats.recentSessions.map((sessionId) => {
+					const session = allSessions.find((s) => s.sessionId === sessionId);
+					if (!session) return null;
+
+					return (
+						<ListItem
+							key={sessionId}
+							icon={NotebookPen}
+							title={session.name}
+							subtitle={`${Math.floor(session.duration / 60)} minutes`}
+							onClick={() => handleSessionClick(sessionId)}
+						/>
+					);
+				})}
+			</CardContent>
+		</Card>
 	);
 };
 

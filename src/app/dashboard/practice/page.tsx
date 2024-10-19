@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import PracticeConfig from '@/components/practice-config-window';
 import PracticeSession from '@/components/practice-session';
-import RecentSessions from '@/components/recent-sessions';
+import SavedLoops from '@/components/saved-loops';
 import SessionReviewModal from '@/components/session-review-modal';
 import { Button } from '@/components/ui/button';
 import {
@@ -103,7 +103,7 @@ const Practice: React.FC = () => {
 							onOpenChange={setIsConfigOpen}
 						/>
 					</div>
-					<RecentSessions />
+					<SavedLoops />
 				</>
 			)}
 			<SessionReviewModal

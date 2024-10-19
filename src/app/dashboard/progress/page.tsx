@@ -2,6 +2,7 @@ import React from 'react';
 import ProgressOverview from '@/components/progress-overview';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import placeholderData from '@/data/placeholder-data.json';
+import RecentSessions from '@/components/recent-sessions';
 
 export default function Practice() {
 	const userData = placeholderData.users[0];
@@ -20,12 +21,14 @@ export default function Practice() {
 						<p className="text-sm text-muted-foreground">Total Sessions</p>
 					</div>
 					<div>
-						<p className="text-2xl font-bold">{userData.stats.totalLoops}</p>
-						<p className="text-sm text-muted-foreground">Total Loops</p>
+						<p className="text-2xl font-bold">
+							{userData.stats.totalPracticeTime / 60} mins
+						</p>
+						<p className="text-sm text-muted-foreground">Total Practice Time</p>
 					</div>
 					<div>
 						<p className="text-2xl font-bold">
-							{userData.stats.avgSessionDuration}
+							{userData.stats.avgSessionDuration / 60} mins
 						</p>
 						<p className="text-sm text-muted-foreground">
 							Avg. Session Duration
@@ -33,6 +36,7 @@ export default function Practice() {
 					</div>
 				</CardContent>
 			</Card>
+			<RecentSessions />
 			{/* Add any additional practice-specific content here */}
 		</div>
 	);

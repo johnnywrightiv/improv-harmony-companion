@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import RecentSessions from '@/components/recent-sessions';
-import { Settings } from 'lucide-react';
+import SavedLoops from './saved-loops';
 import placeholderData from '@/data/placeholder-data.json';
 import {
 	updateConfig,
@@ -13,7 +13,6 @@ import {
 	setTimerDuration,
 } from '@/store/session-slice';
 import ProgressOverview from './progress-overview';
-import { Card, CardHeader, CardContent } from '@/components/ui/card';
 
 const DashboardHome = () => {
 	const userData = placeholderData.users[0];
@@ -71,18 +70,7 @@ const DashboardHome = () => {
 			<div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
 				{/* Left column */}
 				<div className="space-y-6 lg:col-span-2">
-					<Card>
-						<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-							<h2 className="text-sm font-medium">Quick Settings</h2>
-							<Settings className="h-4 w-4 text-muted-foreground" />
-						</CardHeader>
-						<CardContent>
-							{/* Add quick settings controls here */}
-							<p className="text-sm text-muted-foreground">
-								Adjust your preferences
-							</p>
-						</CardContent>
-					</Card>
+					<SavedLoops />
 				</div>
 
 				{/* Right column */}
