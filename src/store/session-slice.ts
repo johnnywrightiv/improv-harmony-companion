@@ -3,21 +3,32 @@ import { AppThunk } from './store';
 
 interface SessionState {
 	config: {
+		isActive: boolean;
 		sessionName: string;
 		keySignature: string;
+		scaleType:
+			| 'major'
+			| 'lydian'
+			| 'mixolydian'
+			| 'dorian'
+			| 'minor'
+			| 'phrygian'
+			| 'locrian'
+			| 'harmonic minor'
+			| 'melodic minor'
+			| 'blues'
+			| 'diminished'
+			| 'augmented';
 		timeSignature: string;
 		chordsNotes: string;
-		difficulty: string;
 		useMetronome: boolean;
 		sessionDuration: number;
 		tempo: number;
-		practiceType: string;
-		skillFocus: string;
-		isActive: boolean;
+		sessionNotes: string;
 	};
 	timer: {
-		mode: 'stopwatch' | 'countdown';
 		status: 'playing' | 'paused' | 'stopped';
+		mode: 'countdown' | 'stopwatch';
 		currentTime: number;
 		duration: number;
 		practiceDuration: number;
@@ -57,21 +68,20 @@ interface SessionState {
 
 const initialState: SessionState = {
 	config: {
+		isActive: false,
 		sessionName: '',
-		keySignature: '',
-		timeSignature: '',
+		keySignature: 'C',
+		scaleType: 'major',
+		timeSignature: '4/4',
 		chordsNotes: '',
-		difficulty: 'easy',
 		useMetronome: false,
 		sessionDuration: 30,
 		tempo: 120,
-		practiceType: 'timed',
-		skillFocus: 'technique',
-		isActive: false,
+		sessionNotes: '',
 	},
 	timer: {
-		mode: 'stopwatch',
 		status: 'stopped',
+		mode: 'countdown',
 		currentTime: 0,
 		duration: 0,
 		practiceDuration: 0,
@@ -129,13 +139,15 @@ const sessionSlice = createSlice({
 			state.timer.status = 'stopped';
 			state.timer.currentTime =
 				state.timer.mode === 'stopwatch' ? 0 : state.timer.duration;
-			// state.timer.practiceDuration = 0;
 		},
 		toggleMetronome: (state) => {
 			state.metronome.isActive = !state.metronome.isActive;
 		},
 		setMetronomeVolume: (state, action: PayloadAction<number>) => {
 			state.metronome.volume = action.payload;
+		},
+		updateSessionNotes: (state, action: PayloadAction<string>) => {
+			state.config.sessionNotes = action.payload;
 		},
 		endSession: (state) => {
 			state.completedSession = {
@@ -184,6 +196,7 @@ export const {
 	resetTimer,
 	toggleMetronome,
 	setMetronomeVolume,
+	updateSessionNotes,
 	endSession,
 	finalizeSession,
 	resetSession,

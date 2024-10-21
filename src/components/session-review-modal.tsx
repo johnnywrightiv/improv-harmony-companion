@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { RootState } from '@/store/store';
-import { addReview } from '@/store/review-slice';
-import { clearCompletedSession } from '@/store/session-slice';
 import {
 	Dialog,
 	DialogContent,
@@ -14,42 +12,24 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Save } from 'lucide-react';
 
 interface SessionReviewModalProps {
 	isOpen: boolean;
 	onClose: () => void;
+	hideControls?: boolean;
 }
 
 const SessionReviewModal: React.FC<SessionReviewModalProps> = ({
 	isOpen,
 	onClose,
+	hideControls = false,
 }) => {
-	const dispatch = useDispatch();
 	const router = useRouter();
 	const completedSession = useSelector(
 		(state: RootState) => state.sessions.completedSession
 	);
 	const [rating, setRating] = useState<number>(0);
 	const [comments, setComments] = useState<string>('');
-
-	const handleSave = () => {
-		if (completedSession) {
-			dispatch(
-				addReview({
-					reviewId: Date.now().toString(), // Generate a unique ID
-					sessionId: completedSession.sessionName, // You might want to use a more unique identifier
-					userId: 'current-user-id', // Replace with actual user ID
-					rating,
-					comments,
-					...completedSession,
-				})
-			);
-			alert(`${completedSession.sessionName} session saved`);
-			dispatch(clearCompletedSession());
-			onClose();
-		}
-	};
 
 	const formatDuration = (duration: number): string => {
 		const minutes = Math.floor(duration / 60);
@@ -61,22 +41,16 @@ const SessionReviewModal: React.FC<SessionReviewModalProps> = ({
 
 	return (
 		<Dialog open={isOpen} onOpenChange={onClose}>
-			<DialogContent aria-describedby="session review modal">
+			<DialogContent>
 				<DialogHeader>
-					<DialogTitle className="flex items-center justify-between">
-						Session Review
-						<Button size="sm" onClick={handleSave}>
-							<Save className="mr-2 h-4 w-4" /> Save
-						</Button>
-					</DialogTitle>
+					<DialogTitle>Session Notes</DialogTitle>
 					<DialogDescription>
-						Update your progress, rate your session, take notes, or save your
-						loop.
+						Rate your session and take notes on your progress.
 					</DialogDescription>
 				</DialogHeader>
 				<div className="space-y-4">
 					<div>
-						<h3 className="mb-2">Rate your session:</h3>
+						<h3 className="mb-2">Rate Your Session:</h3>
 						<div className="flex justify-between">
 							{emojis.map((emoji, index) => (
 								<Button
@@ -91,17 +65,18 @@ const SessionReviewModal: React.FC<SessionReviewModalProps> = ({
 						</div>
 					</div>
 					<div>
-						<h3 className="mb-2">Session comments:</h3>
+						<h3 className="mb-2">Session Notes:</h3>
 						<Textarea
 							value={comments}
 							onChange={(e) => setComments(e.target.value)}
 							placeholder="How was your practice session?"
+							rows={6}
 						/>
 					</div>
 
-					<div>
-						<h3 className="mb-2">Session details:</h3>
-						{completedSession && (
+					{completedSession && (
+						<div>
+							<h3 className="mb-2">Session Details:</h3>
 							<ul>
 								<li>Key Signature: {completedSession.keySignature}</li>
 								<li>Time Signature: {completedSession.timeSignature}</li>
@@ -111,19 +86,24 @@ const SessionReviewModal: React.FC<SessionReviewModalProps> = ({
 									Duration: {formatDuration(completedSession.practiceDuration)}
 								</li>
 							</ul>
-						)}
-					</div>
+						</div>
+					)}
 				</div>
-				<DialogFooter>
-					<div className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-						<Button variant="outline" onClick={() => router.push('/dashboard')}>
-							Back to Home
-						</Button>
-						<Button onClick={() => router.push('/dashboard/progress')}>
-							Review Progress
-						</Button>
-					</div>
-				</DialogFooter>
+				{!hideControls && (
+					<DialogFooter>
+						<div className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+							<Button
+								variant="outline"
+								onClick={() => router.push('/dashboard')}
+							>
+								Back to Home
+							</Button>
+							<Button onClick={() => router.push('/dashboard/progress')}>
+								Review Progress
+							</Button>
+						</div>
+					</DialogFooter>
+				)}
 			</DialogContent>
 		</Dialog>
 	);

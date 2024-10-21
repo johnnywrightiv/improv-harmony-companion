@@ -117,12 +117,9 @@ const Practice: React.FC = () => {
 				>
 					<DialogContent>
 						<DialogHeader>
-							<DialogTitle>
-								Session Complete! - Update your progress?
-							</DialogTitle>
+							<DialogTitle>Quick Session Review?</DialogTitle>
 							<DialogDescription>
-								Log sessions to contribute to your progress and to save your
-								loops.
+								Rate your practice and take notes on your progress
 							</DialogDescription>
 						</DialogHeader>
 						<DialogFooter>

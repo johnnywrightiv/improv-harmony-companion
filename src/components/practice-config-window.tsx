@@ -6,6 +6,7 @@ import {
 	setTimerMode,
 	setTimerStatus,
 	setTimerDuration,
+	setMetronomeVolume,
 } from '@/store/session-slice';
 
 import {
@@ -32,7 +33,6 @@ import { Switch } from '@/components/ui/switch';
 
 interface PracticeConfigProps {
 	initialOpen: boolean;
-	// eslint-disable-next-line no-unused-vars
 	onOpenChange: (open: boolean) => void;
 }
 
@@ -41,30 +41,27 @@ const PracticeConfig: React.FC<PracticeConfigProps> = ({
 	onOpenChange,
 }) => {
 	const dispatch = useDispatch();
-	const config = useSelector((state: RootState) => state.sessions.config);
+	const { config, metronome } = useSelector(
+		(state: RootState) => state.sessions
+	);
 
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		dispatch(updateConfig({ [e.target.id]: e.target.value }));
-	};
-
-	const handleSelectChange = (value: string, field: string) => {
+	const handleSelectChange = (value: string, field: keyof typeof config) => {
 		dispatch(updateConfig({ [field]: value }));
 	};
 
-	const handleSliderChange = (value: number[], field: string) => {
-		dispatch(updateConfig({ [field]: value[0] }));
+	const handleVolumeChange = (value: number[]) => {
+		dispatch(setMetronomeVolume(value[0]));
 	};
 
-	const handleSwitchChange = (checked: boolean) => {
+	const handleMetronomeChange = (checked: boolean) => {
 		dispatch(updateConfig({ useMetronome: checked }));
 	};
 
 	const handleSubmit = (event: React.FormEvent) => {
 		event.preventDefault();
-		console.log('Practice session configuration:', config);
 		dispatch(setTimerStatus('playing'));
 		dispatch(setTimerMode('countdown'));
-		dispatch(setTimerDuration(Number(config.sessionDuration) * 60)); // Convert minutes to seconds
+		dispatch(setTimerDuration(Number(config.sessionDuration) * 60));
 		onOpenChange(false);
 	};
 
@@ -72,10 +69,10 @@ const PracticeConfig: React.FC<PracticeConfigProps> = ({
 		<Sheet open={initialOpen} onOpenChange={onOpenChange}>
 			<SheetContent side="right" className="w-full sm:w-[540px] sm:max-w-full">
 				<SheetHeader>
+					<SheetTitle>Configure Practice Session</SheetTitle>
 					<SheetDescription>
 						Customize your practice session parameters.
 					</SheetDescription>
-					<SheetTitle>Configure Practice Session</SheetTitle>
 				</SheetHeader>
 				<form onSubmit={handleSubmit}>
 					<ScrollArea className="h-[calc(100vh-12rem)] pr-4">
@@ -85,133 +82,185 @@ const PracticeConfig: React.FC<PracticeConfigProps> = ({
 								<Input
 									id="sessionName"
 									value={config.sessionName}
-									onChange={handleInputChange}
+									onChange={(e) =>
+										handleSelectChange(e.target.value, 'sessionName')
+									}
 									placeholder="Enter session name"
 								/>
 							</div>
+
 							<div className="space-y-2">
-								<Label htmlFor="keySignature">Key Signature</Label>
-								<Input
-									id="keySignature"
-									value={config.keySignature}
-									onChange={handleInputChange}
-									placeholder="Enter key signature"
-								/>
+								<Label>Key and Scale</Label>
+								<div className="flex gap-2">
+									<Select
+										value={config.keySignature}
+										onValueChange={(value) =>
+											handleSelectChange(value, 'keySignature')
+										}
+									>
+										<SelectTrigger className="w-[70px]">
+											<SelectValue placeholder="Key" />
+										</SelectTrigger>
+										<SelectContent>
+											{[
+												'C',
+												'D',
+												'E',
+												'F',
+												'G',
+												'A',
+												'B',
+												'Ab',
+												'Bb',
+												'Db',
+												'Eb',
+												'Gb',
+											].map((key) => (
+												<SelectItem key={key} value={key}>
+													{key}
+												</SelectItem>
+											))}
+										</SelectContent>
+									</Select>
+									<Select
+										value={config.scaleType}
+										onValueChange={(value) =>
+											handleSelectChange(value, 'scaleType')
+										}
+									>
+										<SelectTrigger className="w-[180px]">
+											<SelectValue placeholder="Scale Type" />
+										</SelectTrigger>
+										<SelectContent>
+											<SelectItem value="major">Major</SelectItem>
+											<SelectItem value="lydian">Lydian (#4)</SelectItem>
+											<SelectItem value="mixolydian">
+												Mixolydian (b7)
+											</SelectItem>
+											<SelectItem value="dorian">Dorian (b3 b7)</SelectItem>
+											<SelectItem value="minor">Minor</SelectItem>
+											<SelectItem value="phrygian">
+												Phrygian (min b2)
+											</SelectItem>
+											<SelectItem value="locrian">
+												Locrian (min b2 b5)
+											</SelectItem>
+											<SelectItem value="blues">Blues (b5)</SelectItem>
+											<SelectItem value="harmonic-minor">
+												Harmonic Minor (min #7)
+											</SelectItem>
+											<SelectItem value="melodic-minor">
+												Melodic Minor (min #6 #7)
+											</SelectItem>
+											<SelectItem value="diminished">Diminished</SelectItem>
+											<SelectItem value="augmented">Augmented</SelectItem>
+										</SelectContent>
+									</Select>
+								</div>
 							</div>
+
 							<div className="space-y-2">
-								<Label htmlFor="timeSignature">Time Signature</Label>
-								<Input
-									id="timeSignature"
-									value={config.timeSignature}
-									onChange={handleInputChange}
-									placeholder="Enter time signature"
-								/>
-							</div>
-							<div className="space-y-2">
-								<Label htmlFor="chordsNotes">Chords/Notes</Label>
-								<Input
-									id="chordsNotes"
-									value={config.chordsNotes}
-									onChange={handleInputChange}
-									placeholder="Enter chords/notes"
-								/>
-							</div>
-							<div className="space-y-2">
-								<Label htmlFor="difficulty">Difficulty</Label>
+								<Label>Time Signature</Label>
 								<Select
+									value={config.timeSignature}
 									onValueChange={(value) =>
-										handleSelectChange(value, 'difficulty')
+										handleSelectChange(value, 'timeSignature')
 									}
 								>
-									<SelectTrigger id="difficulty">
-										<SelectValue placeholder="Select difficulty" />
+									<SelectTrigger>
+										<SelectValue placeholder="Time Signature" />
 									</SelectTrigger>
 									<SelectContent>
-										<SelectItem value="easy">Easy</SelectItem>
-										<SelectItem value="medium">Medium</SelectItem>
-										<SelectItem value="hard">Hard</SelectItem>
+										{[
+											'1/4',
+											'2/4',
+											'3/4',
+											'4/4',
+											'5/4',
+											'6/8',
+											'7/8',
+											'8/8',
+											'9/8',
+											'11/8',
+											'12/8',
+										].map((time) => (
+											<SelectItem key={time} value={time}>
+												{time}
+											</SelectItem>
+										))}
 									</SelectContent>
 								</Select>
 							</div>
-							<div className="flex items-center space-x-2">
-								<Switch
-									id="useMetronome"
-									checked={config.useMetronome}
-									onCheckedChange={handleSwitchChange}
-								/>
-								<Label htmlFor="useMetronome">Use Metronome</Label>
-							</div>
+
 							<div className="space-y-2">
-								<Label htmlFor="sessionDuration">
-									Session Duration (minutes)
-								</Label>
+								<Label>Session Duration (minutes)</Label>
 								<Input
-									id="sessionDuration"
 									type="number"
 									min="1"
 									value={config.sessionDuration}
-									onChange={handleInputChange}
+									onChange={(e) =>
+										handleSelectChange(e.target.value, 'sessionDuration')
+									}
 									placeholder="Enter duration"
 								/>
 							</div>
+
 							<div className="space-y-2">
-								<Label htmlFor="tempo">Tempo (BPM)</Label>
+								<Label>Tempo (BPM)</Label>
 								<Slider
-									id="tempo"
 									min={40}
 									max={208}
 									step={4}
 									value={[config.tempo]}
-									onValueChange={(value) => handleSliderChange(value, 'tempo')}
+									onValueChange={(value) =>
+										handleSelectChange(value[0].toString(), 'tempo')
+									}
 								/>
 								<div className="text-right text-sm text-muted-foreground">
 									{config.tempo} BPM
 								</div>
 							</div>
+
 							<div className="space-y-2">
-								<Label htmlFor="practiceType">Practice Type</Label>
-								<Select
-									onValueChange={(value) =>
-										handleSelectChange(value, 'practiceType')
-									}
-								>
-									<SelectTrigger id="practiceType">
-										<SelectValue placeholder="Select practice type" />
-									</SelectTrigger>
-									<SelectContent>
-										<SelectItem value="timed">Timed</SelectItem>
-										<SelectItem value="freestyle">Freestyle</SelectItem>
-										<SelectItem value="challenge">Challenge</SelectItem>
-									</SelectContent>
-								</Select>
+								<Label>Metronome</Label>
+								<div className="flex items-center justify-between">
+									<div className="flex items-center space-x-2">
+										<Switch
+											checked={config.useMetronome}
+											onCheckedChange={handleMetronomeChange}
+										/>
+										<Label>Enable Metronome</Label>
+									</div>
+								</div>
 							</div>
+
 							<div className="space-y-2">
-								<Label htmlFor="skillFocus">Skill Focus</Label>
-								<Select
-									onValueChange={(value) =>
-										handleSelectChange(value, 'skillFocus')
+								<Label>Metronome Volume</Label>
+								<Slider
+									min={0}
+									max={100}
+									step={1}
+									value={[metronome.volume]}
+									onValueChange={handleVolumeChange}
+								/>
+								<div className="text-right text-sm text-muted-foreground">
+									{metronome.volume}%
+								</div>
+							</div>
+
+							<div className="space-y-2">
+								<Label>Session Notes</Label>
+								<Input
+									value={config.sessionNotes}
+									onChange={(e) =>
+										handleSelectChange(e.target.value, 'sessionNotes')
 									}
-								>
-									<SelectTrigger id="skillFocus">
-										<SelectValue placeholder="Select skill focus" />
-									</SelectTrigger>
-									<SelectContent>
-										<SelectItem value="technique">Technique</SelectItem>
-										<SelectItem value="speed">Speed</SelectItem>
-										<SelectItem value="endurance">Endurance</SelectItem>
-									</SelectContent>
-								</Select>
+									placeholder="Add notes about your practice session"
+								/>
 							</div>
 						</div>
 					</ScrollArea>
 					<SheetFooter className="mt-4">
-						{/* <Button
-							type="button"
-							variant="outline"
-							onClick={() => dispatch(resetConfig())}
-						>
-							Reset
-						</Button> */}
 						<Button type="submit">Start Session</Button>
 					</SheetFooter>
 				</form>
