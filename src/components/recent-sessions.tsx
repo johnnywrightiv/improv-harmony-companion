@@ -27,7 +27,7 @@ const RecentSessions = () => {
 		<Card>
 			<CardHeader>
 				<CardTitle>Recent Sessions</CardTitle>
-				<CardDescription>Your latest practice sessions</CardDescription>
+				<CardDescription>Review your latest practice sessions</CardDescription>
 			</CardHeader>
 			<CardContent>
 				{userData.stats.recentSessions.map((sessionId) => {

@@ -36,7 +36,7 @@ export default function NavSidebar() {
 	return (
 		<nav
 			className={`flex h-full flex-col p-2 transition-all duration-300
-        ${isVisible ? 'md:w-64' : 'md:w-20'}`}
+        ${isVisible ? 'lg:w-64' : 'lg:w-20'}`}
 			aria-label="Main Navigation"
 		>
 			<div className="relative">
@@ -44,7 +44,7 @@ export default function NavSidebar() {
 					variant="ghost"
 					onClick={() => dispatch(toggleSidebar())}
 					className={clsx(
-						'top text-foreground absolute z-10 hidden rounded-[--radius] p-2 hover:bg-secondary/30 md:block',
+						'top text-foreground absolute z-10 hidden rounded-[--radius] p-2 hover:bg-secondary/30 lg:block',
 						{
 							'right-2': isVisible,
 							'left-1/2 -translate-x-1/2': !isVisible,
@@ -83,7 +83,7 @@ export default function NavSidebar() {
 
 			<div className="flex grow flex-col justify-between">
 				{/* Main links */}
-				<ul className="hidden md:flex md:flex-col md:space-y-2" role="list">
+				<ul className="hidden lg:flex lg:flex-col lg:space-y-2" role="list">
 					{mainLinks.map((link) => {
 						const LinkIcon = link.icon;
 						return (
@@ -103,7 +103,7 @@ export default function NavSidebar() {
 								>
 									<LinkIcon className="w-6" aria-hidden="true" />
 									{isVisible && (
-										<span className="hidden md:block">{link.name}</span>
+										<span className="hidden lg:block">{link.name}</span>
 									)}
 									<span className="sr-only">{link.name}</span>
 								</Link>
@@ -113,7 +113,7 @@ export default function NavSidebar() {
 				</ul>
 
 				{/* Settings link at bottom */}
-				<div className="hidden md:block">
+				<div className="hidden lg:block">
 					<Link
 						href={settingsLink.href}
 						className={clsx(
@@ -129,7 +129,7 @@ export default function NavSidebar() {
 					>
 						<settingsLink.icon className="w-6" aria-hidden="true" />
 						{isVisible && (
-							<span className="hidden md:block">{settingsLink.name}</span>
+							<span className="hidden lg:block">{settingsLink.name}</span>
 						)}
 						<span className="sr-only">{settingsLink.name}</span>
 					</Link>
@@ -137,7 +137,7 @@ export default function NavSidebar() {
 
 				{/* Mobile Dashboard Nav */}
 				<div
-					className="fixed bottom-0 left-0 right-0 z-10 flex flex-row justify-between space-x-2 border-t border-primary bg-background p-2 md:hidden"
+					className="fixed bottom-0 left-0 right-0 z-10 flex flex-row justify-between space-x-2 border-t border-primary bg-background p-2 lg:hidden"
 					role="navigation"
 					aria-label="Mobile Navigation"
 				>

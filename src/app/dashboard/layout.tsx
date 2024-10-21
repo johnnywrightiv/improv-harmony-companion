@@ -9,19 +9,19 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 	const isVisible = useSelector((state: RootState) => state.ui.sidebarVisible);
 
 	return (
-		<div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
+		<div className="flex h-screen flex-col lg:flex-row lg:overflow-hidden">
 			<div
 				className={clsx(
-					'w-full flex-none transition-all duration-300 md:overflow-y-auto',
+					'w-full flex-none transition-all duration-300 lg:overflow-y-auto',
 					{
-						'md:w-64': isVisible,
-						'md:w-20': !isVisible,
+						'lg:w-64': isVisible,
+						'lg:w-20': !isVisible,
 					}
 				)}
 			>
 				<NavSidebar />
 			</div>
-			<div className="flex-grow px-6 pb-[76px] md:overflow-y-auto md:py-12 md:pb-6">
+			<div className="flex-grow px-6 pb-[76px] lg:overflow-y-auto lg:py-12 lg:pb-6">
 				{children}
 			</div>
 		</div>

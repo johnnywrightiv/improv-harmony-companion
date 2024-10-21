@@ -13,8 +13,10 @@ interface UserState {
 		totalPracticeTime: number;
 		recentSessions: string[];
 		goalTracking: {
+			dailyGoal: number;
 			weeklyGoal: number;
-			currentProgress: number;
+			currentDailyProgress: number;
+			currentWeeklyProgress: number;
 		};
 	};
 	settings: {
@@ -26,6 +28,10 @@ interface UserState {
 		notifications: {
 			newLoops: boolean;
 			sessionReminders: boolean;
+		};
+		practiceGoal: {
+			dailyGoal: number;
+			weeklyGoal: number;
 		};
 	};
 }
@@ -43,8 +49,10 @@ const initialState: UserState = {
 		totalPracticeTime: 0,
 		recentSessions: [],
 		goalTracking: {
+			dailyGoal: 0,
 			weeklyGoal: 0,
-			currentProgress: 0,
+			currentDailyProgress: 0,
+			currentWeeklyProgress: 0,
 		},
 	},
 	settings: {
@@ -56,6 +64,10 @@ const initialState: UserState = {
 		notifications: {
 			newLoops: true,
 			sessionReminders: false,
+		},
+		practiceGoal: {
+			dailyGoal: 0,
+			weeklyGoal: 0,
 		},
 	},
 };
@@ -79,9 +91,38 @@ const userSlice = createSlice({
 		) => {
 			state.stats = { ...state.stats, ...action.payload };
 		},
+		setPracticeGoal: (state, action: PayloadAction<{ dailyGoal: number }>) => {
+			const dailyGoal = action.payload.dailyGoal;
+			const weeklyGoal = dailyGoal * 7;
+
+			// Update in settings
+			state.settings.practiceGoal = {
+				dailyGoal,
+				weeklyGoal,
+			};
+
+			// Update in stats
+			state.stats.goalTracking.dailyGoal = dailyGoal;
+			state.stats.goalTracking.weeklyGoal = weeklyGoal;
+		},
+		updateGoalProgress: (
+			state,
+			action: PayloadAction<{ dailyProgress: number; weeklyProgress: number }>
+		) => {
+			state.stats.goalTracking.currentDailyProgress =
+				action.payload.dailyProgress;
+			state.stats.goalTracking.currentWeeklyProgress =
+				action.payload.weeklyProgress;
+		},
 	},
 });
 
-export const { setUser, updateUserSettings, updateUserStats } =
-	userSlice.actions;
+export const {
+	setUser,
+	updateUserSettings,
+	updateUserStats,
+	setPracticeGoal,
+	updateGoalProgress,
+} = userSlice.actions;
+
 export default userSlice.reducer;
