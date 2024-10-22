@@ -24,7 +24,7 @@ interface SessionState {
 		useMetronome: boolean;
 		sessionDuration: number;
 		tempo: number;
-		sessionNotes: string;
+		sessionComments: string;
 	};
 	timer: {
 		status: 'playing' | 'paused' | 'stopped';
@@ -77,7 +77,7 @@ const initialState: SessionState = {
 		useMetronome: false,
 		sessionDuration: 30,
 		tempo: 120,
-		sessionNotes: '',
+		sessionComments: '',
 	},
 	timer: {
 		status: 'stopped',
@@ -146,8 +146,8 @@ const sessionSlice = createSlice({
 		setMetronomeVolume: (state, action: PayloadAction<number>) => {
 			state.metronome.volume = action.payload;
 		},
-		updateSessionNotes: (state, action: PayloadAction<string>) => {
-			state.config.sessionNotes = action.payload;
+		updateSessionComments: (state, action: PayloadAction<string>) => {
+			state.config.sessionComments = action.payload;
 		},
 		endSession: (state) => {
 			state.completedSession = {
@@ -196,7 +196,7 @@ export const {
 	resetTimer,
 	toggleMetronome,
 	setMetronomeVolume,
-	updateSessionNotes,
+	updateSessionComments,
 	endSession,
 	finalizeSession,
 	resetSession,

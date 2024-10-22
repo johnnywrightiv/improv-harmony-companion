@@ -6,6 +6,11 @@ import SetPracticeGoalDialog from '@/components/set-practice-goal';
 const UserSettings = () => {
 	return (
 		<div className="space-y-4">
+			<ul>
+				<li>SETTING: Chord Mode (chords/arpeggios?)</li>
+				<li>SETTING: Countdown (1,2,3,4 pre-roll?)</li>
+				<li>SETTING: Advanced Theory (Show Relative/Parallel Scales & Modes?)</li>
+			</ul>
 			<ThemeSelect />
 			<SetPracticeGoalDialog />
 			<div>

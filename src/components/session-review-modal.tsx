@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { RootState } from '@/store/store';
 import {
@@ -12,6 +12,9 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
+import {
+	updateSessionComments
+} from '@/store/session-slice';
 
 interface SessionReviewModalProps {
 	isOpen: boolean;
@@ -24,12 +27,13 @@ const SessionReviewModal: React.FC<SessionReviewModalProps> = ({
 	onClose,
 	hideControls = false,
 }) => {
+	const dispatch = useDispatch();
 	const router = useRouter();
-	const completedSession = useSelector(
-		(state: RootState) => state.sessions.completedSession
+	const { completedSession, config } = useSelector(
+		(state: RootState) => state.sessions
 	);
+
 	const [rating, setRating] = useState<number>(0);
-	const [comments, setComments] = useState<string>('');
 
 	const formatDuration = (duration: number): string => {
 		const minutes = Math.floor(duration / 60);
@@ -39,13 +43,17 @@ const SessionReviewModal: React.FC<SessionReviewModalProps> = ({
 
 	const emojis = ['😞', '😐', '🙂', '😊', '😃'];
 
+	const handleCommentsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+		dispatch(updateSessionComments(e.target.value));
+	};
+
 	return (
 		<Dialog open={isOpen} onOpenChange={onClose}>
 			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>Session Notes</DialogTitle>
+					<DialogTitle>Session Comments</DialogTitle>
 					<DialogDescription>
-						Rate your session and take notes on your progress.
+						Rate your session and take comments on your progress.
 					</DialogDescription>
 				</DialogHeader>
 				<div className="space-y-4">
@@ -65,10 +73,10 @@ const SessionReviewModal: React.FC<SessionReviewModalProps> = ({
 						</div>
 					</div>
 					<div>
-						<h3 className="mb-2">Session Notes:</h3>
+						<h3 className="mb-2">Session Comments:</h3>
 						<Textarea
-							value={comments}
-							onChange={(e) => setComments(e.target.value)}
+							value={config.sessionComments}
+							onChange={handleCommentsChange}
 							placeholder="How was your practice session?"
 							rows={6}
 						/>

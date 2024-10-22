@@ -7,6 +7,7 @@ import {
 	setTimerStatus,
 	setTimerDuration,
 	setMetronomeVolume,
+	updateSessionComments,
 } from '@/store/session-slice';
 
 import {
@@ -30,6 +31,7 @@ import {
 } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
+import { Textarea } from './ui/textarea';
 
 interface PracticeConfigProps {
 	initialOpen: boolean;
@@ -63,6 +65,10 @@ const PracticeConfig: React.FC<PracticeConfigProps> = ({
 		dispatch(setTimerMode('countdown'));
 		dispatch(setTimerDuration(Number(config.sessionDuration) * 60));
 		onOpenChange(false);
+	};
+
+	const handleCommentsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+		dispatch(updateSessionComments(e.target.value));
 	};
 
 	return (
@@ -249,13 +255,13 @@ const PracticeConfig: React.FC<PracticeConfigProps> = ({
 							</div>
 
 							<div className="space-y-2">
-								<Label>Session Notes</Label>
-								<Input
-									value={config.sessionNotes}
-									onChange={(e) =>
-										handleSelectChange(e.target.value, 'sessionNotes')
-									}
-									placeholder="Add notes about your practice session"
+								<Label htmlFor="sessionComments">Session Comments</Label>
+								<Textarea
+									id="sessionComments"
+									value={config.sessionComments}
+									onChange={handleCommentsChange}
+									placeholder="Add comments about your session"
+									rows={4}
 								/>
 							</div>
 						</div>

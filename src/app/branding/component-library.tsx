@@ -37,7 +37,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 import { ThemeSelect } from '@/components/theme-selector';
-import { PlaybackControls } from '@/components/playback-controls';
+import { PlaybackControls } from '@/components/playback-controls-bar';
 import { SignOutButton } from '@/components/sign-out-button';
 import {
 	Card,
