@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import { Metadata } from 'next';
 import { ReduxProvider } from '@/store/provider';
 import { ThemeProvider } from '@/components/theme-provider';
 // import NavBar from '@/components/nav-bar';
@@ -7,8 +7,8 @@ import { ThemeProvider } from '@/components/theme-provider';
 import '../styles/globals.css';
 
 import localFont from 'next/font/local';
-import { Playfair_Display } from 'next/font/google'; // Example heading font
 import { Pacifico } from 'next/font/google'; // Example decorative font
+import { Happy_Monkey } from 'next/font/google'; // Importing Happy Monkey
 
 // Body font (Geist)
 const geistSans = localFont({
@@ -24,8 +24,9 @@ const geistMono = localFont({
 	weight: '100 900',
 });
 
-// Heading font
-const playfair = Playfair_Display({
+// Heading font - replaced with Happy Monkey
+const happyMonkey = Happy_Monkey({
+	weight: '400',
 	subsets: ['latin'],
 	variable: '--font-heading',
 });
@@ -51,7 +52,7 @@ export default function RootLayout({
 		// can use suppressHydrationWarning if needed...
 		<html suppressHydrationWarning lang="en">
 			<body
-				className={`text-foreground bg-background ${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${pacifico.variable} font-sans antialiased`}
+				className={`text-foreground bg-background ${geistSans.variable} ${geistMono.variable} ${happyMonkey.variable} ${pacifico.variable} font-sans antialiased`}
 			>
 				<ReduxProvider>
 					<ThemeProvider

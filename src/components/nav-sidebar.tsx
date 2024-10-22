@@ -64,7 +64,7 @@ export default function NavSidebar() {
 						'relative mb-2 flex items-center justify-center rounded-[--radius] bg-gradient-to-br from-primary to-secondary',
 						{
 							'h-40 p-1': isVisible,
-							'h-30	 p-2': !isVisible,
+							'h-30	p-2': !isVisible,
 						}
 					)}
 				>

@@ -46,26 +46,27 @@ export const TimerProgress: React.FC = () => {
 	const progress = calculateProgress();
 
 	return (
-		<div className="w-full space-y-4">
-			<div className="text-center">
-        <p className="text-foreground text-xl font-semibold">
-          {formatTime(timer.currentTime)} / {formatTime(timer.duration || 0)}
-        </p>
-			</div>
-
-			<div className="relative ">
+		<div className="w-full">
+			{/* Progress Bar with Timer Overlay */}
+			<div className="relative h-6">
 				<Progress
 					value={progress}
-					className="h-4 w-full rounded-[--radius] bg-accent"
+					className="h-full w-full rounded-tr-[--radius] bg-accent"
 				/>
 				{progress > 0 && (
 					<div
-						className="absolute inset-0 rounded-[--radius] bg-primary"
+						className="absolute inset-0 rounded-b-[--radius] bg-primary"
 						style={{
-              clipPath: `polygon(0 0, ${progress}% 0, ${progress}% 100%, 0 100%)`,
+							clipPath: `polygon(0 0, ${progress}% 0, ${progress}% 100%, 0 100%)`,
 						}}
 					/>
 				)}
+				{/* Timer Overlay */}
+				<div className="absolute inset-0 flex items-center justify-center">
+					<p className="text-foreground font-semibold">
+						{formatTime(timer.currentTime)} / {formatTime(timer.duration || 0)}
+					</p>
+				</div>
 			</div>
 		</div>
 	);

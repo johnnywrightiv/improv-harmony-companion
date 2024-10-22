@@ -33,15 +33,15 @@ import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from './ui/textarea';
 
-interface PracticeConfigProps {
+interface SessionConfigProps {
 	initialOpen: boolean;
 	onOpenChange: (open: boolean) => void;
 }
 
-const PracticeConfig: React.FC<PracticeConfigProps> = ({
+export default function SessionConfig({
 	initialOpen,
 	onOpenChange,
-}) => {
+}: SessionConfigProps) {
 	const dispatch = useDispatch();
 	const { config, metronome } = useSelector(
 		(state: RootState) => state.sessions
@@ -74,15 +74,13 @@ const PracticeConfig: React.FC<PracticeConfigProps> = ({
 	return (
 		<Sheet open={initialOpen} onOpenChange={onOpenChange}>
 			<SheetContent side="right" className="w-full sm:w-[540px] sm:max-w-full">
-				<SheetHeader>
+				<SheetHeader className="mb-6">
 					<SheetTitle>Configure Practice Session</SheetTitle>
-					<SheetDescription>
-						Customize your practice session parameters.
-					</SheetDescription>
+					<SheetDescription>Customize your session parameters</SheetDescription>
 				</SheetHeader>
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={handleSubmit} className="space-y-6">
 					<ScrollArea className="h-[calc(100vh-12rem)] pr-4">
-						<div className="space-y-6 py-4">
+						<div className="space-y-6">
 							<div className="space-y-2">
 								<Label htmlFor="sessionName">Session Name</Label>
 								<Input
@@ -94,6 +92,18 @@ const PracticeConfig: React.FC<PracticeConfigProps> = ({
 									placeholder="Enter session name"
 								/>
 							</div>
+
+							<div className="space-y-2">
+								<Label htmlFor="sessionComments">Session Comments</Label>
+								<Textarea
+									id="sessionComments"
+									value={config.sessionComments}
+									onChange={handleCommentsChange}
+									placeholder="Add comments about your session"
+									rows={4}
+								/>
+							</div>
+
 
 							<div className="space-y-2">
 								<Label>Key and Scale</Label>
@@ -134,7 +144,7 @@ const PracticeConfig: React.FC<PracticeConfigProps> = ({
 											handleSelectChange(value, 'scaleType')
 										}
 									>
-										<SelectTrigger className="w-[180px]">
+										<SelectTrigger className="w-[calc(100%-78px)]">
 											<SelectValue placeholder="Scale Type" />
 										</SelectTrigger>
 										<SelectContent>
@@ -164,7 +174,6 @@ const PracticeConfig: React.FC<PracticeConfigProps> = ({
 									</Select>
 								</div>
 							</div>
-
 							<div className="space-y-2">
 								<Label>Time Signature</Label>
 								<Select
@@ -189,6 +198,7 @@ const PracticeConfig: React.FC<PracticeConfigProps> = ({
 											'9/8',
 											'11/8',
 											'12/8',
+											'13/8',
 										].map((time) => (
 											<SelectItem key={time} value={time}>
 												{time}
@@ -199,10 +209,11 @@ const PracticeConfig: React.FC<PracticeConfigProps> = ({
 							</div>
 
 							<div className="space-y-2">
-								<Label>Session Duration (minutes)</Label>
+								<Label>Duration (minutes)</Label>
 								<Input
 									type="number"
 									min="1"
+									max="60"
 									value={config.sessionDuration}
 									onChange={(e) =>
 										handleSelectChange(e.target.value, 'sessionDuration')
@@ -210,9 +221,13 @@ const PracticeConfig: React.FC<PracticeConfigProps> = ({
 									placeholder="Enter duration"
 								/>
 							</div>
-
-							<div className="space-y-2">
-								<Label>Tempo (BPM)</Label>
+							<div className="space-y-6">
+								<div className="flex items-center">
+									<Label>Tempo</Label>
+									<div className="ml-2 text-right text-muted-foreground">
+										{config.tempo} BPM
+									</div>
+								</div>
 								<Slider
 									min={40}
 									max={208}
@@ -222,57 +237,26 @@ const PracticeConfig: React.FC<PracticeConfigProps> = ({
 										handleSelectChange(value[0].toString(), 'tempo')
 									}
 								/>
-								<div className="text-right text-sm text-muted-foreground">
-									{config.tempo} BPM
-								</div>
 							</div>
 
-							<div className="space-y-2">
-								<Label>Metronome</Label>
-								<div className="flex items-center justify-between">
-									<div className="flex items-center space-x-2">
-										<Switch
-											checked={config.useMetronome}
-											onCheckedChange={handleMetronomeChange}
-										/>
-										<Label>Enable Metronome</Label>
-									</div>
+							<div className="space-y-4">
+								<div className="flex flex-col items-start">
+									<Label className="mb-4">Metronome</Label>
+									<Switch
+										checked={config.useMetronome}
+										onCheckedChange={handleMetronomeChange}
+									/>
 								</div>
-							</div>
-
-							<div className="space-y-2">
-								<Label>Metronome Volume</Label>
-								<Slider
-									min={0}
-									max={100}
-									step={1}
-									value={[metronome.volume]}
-									onValueChange={handleVolumeChange}
-								/>
-								<div className="text-right text-sm text-muted-foreground">
-									{metronome.volume}%
-								</div>
-							</div>
-
-							<div className="space-y-2">
-								<Label htmlFor="sessionComments">Session Comments</Label>
-								<Textarea
-									id="sessionComments"
-									value={config.sessionComments}
-									onChange={handleCommentsChange}
-									placeholder="Add comments about your session"
-									rows={4}
-								/>
 							</div>
 						</div>
 					</ScrollArea>
-					<SheetFooter className="mt-4">
-						<Button type="submit">Start Session</Button>
+					<SheetFooter>
+						<Button type="submit" className="w-full">
+							Start Session
+						</Button>
 					</SheetFooter>
 				</form>
 			</SheetContent>
 		</Sheet>
 	);
-};
-
-export default PracticeConfig;
+}

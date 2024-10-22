@@ -1,12 +1,11 @@
 import React from 'react';
-import { Timer } from '@/components/timer';
 import { PlaybackControlsBar } from '@/components/playback-controls-bar';
 import { MusicalControlsBar } from '@/components/musical-controls-bar';
-import PracticeConfig from '@/components/practice-config-window';
+import SessionConfig from '@/components/session-config-window';
 import SessionReviewModal from '@/components/session-review-modal';
 import ChordProgressionDisplay from '@/components/chord-progression-display';
 import ScaleDisplay from './scales-display';
-import TimerProgress from './timer-progress';
+import { Card } from './ui/card';
 
 interface PracticeSessionProps {}
 
@@ -37,10 +36,20 @@ const PracticeSession: React.FC<PracticeSessionProps> = () => {
 		{ note: 'B', degree: 'vii*', isChordTone: false },
 	];
 
+	const scaleRelative = [
+		{ note: 'A', degree: 'i', isChordTone: false },
+		{ note: 'B', degree: 'ii*', isChordTone: false },
+		{ note: 'C', degree: 'III', isChordTone: true },
+		{ note: 'D', degree: 'iv', isChordTone: false },
+		{ note: 'E', degree: 'v', isChordTone: true },
+		{ note: 'F', degree: 'IV', isChordTone: false },
+		{ note: 'G', degree: 'V', isChordTone: true },
+	];
+
 	return (
-		<>
+		<Card>
 			<div className="space-y-4">
-				<div className="h-auto items-center justify-center rounded-[--radius] border border-border bg-secondary p-4">
+				<div className="h-auto items-center justify-center rounded-[--radius] border border-border">
 					<MusicalControlsBar />
 					<div className="my-6">
 						<h3 className="mb-4 text-center text-xl font-semibold">
@@ -51,14 +60,26 @@ const PracticeSession: React.FC<PracticeSessionProps> = () => {
 							currentChordIndex={currentChordIndex}
 						/>
 					</div>
-					<div className="my-6 flex justify-center">
-						<h3 className="items-center mb-4 flex text-center text-xl font-semibold">C Major Scale</h3>
+					<div className="my-6 justify-center">
+						<h3 className="mb-4 text-center text-xl font-semibold">
+							Scales, Tones, and Modes
+						</h3>
+						<div className="mb-4 flex items-center justify-center">
+							<h3 className="text-sm font-semibold sm:text-xl">C Major</h3>
 							<ScaleDisplay
 								scale={scale}
 								currentChord={chords[currentChordIndex].name}
 							/>
+						</div>
+						<div className="mb-4 flex items-center justify-center">
+							<h3 className="text-sm font-semibold sm:text-xl">A Minor</h3>
+							<ScaleDisplay
+								scale={scaleRelative}
+								currentChord={chords[currentChordIndex].name}
+							/>
+						</div>
 					</div>
-					<TimerProgress />
+
 					<PlaybackControlsBar
 						onConfigOpen={() => setIsConfigOpen(true)}
 						onReviewOpen={() => setIsReviewOpen(true)}
@@ -67,7 +88,7 @@ const PracticeSession: React.FC<PracticeSessionProps> = () => {
 				</div>
 			</div>
 
-			<PracticeConfig
+			<SessionConfig
 				initialOpen={isConfigOpen}
 				onOpenChange={setIsConfigOpen}
 			/>
@@ -77,7 +98,7 @@ const PracticeSession: React.FC<PracticeSessionProps> = () => {
 				onClose={() => setIsReviewOpen(false)}
 				hideControls={true}
 			/>
-		</>
+		</Card>
 	);
 };
 

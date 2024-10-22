@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import PracticeConfig from '@/components/practice-config-window';
+import SessionConfig from '@/components/session-config-window';
 import PracticeSession from '@/components/practice-session';
 import SavedLoops from '@/components/saved-loops';
 import SessionReviewModal from '@/components/session-review-modal';
@@ -98,7 +98,7 @@ const Practice: React.FC = () => {
 					<PracticeSessionPlaceholder />
 					<div className="flex justify-center space-y-4">
 						<Button onClick={handleConfigOpen}>Open Session Config</Button>
-						<PracticeConfig
+						<SessionConfig
 							initialOpen={isConfigOpen}
 							onOpenChange={setIsConfigOpen}
 						/>

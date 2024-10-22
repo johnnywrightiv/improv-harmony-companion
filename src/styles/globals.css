@@ -93,90 +93,6 @@
 		);
 	}
 
-	/* Orange - Light Mode */
-	:root {
-		--background: 36 17% 95%;
-		--foreground: 36 5% 10%;
-		--card: 36 17% 90%;
-		--card-foreground: 36 5% 15%;
-		--popover: 36 17% 95%;
-		--popover-foreground: 36 95% 10%;
-		--primary: 36 83% 39%;
-		--primary-foreground: 0 0% 100%;
-		--secondary: 36 17% 70%;
-		--secondary-foreground: 0 0% 0%;
-		--muted: -2 17% 85%;
-		--muted-foreground: 36 5% 40%;
-		--accent: -2 17% 80%;
-		--accent-foreground: 36 5% 15%;
-		--border: 36 20% 50%;
-		--input: 36 20% 46%;
-		--ring: 36 83% 39%;
-		--radius: 0.5rem;
-
-		/* DO NOT DELETE - Additional custom variables in use */
-		--chart-1: 347 60% 60%; /* Brighter red */
-		--chart-2: 327 50% 50%; /* Pink-red */
-		--chart-3: 7 70% 60%; /* Red-orange */
-		--chart-4: 327 30% 40%; /* Muted pink */
-		--chart-5: 347 40% 70%; /* Light pink */
-
-		--destructive: 0 50% 50%;
-		--destructive-foreground: 347 5% 90%;
-		--warning: 36 100% 46%;
-		--warning-foreground: 347 5% 90%;
-		--success: 123 52% 47%;
-		--success-foreground: 347 5% 90%;
-
-		--gradient: linear-gradient(
-			135deg,
-			hsl(var(--primary)),
-			hsl(var(--secondary))
-		);
-	}
-
-	/* Orange - Dark Mode */
-	.dark {
-		--background: 36 17% 10%;
-		--foreground: 36 5% 90%;
-		--card: 36 17% 10%;
-		--card-foreground: 36 5% 90%;
-		--popover: 36 17% 5%;
-		--popover-foreground: 36 5% 90%;
-		--primary: 36 83% 39%;
-		--primary-foreground: 0 0% 100%;
-		--secondary: 36 17% 20%;
-		--secondary-foreground: 0 0% 100%;
-		--muted: -2 17% 25%;
-		--muted-foreground: 36 5% 60%;
-		--accent: -2 17% 25%;
-		--accent-foreground: 36 5% 90%;
-		--border: 36 20% 46%;
-		--input: 36 20% 46%;
-		--ring: 36 83% 39%;
-		--radius: 0.5rem;
-
-		/* DO NOT DELETE - Additional custom variables in use */
-		--chart-1: 347 70% 50%; /* Vibrant red */
-		--chart-2: 327 60% 60%; /* Bright pink-red */
-		--chart-3: 7 80% 50%; /* Bright red-orange */
-		--chart-4: 327 40% 50%; /* Deep pink */
-		--chart-5: 347 50% 60%; /* Soft pink */
-
-		--destructive: 0 50% 50%;
-		--destructive-foreground: 347 5% 90%;
-		--warning: 36 100% 46%;
-		--warning-foreground: 347 5% 90%;
-		--success: 123 52% 47%;
-		--success-foreground: 347 5% 90%;
-
-		--gradient: linear-gradient(
-			135deg,
-			hsl(var(--primary)),
-			hsl(var(--secondary))
-		);
-	}
-
 	/* Purple - Light Mode */
 	:root {
 		--background: 262 8% 95%;
@@ -255,6 +171,90 @@
 		--chart-3: 30 80% 55%;
 		--chart-4: 280 65% 60%;
 		--chart-5: 340 75% 55%;
+
+		--gradient: linear-gradient(
+			135deg,
+			hsl(var(--primary)),
+			hsl(var(--secondary))
+		);
+	}
+
+	/* Orange - Light Mode */
+	:root {
+		--background: 36 17% 95%;
+		--foreground: 36 5% 10%;
+		--card: 36 17% 90%;
+		--card-foreground: 36 5% 15%;
+		--popover: 36 17% 95%;
+		--popover-foreground: 36 95% 10%;
+		--primary: 36 83% 39%;
+		--primary-foreground: 0 0% 100%;
+		--secondary: 36 17% 70%;
+		--secondary-foreground: 0 0% 0%;
+		--muted: -2 17% 85%;
+		--muted-foreground: 36 5% 40%;
+		--accent: -2 17% 80%;
+		--accent-foreground: 36 5% 15%;
+		--border: 36 20% 50%;
+		--input: 36 20% 46%;
+		--ring: 36 83% 39%;
+		--radius: 0.5rem;
+
+		/* DO NOT DELETE - Additional custom variables in use */
+		--chart-1: 347 60% 60%; /* Brighter red */
+		--chart-2: 327 50% 50%; /* Pink-red */
+		--chart-3: 7 70% 60%; /* Red-orange */
+		--chart-4: 327 30% 40%; /* Muted pink */
+		--chart-5: 347 40% 70%; /* Light pink */
+
+		--destructive: 0 50% 50%;
+		--destructive-foreground: 347 5% 90%;
+		--warning: 36 100% 46%;
+		--warning-foreground: 347 5% 90%;
+		--success: 123 52% 47%;
+		--success-foreground: 347 5% 90%;
+
+		--gradient: linear-gradient(
+			135deg,
+			hsl(var(--primary)),
+			hsl(var(--secondary))
+		);
+	}
+
+	/* Orange - Dark Mode */
+	.dark {
+		--background: 36 17% 10%;
+		--foreground: 36 5% 90%;
+		--card: 36 17% 10%;
+		--card-foreground: 36 5% 90%;
+		--popover: 36 17% 5%;
+		--popover-foreground: 36 5% 90%;
+		--primary: 36 83% 39%;
+		--primary-foreground: 0 0% 100%;
+		--secondary: 36 17% 20%;
+		--secondary-foreground: 0 0% 100%;
+		--muted: -2 17% 25%;
+		--muted-foreground: 36 5% 60%;
+		--accent: -2 17% 25%;
+		--accent-foreground: 36 5% 90%;
+		--border: 36 20% 46%;
+		--input: 36 20% 46%;
+		--ring: 36 83% 39%;
+		--radius: 0.5rem;
+
+		/* DO NOT DELETE - Additional custom variables in use */
+		--chart-1: 347 70% 50%; /* Vibrant red */
+		--chart-2: 327 60% 60%; /* Bright pink-red */
+		--chart-3: 7 80% 50%; /* Bright red-orange */
+		--chart-4: 327 40% 50%; /* Deep pink */
+		--chart-5: 347 50% 60%; /* Soft pink */
+
+		--destructive: 0 50% 50%;
+		--destructive-foreground: 347 5% 90%;
+		--warning: 36 100% 46%;
+		--warning-foreground: 347 5% 90%;
+		--success: 123 52% 47%;
+		--success-foreground: 347 5% 90%;
 
 		--gradient: linear-gradient(
 			135deg,

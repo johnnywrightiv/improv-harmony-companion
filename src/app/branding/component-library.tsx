@@ -37,7 +37,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 import { ThemeSelect } from '@/components/theme-selector';
-import { PlaybackControls } from '@/components/playback-controls-bar';
+import { PlaybackControlsBar } from '@/components/playback-controls-bar';
 import { SignOutButton } from '@/components/sign-out-button';
 import {
 	Card,
@@ -161,7 +161,7 @@ export default function ComponentLibrary() {
 						<h3>Icons & Controls</h3>
 						<div className="flex gap-4">
 							<ThemeSelect />
-							<PlaybackControls />
+							<PlaybackControlsBar />
 						</div>
 						<p className="mt-2 text-sm text-muted-foreground">
 							Control icons using Lucide React icons. (define style)
@@ -439,7 +439,7 @@ export default function ComponentLibrary() {
 						<div className="flex items-end justify-around">
 							<div>
 								<h6>Playback Controls</h6>
-								<PlaybackControls />
+								<PlaybackControlsBar />
 							</div>
 							<div>
 								<h6>Light/Dark Mode</h6>
