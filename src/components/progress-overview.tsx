@@ -32,8 +32,8 @@ export default function ProgressOverview() {
 	return (
 		<div className="w-full space-y-4 rounded-[--radius] border border-border bg-secondary p-3 shadow-lg">
 			<Link href="/dashboard/progress" className="block">
-				<div className="hover: text-center">
-					<h3 className="text-foreground font-semibold">
+				<div className="hover:underline text-center ">
+					<h3 className="text-foreground font-semibold mb-4">
 						{actualWeeklyProgress > 0
 							? `${overallProgress}% of the way to your goal this week`
 							: 'No progress yet this week'}
@@ -43,7 +43,7 @@ export default function ProgressOverview() {
 				<div className="relative">
 					<Progress
 						value={overallProgress}
-						className="h-4 w-full rounded-[--radius] bg-accent"
+						className="h-6 w-full rounded-[--radius] bg-accent"
 					/>
 					{overallProgress > 0 && (
 						<div

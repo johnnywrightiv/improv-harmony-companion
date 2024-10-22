@@ -20,15 +20,25 @@ const ChordProgressionDisplay: React.FC<ChordProgressionDisplayProps> = ({
 			{chords.map((chord, index) => (
 				<div
 					key={index}
-					className={`flex flex-col items-center justify-between rounded-lg p-4 w-[120px] ${
+					className={`flex w-[120px] flex-col items-center justify-between rounded-[--radius] p-4 ${
 						index === currentChordIndex
-							? 'border-2 border-primary bg-secondary'
+							? 'border-2 border-primary bg-primary'
 							: 'border border-border'
 					}`}
 				>
 					<div className="text-2xl font-bold">{chord.name}</div>
 					<div className="text-sm text-muted-foreground">
-						({chord.tones.join(' ')})
+						(
+						{chord.tones.map((tone, i) => (
+							<span
+								key={i}
+								className={index === currentChordIndex ? 'text-card-foreground font-bold' : ''}
+							>
+								{tone}
+								{i < chord.tones.length - 1 ? ' ' : ''}
+							</span>
+						))}
+						)
 					</div>
 					<div className="mt-2 text-lg font-semibold">{chord.romanNumeral}</div>
 				</div>
