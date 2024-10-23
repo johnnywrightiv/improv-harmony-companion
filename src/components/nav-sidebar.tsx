@@ -39,7 +39,7 @@ export default function NavSidebar() {
         ${isVisible ? 'lg:w-64' : 'lg:w-20'}`}
 			aria-label="Main Navigation"
 		>
-			<div className="relative hidden">
+			<div className="relative">
 				<Button
 					variant="ghost"
 					onClick={() => dispatch(toggleSidebar())}
