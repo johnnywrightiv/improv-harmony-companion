@@ -4,7 +4,7 @@ import { MusicalControlsBar } from '@/components/musical-controls-bar';
 import SessionConfig from '@/components/session-config-window';
 import SessionReviewModal from '@/components/session-review-modal';
 import ChordProgressionDisplay from '@/components/chord-progression-display';
-import ScaleDisplay from './scales-display';
+import ScaleDisplay from './scale-display';
 import { Card } from './ui/card';
 
 interface PracticeSessionProps {}
@@ -48,30 +48,24 @@ const PracticeSession: React.FC<PracticeSessionProps> = () => {
 
 	return (
 		<Card>
-			<div className="space-y-4">
+			<div className="">
 				<div className="h-auto items-center justify-center rounded-[--radius] border border-border">
 					<MusicalControlsBar />
-					<div className="my-6">
-						<h3 className="mb-4 text-center text-xl font-semibold">
-							Chord Progression
-						</h3>
+					<div className="mt-8">
 						<ChordProgressionDisplay
 							chords={chords}
 							currentChordIndex={currentChordIndex}
 						/>
 					</div>
-					<div className="my-6 justify-center">
-						<h3 className="mb-4 text-center text-xl font-semibold">
-							Scales, Tones, and Modes
-						</h3>
-						<div className="mb-4 flex items-center justify-center">
+					<div className="justify-center">
+						<div className="flex items-center justify-center">
 							<h3 className="text-sm font-semibold sm:text-xl">C Major</h3>
 							<ScaleDisplay
 								scale={scale}
 								currentChord={chords[currentChordIndex].name}
 							/>
 						</div>
-						<div className="mb-4 flex items-center justify-center">
+						<div className="mb-2 flex items-center justify-center">
 							<h3 className="text-sm font-semibold sm:text-xl">A Minor</h3>
 							<ScaleDisplay
 								scale={scaleRelative}

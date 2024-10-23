@@ -75,11 +75,10 @@ export default function SessionConfig({
 		<Sheet open={initialOpen} onOpenChange={onOpenChange}>
 			<SheetContent side="right" className="w-full sm:w-[540px] sm:max-w-full">
 				<SheetHeader className="mb-6">
-					<SheetTitle>Configure Practice Session</SheetTitle>
+					<SheetTitle className="-mb-2">Configure Practice Session</SheetTitle>
 					<SheetDescription>Customize your session parameters</SheetDescription>
 				</SheetHeader>
 				<form onSubmit={handleSubmit} className="space-y-6">
-					<ScrollArea className="h-[calc(100vh-12rem)] pr-4">
 						<div className="space-y-6">
 							<div className="space-y-2">
 								<Label htmlFor="sessionName">Session Name</Label>
@@ -104,108 +103,109 @@ export default function SessionConfig({
 								/>
 							</div>
 
-
-							<div className="space-y-2">
-								<Label>Key and Scale</Label>
-								<div className="flex gap-2">
+							<div className="grid grid-cols-2 gap-4">
+								<div className="space-y-2">
+									<Label>Key and Scale</Label>
+									<div className="flex gap-2">
+										<Select
+											value={config.keySignature}
+											onValueChange={(value) =>
+												handleSelectChange(value, 'keySignature')
+											}
+										>
+											<SelectTrigger className="w-[70px]">
+												<SelectValue placeholder="Key" />
+											</SelectTrigger>
+											<SelectContent>
+												{[
+													'C',
+													'D',
+													'E',
+													'F',
+													'G',
+													'A',
+													'B',
+													'Ab',
+													'Bb',
+													'Db',
+													'Eb',
+													'Gb',
+												].map((key) => (
+													<SelectItem key={key} value={key}>
+														{key}
+													</SelectItem>
+												))}
+											</SelectContent>
+										</Select>
+										<Select
+											value={config.scaleType}
+											onValueChange={(value) =>
+												handleSelectChange(value, 'scaleType')
+											}
+										>
+											<SelectTrigger className="w-[calc(100%-78px)]">
+												<SelectValue placeholder="Scale Type" />
+											</SelectTrigger>
+											<SelectContent>
+												<SelectItem value="major">Major</SelectItem>
+												<SelectItem value="lydian">Lydian (#4)</SelectItem>
+												<SelectItem value="mixolydian">
+													Mixolydian (b7)
+												</SelectItem>
+												<SelectItem value="dorian">Dorian (b3 b7)</SelectItem>
+												<SelectItem value="minor">Minor</SelectItem>
+												<SelectItem value="phrygian">
+													Phrygian (min b2)
+												</SelectItem>
+												<SelectItem value="locrian">
+													Locrian (min b2 b5)
+												</SelectItem>
+												<SelectItem value="blues">Blues (min b5)</SelectItem>
+												<SelectItem value="harmonic-minor">
+													Harmonic Minor (min #7)
+												</SelectItem>
+												<SelectItem value="melodic-minor">
+													Melodic Minor (min #6 #7)
+												</SelectItem>
+												<SelectItem value="diminished">Diminished (b3 b5)</SelectItem>
+												<SelectItem value="augmented">Augmented (#5)</SelectItem>
+											</SelectContent>
+										</Select>
+									</div>
+								</div>
+								<div className="space-y-2">
+									<Label>Time Signature</Label>
 									<Select
-										value={config.keySignature}
+										value={config.timeSignature}
 										onValueChange={(value) =>
-											handleSelectChange(value, 'keySignature')
+											handleSelectChange(value, 'timeSignature')
 										}
 									>
-										<SelectTrigger className="w-[70px]">
-											<SelectValue placeholder="Key" />
+										<SelectTrigger>
+											<SelectValue placeholder="Time Signature" />
 										</SelectTrigger>
 										<SelectContent>
 											{[
-												'C',
-												'D',
-												'E',
-												'F',
-												'G',
-												'A',
-												'B',
-												'Ab',
-												'Bb',
-												'Db',
-												'Eb',
-												'Gb',
-											].map((key) => (
-												<SelectItem key={key} value={key}>
-													{key}
+												'1/4',
+												'2/4',
+												'3/4',
+												'4/4',
+												'5/4',
+												'6/8',
+												'7/8',
+												'8/8',
+												'9/8',
+												'11/8',
+												'12/8',
+												'13/8',
+											].map((time) => (
+												<SelectItem key={time} value={time}>
+													{time}
 												</SelectItem>
 											))}
 										</SelectContent>
 									</Select>
-									<Select
-										value={config.scaleType}
-										onValueChange={(value) =>
-											handleSelectChange(value, 'scaleType')
-										}
-									>
-										<SelectTrigger className="w-[calc(100%-78px)]">
-											<SelectValue placeholder="Scale Type" />
-										</SelectTrigger>
-										<SelectContent>
-											<SelectItem value="major">Major</SelectItem>
-											<SelectItem value="lydian">Lydian (#4)</SelectItem>
-											<SelectItem value="mixolydian">
-												Mixolydian (b7)
-											</SelectItem>
-											<SelectItem value="dorian">Dorian (b3 b7)</SelectItem>
-											<SelectItem value="minor">Minor</SelectItem>
-											<SelectItem value="phrygian">
-												Phrygian (min b2)
-											</SelectItem>
-											<SelectItem value="locrian">
-												Locrian (min b2 b5)
-											</SelectItem>
-											<SelectItem value="blues">Blues (b5)</SelectItem>
-											<SelectItem value="harmonic-minor">
-												Harmonic Minor (min #7)
-											</SelectItem>
-											<SelectItem value="melodic-minor">
-												Melodic Minor (min #6 #7)
-											</SelectItem>
-											<SelectItem value="diminished">Diminished</SelectItem>
-											<SelectItem value="augmented">Augmented</SelectItem>
-										</SelectContent>
-									</Select>
 								</div>
-							</div>
-							<div className="space-y-2">
-								<Label>Time Signature</Label>
-								<Select
-									value={config.timeSignature}
-									onValueChange={(value) =>
-										handleSelectChange(value, 'timeSignature')
-									}
-								>
-									<SelectTrigger>
-										<SelectValue placeholder="Time Signature" />
-									</SelectTrigger>
-									<SelectContent>
-										{[
-											'1/4',
-											'2/4',
-											'3/4',
-											'4/4',
-											'5/4',
-											'6/8',
-											'7/8',
-											'8/8',
-											'9/8',
-											'11/8',
-											'12/8',
-											'13/8',
-										].map((time) => (
-											<SelectItem key={time} value={time}>
-												{time}
-											</SelectItem>
-										))}
-									</SelectContent>
-								</Select>
 							</div>
 
 							<div className="space-y-2">
@@ -249,7 +249,6 @@ export default function SessionConfig({
 								</div>
 							</div>
 						</div>
-					</ScrollArea>
 					<SheetFooter>
 						<Button type="submit" className="w-full">
 							Start Session

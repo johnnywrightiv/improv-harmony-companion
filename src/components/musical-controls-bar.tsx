@@ -120,15 +120,15 @@ export const MusicalControlsBar: React.FC = () => {
 								<SelectItem value="minor">Minor</SelectItem>
 								<SelectItem value="phrygian">Phrygian (min b2)</SelectItem>
 								<SelectItem value="locrian">Locrian (min b2 b5)</SelectItem>
-								<SelectItem value="blues">Blues (b5)</SelectItem>
+								<SelectItem value="blues">Blues (min b5)</SelectItem>
 								<SelectItem value="harmonic-minor">
 									Harmonic Minor (min #7)
 								</SelectItem>
 								<SelectItem value="melodic-minor">
 									Melodic Minor (min #6 #7)
 								</SelectItem>
-								<SelectItem value="diminished">Diminished</SelectItem>
-								<SelectItem value="augmented">Augmented</SelectItem>
+								<SelectItem value="diminished">Diminished (min b5)</SelectItem>
+								<SelectItem value="augmented">Augmented (#5)</SelectItem>
 							</SelectContent>
 						</Select>
 					</div>
