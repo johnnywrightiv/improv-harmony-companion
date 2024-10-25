@@ -1,11 +1,10 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { Calendar } from '@/components/ui/calendar';
 import { ArrowUp, ArrowDown } from 'lucide-react';
 import RecentSessions from '@/components/recent-sessions';
-import placeholderData from '@/data/placeholder-data.json';
 import {
 	Line,
 	XAxis,
@@ -18,7 +17,9 @@ import {
 } from 'recharts';
 import ProgressOverview from '@/components/progress-overview';
 import SetPracticeGoalDialog from '@/components/set-practice-goal';
+import placeholderData from '@/data/placeholder-data.json';
 
+// Helper component for trend indicators
 const TrendIndicator: React.FC<{ isPositive: boolean; value: string }> = ({
 	isPositive,
 	value,
@@ -41,7 +42,68 @@ const Progress: React.FC = () => {
 		(session) => session.userId === user.id
 	);
 
-	const practiceData = useMemo(() => {
+	// Calculate total stats (all-time)
+	const totalStats = {
+		sessions: userSessions.length,
+		practiceTime: userSessions.reduce(
+			(sum, session) => sum + session.duration / 60,
+			0
+		),
+		avgSession:
+			userSessions.length > 0
+				? userSessions.reduce(
+						(sum, session) => sum + session.duration / 60,
+						0
+					) / userSessions.length
+				: 0,
+	};
+
+	// Calculate weekly trends
+	const getWeekStats = (daysAgo: number) => {
+		const now = new Date();
+		const startDate = new Date(now.setDate(now.getDate() - daysAgo));
+
+		return userSessions
+			.filter((session) => new Date(session.date) >= startDate)
+			.reduce(
+				(stats, session) => ({
+					sessions: stats.sessions + 1,
+					practiceTime: stats.practiceTime + session.duration / 60,
+				}),
+				{ sessions: 0, practiceTime: 0 }
+			);
+	};
+
+	// Get current week and previous week stats
+	const currentWeek = getWeekStats(7);
+	const previousWeek = getWeekStats(14);
+	previousWeek.sessions -= currentWeek.sessions;
+	previousWeek.practiceTime -= currentWeek.practiceTime;
+
+	// Calculate week-over-week trends
+	const calculateTrend = (current: number, previous: number) => {
+		if (previous === 0) return 0;
+		return Math.round(((current - previous) / previous) * 100);
+	};
+
+	const trends = {
+		sessions: calculateTrend(currentWeek.sessions, previousWeek.sessions),
+		practiceTime: calculateTrend(
+			currentWeek.practiceTime,
+			previousWeek.practiceTime
+		),
+		avgSession: calculateTrend(
+			currentWeek.sessions > 0
+				? currentWeek.practiceTime / currentWeek.sessions
+				: 0,
+			previousWeek.sessions > 0
+				? previousWeek.practiceTime / previousWeek.sessions
+				: 0
+		),
+	};
+
+	// Calculate practice data for chart
+	const practiceData = React.useMemo(() => {
 		const now = new Date();
 		const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
 
@@ -62,47 +124,6 @@ const Progress: React.FC = () => {
 		});
 	}, [userSessions]);
 
-	const calculateWeeklyStats = (daysAgo: number) => {
-		const endDate = new Date();
-		const startDate = new Date(
-			endDate.getTime() - daysAgo * 24 * 60 * 60 * 1000
-		);
-		const relevantSessions = userSessions.filter(
-			(session) =>
-				new Date(session.date) >= startDate && new Date(session.date) < endDate
-		);
-
-		const totalSessions = relevantSessions.length;
-		const totalPracticeTime = relevantSessions.reduce(
-			(sum, session) => sum + session.duration / 60,
-			0
-		);
-		const avgSessionDuration =
-			totalSessions > 0 ? totalPracticeTime / totalSessions : 0;
-
-		return { totalSessions, totalPracticeTime, avgSessionDuration };
-	};
-
-	const currentWeekStats = calculateWeeklyStats(7);
-	const previousWeekStats = calculateWeeklyStats(14);
-
-	const calculateTrendPercentage = (current: number, previous: number) => {
-		return previous !== 0 ? ((current - previous) / previous) * 100 : 0;
-	};
-
-	const totalSessionsTrend = calculateTrendPercentage(
-		currentWeekStats.totalSessions,
-		previousWeekStats.totalSessions
-	);
-	const totalPracticeTimeTrend = calculateTrendPercentage(
-		currentWeekStats.totalPracticeTime,
-		previousWeekStats.totalPracticeTime
-	);
-	const avgSessionDurationTrend = calculateTrendPercentage(
-		currentWeekStats.avgSessionDuration,
-		previousWeekStats.avgSessionDuration
-	);
-
 	return (
 		<div className="space-y-8">
 			<ProgressOverview />
@@ -119,13 +140,11 @@ const Progress: React.FC = () => {
 				<CardContent className="grid grid-cols-3 gap-2 md:gap-4">
 					<div>
 						<p className="mb-1 text-muted-foreground">Total Sessions</p>
-						<p className="mb-2 text-2xl font-bold">
-							{currentWeekStats.totalSessions}
-						</p>
+						<p className="mb-2 text-2xl font-bold">{totalStats.sessions}</p>
 						<div className="flex items-center text-sm">
 							<TrendIndicator
-								isPositive={totalSessionsTrend >= 0}
-								value={Math.abs(totalSessionsTrend).toFixed(0)}
+								isPositive={trends.sessions >= 0}
+								value={Math.abs(trends.sessions).toString()}
 							/>
 							<span className="ml-1">past week</span>
 						</div>
@@ -133,12 +152,12 @@ const Progress: React.FC = () => {
 					<div>
 						<p className="mb-1 text-muted-foreground">Total Practice</p>
 						<p className="mb-2 text-2xl font-bold">
-							{currentWeekStats.totalPracticeTime.toFixed(0)} mins
+							{Math.round(totalStats.practiceTime)} mins
 						</p>
 						<div className="flex items-center text-sm">
 							<TrendIndicator
-								isPositive={totalPracticeTimeTrend >= 0}
-								value={Math.abs(totalPracticeTimeTrend).toFixed(0)}
+								isPositive={trends.practiceTime >= 0}
+								value={Math.abs(trends.practiceTime).toString()}
 							/>
 							<span className="ml-1">past week</span>
 						</div>
@@ -146,12 +165,12 @@ const Progress: React.FC = () => {
 					<div>
 						<p className="mb-1 text-muted-foreground">Avg. Session</p>
 						<p className="mb-2 text-2xl font-bold">
-							{currentWeekStats.avgSessionDuration.toFixed(0)} mins
+							{Math.round(totalStats.avgSession)} mins
 						</p>
 						<div className="flex items-center text-sm">
 							<TrendIndicator
-								isPositive={avgSessionDurationTrend >= 0}
-								value={Math.abs(avgSessionDurationTrend).toFixed(0)}
+								isPositive={trends.avgSession >= 0}
+								value={Math.abs(trends.avgSession).toString()}
 							/>
 							<span className="ml-1">past week</span>
 						</div>
@@ -181,7 +200,7 @@ const Progress: React.FC = () => {
 						<h2>Practice Trend</h2>
 					</CardHeader>
 					<CardContent className="-ml-10 flex flex-grow items-center justify-center">
-						<div className=" h-80 w-full">
+						<div className="h-80 w-full">
 							<ResponsiveContainer width="100%" height="100%">
 								<ComposedChart data={practiceData}>
 									<CartesianGrid strokeDasharray="3 3" />

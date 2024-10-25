@@ -21,9 +21,9 @@ const DashboardHome = () => {
 
 	const handleQuickStart = () => {
 		dispatch(updateConfig({ isActive: true }));
-		dispatch(setTimerMode('stopwatch'));
+		dispatch(setTimerMode('countdown'));
 		dispatch(setTimerStatus('playing'));
-		dispatch(setTimerDuration(0));
+		dispatch(setTimerDuration(1800));
 		router.push('/dashboard/practice');
 	};
 

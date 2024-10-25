@@ -129,23 +129,23 @@
 			"sessionId": "session_000",
 			"userId": "user_001",
 			"loopId": "loop_001",
-			"name": "Morning Jazz Practice",
-			"duration": 1800,
-			"date": "2024-10-24",
+			"name": "Weekend Session",
+			"duration": 3600,
+			"date": "2024-10-13",
 			"review": {
-				"notes": "Good progress on scales",
-				"rating": 4
+				"notes": "Long weekend practice",
+				"rating": 5
 			}
 		},
 		{
 			"sessionId": "session_001",
 			"userId": "user_001",
 			"loopId": "loop_001",
-			"name": "Evening Jazz Practice",
-			"duration": 1200,
-			"date": "2024-10-23",
+			"name": "Late Practice",
+			"duration": 1500,
+			"date": "2024-10-14",
 			"review": {
-				"notes": "Short but focused session",
+				"notes": "Quick but productive",
 				"rating": 4
 			}
 		},
@@ -153,35 +153,35 @@
 			"sessionId": "session_002",
 			"userId": "user_001",
 			"loopId": "loop_001",
-			"name": "Afternoon Practice",
-			"duration": 2400,
-			"date": "2024-10-22",
+			"name": "Evening Practice",
+			"duration": 1800,
+			"date": "2024-10-15",
 			"review": {
-				"notes": "Extended rhythm work",
-				"rating": 5
+				"notes": "Good session",
+				"rating": 4
 			}
 		},
 		{
 			"sessionId": "session_003",
 			"userId": "user_001",
 			"loopId": "loop_001",
-			"name": "Quick Practice",
-			"duration": 900,
-			"date": "2024-10-21",
+			"name": "Afternoon Session",
+			"duration": 2700,
+			"date": "2024-10-16",
 			"review": {
-				"notes": "Brief warmup",
-				"rating": 3
+				"notes": "Extended practice",
+				"rating": 4
 			}
 		},
 		{
 			"sessionId": "session_004",
 			"userId": "user_001",
 			"loopId": "loop_001",
-			"name": "Late Night Session",
-			"duration": 1500,
-			"date": "2024-10-20",
+			"name": "Morning Practice",
+			"duration": 1800,
+			"date": "2024-10-17",
 			"review": {
-				"notes": "Focus on chord progressions",
+				"notes": "Regular practice",
 				"rating": 4
 			}
 		},
@@ -201,11 +201,11 @@
 			"sessionId": "session_006",
 			"userId": "user_001",
 			"loopId": "loop_001",
-			"name": "Morning Practice",
-			"duration": 1800,
-			"date": "2024-10-17",
+			"name": "Late Night Session",
+			"duration": 1500,
+			"date": "2024-10-20",
 			"review": {
-				"notes": "Regular practice",
+				"notes": "Focus on chord progressions",
 				"rating": 4
 			}
 		},
@@ -213,35 +213,35 @@
 			"sessionId": "session_007",
 			"userId": "user_001",
 			"loopId": "loop_001",
-			"name": "Afternoon Session",
-			"duration": 2700,
-			"date": "2024-10-16",
+			"name": "Quick Practice",
+			"duration": 900,
+			"date": "2024-10-21",
 			"review": {
-				"notes": "Extended practice",
-				"rating": 4
+				"notes": "Brief warmup",
+				"rating": 3
 			}
 		},
 		{
 			"sessionId": "session_008",
 			"userId": "user_001",
 			"loopId": "loop_001",
-			"name": "Evening Practice",
-			"duration": 1800,
-			"date": "2024-10-15",
+			"name": "Afternoon Practice",
+			"duration": 2400,
+			"date": "2024-10-22",
 			"review": {
-				"notes": "Good session",
-				"rating": 4
+				"notes": "Extended rhythm work",
+				"rating": 5
 			}
 		},
 		{
 			"sessionId": "session_009",
 			"userId": "user_001",
 			"loopId": "loop_001",
-			"name": "Late Practice",
-			"duration": 1500,
-			"date": "2024-10-14",
+			"name": "Evening Jazz Practice",
+			"duration": 1200,
+			"date": "2024-10-23",
 			"review": {
-				"notes": "Quick but productive",
+				"notes": "Short but focused session",
 				"rating": 4
 			}
 		},
@@ -249,36 +249,12 @@
 			"sessionId": "session_010",
 			"userId": "user_001",
 			"loopId": "loop_001",
-			"name": "Weekend Session",
-			"duration": 3600,
-			"date": "2024-10-13",
-			"review": {
-				"notes": "Long weekend practice",
-				"rating": 5
-			}
-		},
-		{
-			"sessionId": "session_011",
-			"userId": "user_001",
-			"loopId": "loop_001",
-			"name": "Morning Practice",
+			"name": "Morning Jazz Practice",
 			"duration": 1800,
-			"date": "2024-10-12",
+			"date": "2024-10-24",
 			"review": {
-				"notes": "Regular practice",
+				"notes": "Good progress on scales",
 				"rating": 4
-			}
-		},
-		{
-			"sessionId": "session_012",
-			"userId": "user_001",
-			"loopId": "loop_001",
-			"name": "Quick Session",
-			"duration": 900,
-			"date": "2024-10-11",
-			"review": {
-				"notes": "Brief session",
-				"rating": 3
 			}
 		},
 		{
