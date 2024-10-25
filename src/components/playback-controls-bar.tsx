@@ -82,13 +82,13 @@ export const PlaybackControlsBar: React.FC<PlaybackControlsBarProps> = ({
 				</Button>
 
 				{/* Other Controls */}
-				<Button variant="outline" size="icon" onClick={onSaveLoop}>
-					<Save className="h-4 w-4" />
-					<span className="sr-only">Save loop</span>
-				</Button>
 				<Button variant="outline" size="icon" onClick={onReviewOpen}>
 					<NotepadText className="h-4 w-4" />
 					<span className="sr-only">Session comments</span>
+				</Button>
+				<Button variant="outline" size="icon" onClick={onSaveLoop}>
+					<Save className="h-4 w-4" />
+					<span className="sr-only">Save loop</span>
 				</Button>
 				<Button variant="outline" size="icon" onClick={onConfigOpen}>
 					<Settings className="h-4 w-4" />

@@ -33,12 +33,12 @@ const PracticeSession: React.FC<PracticeSessionProps> = () => {
 		{ note: 'F', degree: 'IV', isChordTone: false },
 		{ note: 'G', degree: 'V', isChordTone: true },
 		{ note: 'A', degree: 'vi', isChordTone: false },
-		{ note: 'B', degree: 'vii*', isChordTone: false },
+		{ note: 'B', degree: 'vii°', isChordTone: false },
 	];
 
 	const scaleRelative = [
 		{ note: 'A', degree: 'i', isChordTone: false },
-		{ note: 'B', degree: 'ii*', isChordTone: false },
+		{ note: 'B', degree: 'ii°', isChordTone: false },
 		{ note: 'C', degree: 'III', isChordTone: true },
 		{ note: 'D', degree: 'iv', isChordTone: false },
 		{ note: 'E', degree: 'v', isChordTone: true },

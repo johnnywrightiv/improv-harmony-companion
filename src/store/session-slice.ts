@@ -25,6 +25,7 @@ interface SessionState {
 		sessionDuration: number;
 		tempo: number;
 		sessionComments: string;
+		sessionRating: number;
 	};
 	timer: {
 		status: 'playing' | 'paused' | 'stopped';
@@ -78,6 +79,7 @@ const initialState: SessionState = {
 		sessionDuration: 30,
 		tempo: 120,
 		sessionComments: '',
+		sessionRating: 0,
 	},
 	timer: {
 		status: 'stopped',
@@ -184,6 +186,9 @@ const sessionSlice = createSlice({
 				state.sessions[index] = action.payload;
 			}
 		},
+		updateSessionRating: (state, action: PayloadAction<number>) => {
+			state.config.sessionRating = action.payload;
+		},
 	},
 });
 
@@ -203,6 +208,7 @@ export const {
 	clearCompletedSession,
 	addSession,
 	updateSession,
+	updateSessionRating,
 } = sessionSlice.actions;
 
 // Thunk action

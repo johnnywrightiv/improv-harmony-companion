@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+'use client';
+
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { RootState } from '@/store/store';
@@ -12,8 +14,11 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
 import {
-	updateSessionComments
+	updateConfig,
+	updateSessionComments,
+	updateSessionRating,
 } from '@/store/session-slice';
 
 interface SessionReviewModalProps {
@@ -33,7 +38,11 @@ const SessionReviewModal: React.FC<SessionReviewModalProps> = ({
 		(state: RootState) => state.sessions
 	);
 
-	const [rating, setRating] = useState<number>(0);
+	useEffect(() => {
+		if (completedSession) {
+			dispatch(updateConfig({ sessionName: completedSession.sessionName }));
+		}
+	}, [completedSession, dispatch]);
 
 	const formatDuration = (duration: number): string => {
 		const minutes = Math.floor(duration / 60);
@@ -47,49 +56,62 @@ const SessionReviewModal: React.FC<SessionReviewModalProps> = ({
 		dispatch(updateSessionComments(e.target.value));
 	};
 
+	const handleSessionNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		dispatch(updateConfig({ sessionName: e.target.value }));
+	};
+
+	const handleRatingChange = (newRating: number) => {
+		dispatch(updateSessionRating(newRating));
+	};
+
 	return (
 		<Dialog open={isOpen} onOpenChange={onClose}>
 			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>Session Comments</DialogTitle>
+					<DialogTitle>Session Review</DialogTitle>
 					<DialogDescription>
 						Rate your session and take comments on your progress.
 					</DialogDescription>
 				</DialogHeader>
-				<div className="space-y-4">
+				<div>
+					<Input
+						value={config.sessionName}
+						onChange={handleSessionNameChange}
+						placeholder="Session Name"
+						className="mb-4"
+					/>
 					<div>
-						<h3 className="mb-2">Rate Your Session:</h3>
-						<div className="flex justify-between">
+						Rate Your Session:
+						<div className="mb-4 mt-2 flex justify-between">
 							{emojis.map((emoji, index) => (
-								<Button
+								<button
 									key={index}
-									variant={rating === index + 1 ? 'default' : 'outline'}
-									onClick={() => setRating(index + 1)}
-									className="text-2xl"
+									onClick={() => handleRatingChange(index + 1)}
+									className={`text-2xl ${config.sessionRating === index + 1 ? 'border-2 border-primary' : ''} rounded-full p-1`}
 								>
 									{emoji}
-								</Button>
+								</button>
 							))}
 						</div>
 					</div>
 					<div>
-						<h3 className="mb-2">Session Comments:</h3>
+						Session Comments:
 						<Textarea
 							value={config.sessionComments}
 							onChange={handleCommentsChange}
-							placeholder="How was your practice session?"
-							rows={6}
+							className="mt-2"
 						/>
 					</div>
-
 					{completedSession && (
 						<div>
 							<h3 className="mb-2">Session Details:</h3>
 							<ul>
-								<li>Key Signature: {completedSession.keySignature}</li>
+								<li>
+									Key Signature:{' '}
+									{`${completedSession.keySignature} ${config.scaleType.charAt(0).toUpperCase() + config.scaleType.slice(1)}`}
+								</li>
 								<li>Time Signature: {completedSession.timeSignature}</li>
 								<li>Tempo: {completedSession.tempo} BPM</li>
-								<li>Session Name: {completedSession.sessionName}</li>
 								<li>
 									Duration: {formatDuration(completedSession.practiceDuration)}
 								</li>
