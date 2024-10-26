@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import SessionConfig from '@/components/session-config-window';
 import PracticeSession from '@/components/practice-session';
+import PracticeSessionPlaceholder from '@/components/practice-session-placeholder';
 import SavedLoops from '@/components/saved-loops';
 import SessionReviewModal from '@/components/session-review-modal';
 import { Button } from '@/components/ui/button';
@@ -22,21 +23,6 @@ import {
 	completeSession,
 } from '@/store/session-slice';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks/redux-hooks';
-
-interface PracticeSessionPlaceholderProps {}
-
-const PracticeSessionPlaceholder: React.FC<
-	PracticeSessionPlaceholderProps
-> = () => (
-	<div className="space-y-4 rounded-[--radius] border p-4">
-		<h2>Practice Session (Inactive)</h2>
-		<div className="space-y-2">
-			<div className="flex h-40 items-center justify-center rounded bg-secondary">
-				PracticeSession Placeholder
-			</div>
-		</div>
-	</div>
-);
 
 const Practice: React.FC = () => {
 	const [isConfigOpen, setIsConfigOpen] = useState(false);
@@ -92,17 +78,22 @@ const Practice: React.FC = () => {
 	return (
 		<div className="grid gap-4">
 			{playback.status === 'playing' || playback.status === 'paused' ? (
-				<PracticeSession />
+				<>
+					<PracticeSession />
+					<SavedLoops />
+				</>
 			) : (
 				<>
-					<PracticeSessionPlaceholder />
-					<div className="flex justify-center space-y-4">
-						<Button onClick={handleConfigOpen}>Open Session Config</Button>
-						<SessionConfig
-							initialOpen={isConfigOpen}
-							onOpenChange={setIsConfigOpen}
-						/>
+					<div className="relative">
+						<PracticeSessionPlaceholder />
+						<div className="absolute inset-0 flex items-center justify-center rounded-[--radius] bg-muted-foreground/50">
+							<Button onClick={handleConfigOpen}>Open Session Config</Button>
+						</div>
 					</div>
+					<SessionConfig
+						initialOpen={isConfigOpen}
+						onOpenChange={setIsConfigOpen}
+					/>
 					<SavedLoops />
 				</>
 			)}

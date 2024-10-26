@@ -107,6 +107,40 @@
 			"tags": ["practice", "ii-V-I", "beginner"]
 		},
 		{
+			"loopId": "loop_001",
+			"userId": "user_001",
+			"name": "Jazz Loop",
+			"config": {
+				"keySignature": "C",
+				"scale": "Dorian",
+				"chordProgression": ["Dm7", "G7", "Cmaj7"],
+				"tempo": 100,
+				"timeSignature": "4/4",
+				"swing": 0,
+				"instrument": "piano"
+			},
+			"genre": "Jazz",
+			"isShared": false,
+			"tags": ["practice", "ii-V-I", "beginner"]
+		},
+		{
+			"loopId": "loop_001",
+			"userId": "user_001",
+			"name": "Jazz Loop",
+			"config": {
+				"keySignature": "C",
+				"scale": "Dorian",
+				"chordProgression": ["Dm7", "G7", "Cmaj7"],
+				"tempo": 100,
+				"timeSignature": "4/4",
+				"swing": 0,
+				"instrument": "piano"
+			},
+			"genre": "Jazz",
+			"isShared": false,
+			"tags": ["practice", "ii-V-I", "beginner"]
+		},
+		{
 			"loopId": "loop_001 - synthwizard",
 			"userId": "user_003",
 			"name": "Key Madness Back Track",
@@ -252,6 +286,18 @@
 			"name": "Morning Jazz Practice",
 			"duration": 1800,
 			"date": "2024-10-24",
+			"review": {
+				"notes": "Good progress on scales",
+				"rating": 4
+			}
+		},
+		{
+			"sessionId": "session_011",
+			"userId": "user_001",
+			"loopId": "loop_001",
+			"name": "Morning Jazz Practice",
+			"duration": 1200,
+			"date": "2024-10-25",
 			"review": {
 				"notes": "Good progress on scales",
 				"rating": 4

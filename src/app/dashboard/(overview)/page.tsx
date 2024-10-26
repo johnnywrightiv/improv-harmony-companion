@@ -1,4 +1,4 @@
-'use client'; // remove and place in DashboardHome once we actually fetch data if possible rather than declaring in page.tsx
+'use client'; // remove once we remove useEffect & useState for loading simulation (i.e. once we fetch real data)
 
 import React, { useState, useEffect } from 'react';
 import DashboardSkeleton from '@/app/skeletons';
