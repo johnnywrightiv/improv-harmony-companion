@@ -156,7 +156,7 @@ const PracticeSessionPlaceholder = () => {
 				</div>
 
 				{/* Chord Progression Display */}
-				<div className="mt-8">
+				<div className="mt-12">
 					<div className="flex flex-wrap justify-center gap-4 px-4">
 						{[1, 2, 3, 4].map((i) => (
 							<div key={i} className="relative">
@@ -169,35 +169,33 @@ const PracticeSessionPlaceholder = () => {
 										</div>
 									</div>
 								</div>
-								<div className="absolute -left-2 top-1/2 h-6 w-6 -translate-y-1/2 rounded-full bg-secondary/50" />
-								<div className="absolute -right-2 top-1/2 h-6 w-6 -translate-y-1/2 rounded-full bg-secondary/50" />
 							</div>
 						))}
 					</div>
 				</div>
 
 				{/* Scale Display */}
-				<div className="justify-center">
-					<div className="flex items-center justify-center">
+				<div className="justify-center space-y-4">
+					<div className="my-4 flex items-center justify-center">
 						<h3 className="text-sm font-semibold sm:text-xl">Major</h3>
 						<div className="flex flex-wrap justify-center gap-2">
 							{[1, 2, 3, 4, 5, 6, 7].map((i) => (
 								<div
 									key={i}
-									className="flex h-10 w-10 items-center justify-center rounded bg-secondary"
+									className="flex h-6 w-6 items-center justify-center rounded bg-secondary"
 								>
 									<div className="text-xs text-muted-foreground">•</div>
 								</div>
 							))}
 						</div>
 					</div>
-					<div className="mb-2 flex items-center justify-center">
+					<div className="my-2 flex items-center justify-center">
 						<h3 className="text-sm font-semibold sm:text-xl">Minor</h3>
 						<div className="flex flex-wrap justify-center gap-2">
 							{[1, 2, 3, 4, 5, 6, 7].map((i) => (
 								<div
 									key={i}
-									className="flex h-10 w-10 items-center justify-center rounded bg-secondary"
+									className="flex h-6 w-6 items-center justify-center rounded bg-secondary"
 								>
 									<div className="text-xs text-muted-foreground">•</div>
 								</div>
