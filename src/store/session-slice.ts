@@ -3,6 +3,12 @@ import { AppThunk } from './store';
 
 type ToneSet = 'click' | 'clave' | 'blip' | 'beep';
 
+interface Chord {
+	name: string;
+	tones: string[];
+	romanNumeral: string;
+}
+
 interface SessionState {
 	config: {
 		isActive: boolean;
@@ -23,6 +29,8 @@ interface SessionState {
 			| 'augmented';
 		timeSignature: string;
 		chordsNotes: string;
+		chords: Chord[];
+		currentChordIndex: number;
 		useMetronome: boolean;
 		sessionDuration: number;
 		tempo: number;
@@ -78,6 +86,13 @@ const initialState: SessionState = {
 		scaleType: 'major',
 		timeSignature: '4/4',
 		chordsNotes: '',
+		chords: [
+			{ name: 'C', tones: ['C', 'E', 'G'], romanNumeral: 'I' },
+			{ name: 'A', tones: ['A', 'C', 'E'], romanNumeral: 'vi' },
+			{ name: 'G7', tones: ['G', 'B', 'D', 'F'], romanNumeral: 'V7' },
+			{ name: 'Em', tones: ['E', 'G', 'B'], romanNumeral: 'iii' },
+		],
+		currentChordIndex: 0,
 		useMetronome: true,
 		sessionDuration: 30,
 		tempo: 120,
@@ -193,6 +208,47 @@ const sessionSlice = createSlice({
 		updateSessionRating: (state, action: PayloadAction<number>) => {
 			state.config.sessionRating = action.payload;
 		},
+		setCurrentChordIndex: (state, action: PayloadAction<number>) => {
+			state.config.currentChordIndex = action.payload;
+		},
+		updateChord: (
+			state,
+			action: PayloadAction<{ index: number; chord: Chord }>
+		) => {
+			state.config.chords[action.payload.index] = action.payload.chord;
+		},
+		addChord: (state, action: PayloadAction<Chord>) => {
+			state.config.chords.push(action.payload);
+		},
+		moveChord: (
+			state,
+			action: PayloadAction<{ index: number; direction: 'left' | 'right' }>
+		) => {
+			const { index, direction } = action.payload;
+			if (direction === 'left' && index > 0) {
+				[state.config.chords[index - 1], state.config.chords[index]] = [
+					state.config.chords[index],
+					state.config.chords[index - 1],
+				];
+			} else if (
+				direction === 'right' &&
+				index < state.config.chords.length - 1
+			) {
+				[state.config.chords[index], state.config.chords[index + 1]] = [
+					state.config.chords[index + 1],
+					state.config.chords[index],
+				];
+			}
+		},
+		deleteChord: (state, action: PayloadAction<number>) => {
+			state.config.chords.splice(action.payload, 1);
+		},
+		setPlaybackStatus: (
+			state,
+			action: PayloadAction<'playing' | 'paused' | 'stopped'>
+		) => {
+			state.playback.status = action.payload;
+		},
 	},
 });
 
@@ -213,6 +269,12 @@ export const {
 	addSession,
 	updateSession,
 	updateSessionRating,
+	setCurrentChordIndex,
+	updateChord,
+	addChord,
+	moveChord,
+	deleteChord,
+	setPlaybackStatus,
 } = sessionSlice.actions;
 
 // Thunk action

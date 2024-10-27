@@ -1,50 +1,40 @@
+import {
+	ChordAudioService,
+	chordAudio,
+} from '@/lib/services/chord-audio-service';
+
 export type MetronomeStatus = 'playing' | 'paused' | 'stopped';
 export type ToneSet = 'click' | 'clave' | 'blip' | 'beep';
 
 export class MetronomeService {
-	private audioContext: AudioContext | null;
-	private gainNode: GainNode | null;
-	private schedulerTimer: number | null;
-	private nextNoteTime: number;
-	private currentBeat: number;
-	private tempo: number;
-	private beatsPerBar: number;
-	private status: MetronomeStatus;
-	private isEnabled: boolean;
-	private volume: number;
-	private toneSet: ToneSet;
-	private strongBeatBuffers: Record<ToneSet, AudioBuffer | null>;
-	private weakBeatBuffers: Record<ToneSet, AudioBuffer | null>;
-	private isCompoundTime: boolean;
-	private lookAhead: number = 25.0;
-	private scheduleAheadTime: number = 0.1;
+	private audioContext: AudioContext | null = null;
+	private gainNode: GainNode | null = null;
+	private schedulerTimer: number | null = null;
+	private nextNoteTime: number = 0.0;
+	private currentBeat: number = 0;
+	private tempo: number = 120;
+	private beatsPerBar: number = 4;
+	private status: MetronomeStatus = 'stopped';
+	private isEnabled: boolean = false;
+	private volume: number = 0.5;
+	private toneSet: ToneSet = 'click';
+	private strongBeatBuffers: Record<ToneSet, AudioBuffer | null> = {
+		click: null,
+		clave: null,
+		blip: null,
+		beep: null,
+	};
+	private weakBeatBuffers: Record<ToneSet, AudioBuffer | null> = {
+		click: null,
+		clave: null,
+		blip: null,
+		beep: null,
+	};
+	private isCompoundTime: boolean = false;
+	private readonly lookAhead: number = 25.0;
+	private readonly scheduleAheadTime: number = 0.1;
 
-	constructor() {
-		this.audioContext = null;
-		this.gainNode = null;
-		this.schedulerTimer = null;
-		this.nextNoteTime = 0.0;
-		this.currentBeat = 0;
-		this.tempo = 120;
-		this.beatsPerBar = 4;
-		this.status = 'stopped';
-		this.isEnabled = false;
-		this.volume = 0.5;
-		this.toneSet = 'click';
-		this.strongBeatBuffers = {
-			click: null,
-			clave: null,
-			blip: null,
-			beep: null,
-		};
-		this.weakBeatBuffers = {
-			click: null,
-			clave: null,
-			blip: null,
-			beep: null,
-		};
-		this.isCompoundTime = false;
-	}
+	// Removed constructor as it's not necessary with property initializers
 
 	private async loadAudioFile(url: string): Promise<AudioBuffer> {
 		if (!this.audioContext) throw new Error('AudioContext not initialized');
@@ -107,11 +97,7 @@ export class MetronomeService {
 	}
 
 	private getTrueTempoForSubdivision(): number {
-		if (this.isCompoundTime) {
-			// For any X/8 time, double the tempo to fit X beats in the same space
-			return this.tempo * 2;
-		}
-		return this.tempo;
+		return this.isCompoundTime ? this.tempo * 2 : this.tempo;
 	}
 
 	private getEffectiveBeatsPerBar(): number {
@@ -124,9 +110,26 @@ export class MetronomeService {
 		this.currentBeat = (this.currentBeat + 1) % this.getEffectiveBeatsPerBar();
 	}
 
+	protected tickCallback?: () => void;
+	private readonly visualDelay: number = 20; // 20ms delay for visual feedback
+
+	public setTickCallback(callback: () => void) {
+		this.tickCallback = callback;
+	}
+
+	private nextNote() {
+		if (this.tickCallback) {
+			// Trigger visual feedback for the current beat
+			this.tickCallback();
+		}
+
+		const secondsPerBeat = 60.0 / this.getTrueTempoForSubdivision();
+		this.nextNoteTime += secondsPerBeat;
+		this.currentBeat = (this.currentBeat + 1) % this.getEffectiveBeatsPerBar();
+	}
+
 	private scheduleNote() {
 		if (!this.audioContext) return;
-		// For all time signatures, only accent the first beat
 		const isStrongBeat = this.currentBeat === 0;
 		this.playSound(this.nextNoteTime, isStrongBeat);
 	}
@@ -152,21 +155,15 @@ export class MetronomeService {
 		this.audioContext = new AudioContext();
 		this.gainNode = this.audioContext.createGain();
 		this.gainNode.connect(this.audioContext.destination);
-		this.setVolume(this.volume);
+		this.setVolume(this.volume * 100);
 		await this.loadToneSets();
 	}
 
 	public setTimeSignature(timeSignature: string) {
 		const [numerator, denominator] = timeSignature.split('/').map(Number);
 
-		if (denominator === 8) {
-			// Any X/8 time signature gets X beats with first beat accented
-			this.isCompoundTime = true;
-			this.beatsPerBar = numerator;
-		} else {
-			this.isCompoundTime = false;
-			this.beatsPerBar = numerator;
-		}
+		this.isCompoundTime = denominator === 8;
+		this.beatsPerBar = numerator;
 	}
 
 	public setToneSet(toneSet: ToneSet) {
@@ -185,21 +182,25 @@ export class MetronomeService {
 	}
 
 	public setVolume(newVolume: number) {
-		this.volume = newVolume / 100;
+		this.volume = Math.max(0, Math.min(100, newVolume)) / 100;
 		if (this.gainNode) {
-			this.gainNode.gain.value = this.volume;
+			this.gainNode.gain.setValueAtTime(
+				this.volume,
+				this.audioContext?.currentTime || 0
+			);
 		}
 	}
 
 	public start() {
-		if (!this.isEnabled || this.status === 'playing') return;
+		if (!this.isEnabled || this.status === 'playing' || !this.audioContext)
+			return;
 
-		if (this.audioContext?.state === 'suspended') {
+		if (this.audioContext.state === 'suspended') {
 			this.audioContext.resume();
 		}
 
 		this.status = 'playing';
-		this.nextNoteTime = this.audioContext!.currentTime;
+		this.nextNoteTime = this.audioContext.currentTime;
 		this.scheduler();
 	}
 
@@ -207,7 +208,7 @@ export class MetronomeService {
 		if (this.status !== 'playing') return;
 
 		this.status = 'paused';
-		if (this.schedulerTimer) {
+		if (this.schedulerTimer !== null) {
 			window.clearTimeout(this.schedulerTimer);
 			this.schedulerTimer = null;
 		}
@@ -217,7 +218,7 @@ export class MetronomeService {
 		if (this.status === 'stopped') return;
 
 		this.status = 'stopped';
-		if (this.schedulerTimer) {
+		if (this.schedulerTimer !== null) {
 			window.clearTimeout(this.schedulerTimer);
 			this.schedulerTimer = null;
 		}
@@ -233,4 +234,83 @@ export class MetronomeService {
 	}
 }
 
+export class EnhancedMetronomeService extends MetronomeService {
+	private chords: { name: string; duration: number }[] = [];
+	private currentChordIndex: number = 0;
+	private onChordChange?: (index: number) => void;
+
+	public setChordProgression(
+		chords: { name: string }[] | undefined,
+		timeSignature: string
+	) {
+		if (!chords || chords.length === 0) {
+			this.chords = [];
+			return;
+		}
+		const [numerator] = timeSignature.split('/').map(Number);
+		this.chords = chords.map((chord) => ({
+			name: chord.name,
+			duration: numerator,
+		}));
+	}
+
+	public setChordChangeCallback(callback: (index: number) => void) {
+		this.onChordChange = callback;
+	}
+
+	protected override scheduleNote() {
+		if (!this.audioContext) return;
+
+		super.scheduleNote();
+
+		if (this.currentBeat === 0 && this.chords.length > 0) {
+			const currentChord = this.chords[this.currentChordIndex];
+			const barDuration =
+				(60 / this.getTrueTempoForSubdivision()) * currentChord.duration;
+			chordAudio.playChord(currentChord.name, this.nextNoteTime, barDuration);
+
+			if (this.onChordChange) {
+				const timeUntilChange =
+					(this.nextNoteTime - this.audioContext.currentTime) * 1000;
+				setTimeout(
+					() => this.onChordChange!(this.currentChordIndex),
+					timeUntilChange
+				);
+			}
+
+			this.currentChordIndex =
+				(this.currentChordIndex + 1) % this.chords.length;
+		}
+	}
+
+	public override start() {
+		super.start();
+		if (this.isEnabled) {
+			chordAudio.setEnabled(true);
+		}
+	}
+
+	public override stop() {
+		super.stop();
+		this.currentChordIndex = 0;
+		chordAudio.setEnabled(false);
+	}
+
+	public override pause() {
+		super.pause();
+		chordAudio.setEnabled(false);
+	}
+
+	public override async initialize() {
+		await super.initialize();
+		await chordAudio.initialize();
+	}
+
+	public override cleanup() {
+		super.cleanup();
+		chordAudio.cleanup();
+	}
+}
+
 export const metronome = new MetronomeService();
+export const enhancedMetronome = new EnhancedMetronomeService();

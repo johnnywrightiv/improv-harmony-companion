@@ -15,6 +15,7 @@ import { ChordEditForm } from '@/components/chord-edit-form';
 interface Chord {
 	name: string;
 	tones: string[];
+	romanNumeral: string;
 }
 
 interface ChordProgressionDisplayProps {
@@ -23,12 +24,13 @@ interface ChordProgressionDisplayProps {
 }
 
 const COMMON_CHORDS: Chord[] = [
-	{ name: 'C', tones: ['C', 'E', 'G'] },
-	{ name: 'Dm', tones: ['D', 'F', 'A'] },
-	{ name: 'Em', tones: ['E', 'G', 'B'] },
-	{ name: 'F', tones: ['F', 'A', 'C'] },
-	{ name: 'G', tones: ['G', 'B', 'D'] },
-	{ name: 'Am', tones: ['A', 'C', 'E'] },
+	{ name: 'C', tones: ['C', 'E', 'G'], romanNumeral: 'I' },
+	{ name: 'Dm', tones: ['D', 'F', 'A'], romanNumeral: 'ii' },
+	{ name: 'Em', tones: ['E', 'G', 'B'], romanNumeral: 'iii' },
+	{ name: 'F', tones: ['F', 'A', 'C'], romanNumeral: 'IV' },
+	{ name: 'G', tones: ['G', 'B', 'D'], romanNumeral: 'V' },
+	{ name: 'Am', tones: ['A', 'C', 'E'], romanNumeral: 'vi' },
+	{ name: 'Bdim', tones: ['B', 'D', 'F'], romanNumeral: 'vii°' },
 ];
 
 const ChordProgressionDisplay: React.FC<ChordProgressionDisplayProps> = ({
@@ -70,7 +72,9 @@ const ChordProgressionDisplay: React.FC<ChordProgressionDisplayProps> = ({
 	};
 
 	const handleSwapChord = (index: number) => {
-		dispatch({ type: 'session/swapChord', payload: index });
+		// You might want to implement a chord swap feature in your slice
+		// For now, we'll just log it
+		console.log('Swap chord at index:', index);
 	};
 
 	const renderNavigationButtons = (index: number) => (
@@ -116,7 +120,7 @@ const ChordProgressionDisplay: React.FC<ChordProgressionDisplayProps> = ({
 								chord={chord}
 								isActive={index === currentChordIndex}
 								onClick={() =>
-									alert(`Chord: ${chord.name}`)
+									alert(`Chord: ${chord.name} (${chord.romanNumeral})`)
 								}
 							/>
 							<ChordActionsMenu
@@ -146,7 +150,7 @@ const ChordProgressionDisplay: React.FC<ChordProgressionDisplayProps> = ({
 							key={chord.name}
 							onClick={() => handleAddChord(chord)}
 						>
-							{chord.name}
+							{chord.name} ({chord.romanNumeral})
 						</DropdownMenuItem>
 					))}
 				</DropdownMenuContent>

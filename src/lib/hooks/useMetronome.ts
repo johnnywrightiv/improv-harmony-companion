@@ -1,29 +1,50 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store/store';
-import { metronome } from '../services/metronome-service';
+import { enhancedMetronome } from '@/lib/services/metronome-service';
 
 export const useMetronome = () => {
+	const dispatch = useDispatch();
+
+	// Redux selectors
 	const {
 		config,
 		metronome: metronomeState,
 		playback,
+		chords,
 	} = useSelector((state: RootState) => state.sessions);
-
 	const userToneSet = useSelector(
 		(state: RootState) => state.user.settings.audioPreferences.toneSet
 	);
 
-	// Initialize metronome on mount
+	// Initialize enhanced metronome on mount
 	useEffect(() => {
-		metronome.initialize();
-		return () => metronome.cleanup();
+		enhancedMetronome.initialize();
+		return () => {
+			enhancedMetronome.cleanup();
+		};
 	}, []);
 
 	// Handle metronome enabled state
 	useEffect(() => {
-		metronome.setEnabled(config.useMetronome);
+		enhancedMetronome.setEnabled(config.useMetronome);
 	}, [config.useMetronome]);
+
+	// Set up chord progression
+	useEffect(() => {
+		enhancedMetronome.setChordProgression(chords, config.timeSignature);
+	}, [chords, config.timeSignature]);
+
+	// Set up callbacks for both chord changes and visual feedback
+	useEffect(() => {
+		enhancedMetronome.setTickCallback(() => {
+			window.dispatchEvent(new Event('metronomeTick'));
+		});
+
+		enhancedMetronome.setChordChangeCallback((index) => {
+			dispatch({ type: 'session/setCurrentChordIndex', payload: index });
+		});
+	}, [dispatch]);
 
 	// Handle playback state changes
 	useEffect(() => {
@@ -31,34 +52,34 @@ export const useMetronome = () => {
 
 		switch (playback.status) {
 			case 'playing':
-				metronome.start();
+				enhancedMetronome.start();
 				break;
 			case 'paused':
-				metronome.pause();
+				enhancedMetronome.pause();
 				break;
 			case 'stopped':
-				metronome.stop();
+				enhancedMetronome.stop();
 				break;
 		}
 	}, [playback.status, config.useMetronome]);
 
 	// Handle tempo changes
 	useEffect(() => {
-		metronome.setTempo(config.tempo);
+		enhancedMetronome.setTempo(config.tempo);
 	}, [config.tempo]);
 
 	// Handle time signature changes
 	useEffect(() => {
-		metronome.setTimeSignature(config.timeSignature);
+		enhancedMetronome.setTimeSignature(config.timeSignature);
 	}, [config.timeSignature]);
 
 	// Handle volume changes
 	useEffect(() => {
-		metronome.setVolume(metronomeState.volume);
+		enhancedMetronome.setVolume(metronomeState.volume);
 	}, [metronomeState.volume]);
 
 	// Handle tone set changes
 	useEffect(() => {
-		metronome.setToneSet(userToneSet);
+		enhancedMetronome.setToneSet(userToneSet);
 	}, [userToneSet]);
 };
