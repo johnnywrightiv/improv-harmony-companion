@@ -16,7 +16,6 @@ export class MetronomeService {
 	private strongBeatBuffers: Record<ToneSet, AudioBuffer | null>;
 	private weakBeatBuffers: Record<ToneSet, AudioBuffer | null>;
 	private isCompoundTime: boolean;
-	private accentPattern: number[];
 	private lookAhead: number = 25.0;
 	private scheduleAheadTime: number = 0.1;
 
@@ -45,7 +44,6 @@ export class MetronomeService {
 			beep: null,
 		};
 		this.isCompoundTime = false;
-		this.accentPattern = [1]; // 1 for accent, 0 for no accent
 	}
 
 	private async loadAudioFile(url: string): Promise<AudioBuffer> {
@@ -110,8 +108,7 @@ export class MetronomeService {
 
 	private getTrueTempoForSubdivision(): number {
 		if (this.isCompoundTime) {
-			// For compound time (e.g., 7/8), double the tempo to fit more beats
-			// in the same space as simple time
+			// For any X/8 time, double the tempo to fit X beats in the same space
 			return this.tempo * 2;
 		}
 		return this.tempo;
@@ -129,7 +126,8 @@ export class MetronomeService {
 
 	private scheduleNote() {
 		if (!this.audioContext) return;
-		const isStrongBeat = this.accentPattern[this.currentBeat] === 1;
+		// For all time signatures, only accent the first beat
+		const isStrongBeat = this.currentBeat === 0;
 		this.playSound(this.nextNoteTime, isStrongBeat);
 	}
 
@@ -150,23 +148,6 @@ export class MetronomeService {
 		);
 	}
 
-	private getAccentPattern(numerator: number): number[] {
-		switch (numerator) {
-			case 6:
-				return [1, 0, 0, 0, 0, 0]; // 6/8: (1+5)
-			case 7:
-				return [1, 0, 0, 1, 0, 0, 0]; // 7/8: (3+4)
-			case 9:
-				return [1, 0, 0, 1, 0, 0, 1, 0, 0]; // 9/8: (3+3+3)
-			case 11:
-				return [1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0]; // 11/8: (3+3+5)
-			case 13:
-				return [1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0]; // 13/8: (3+3+3+4)
-			default:
-				return Array(numerator).fill(0).fill(1, 0, 1); // Default: accent first beat only
-		}
-	}
-
 	public async initialize() {
 		this.audioContext = new AudioContext();
 		this.gainNode = this.audioContext.createGain();
@@ -179,13 +160,12 @@ export class MetronomeService {
 		const [numerator, denominator] = timeSignature.split('/').map(Number);
 
 		if (denominator === 8) {
+			// Any X/8 time signature gets X beats with first beat accented
 			this.isCompoundTime = true;
 			this.beatsPerBar = numerator;
-			this.accentPattern = this.getAccentPattern(numerator);
 		} else {
 			this.isCompoundTime = false;
 			this.beatsPerBar = numerator;
-			this.accentPattern = Array(numerator).fill(0).fill(1, 0, 1); // Accent first beat only
 		}
 	}
 
