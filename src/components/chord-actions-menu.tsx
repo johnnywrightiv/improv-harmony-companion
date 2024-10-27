@@ -1,5 +1,5 @@
 import React from 'react';
-import { MoreVertical, Edit2, Shuffle, X } from 'lucide-react';
+import { MoreVertical, Edit2, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
 	DropdownMenu,
@@ -10,13 +10,11 @@ import {
 
 interface ChordActionsMenuProps {
 	onEdit: () => void;
-	onSwap: () => void;
 	onDelete: () => void;
 }
 
 export const ChordActionsMenu: React.FC<ChordActionsMenuProps> = ({
 	onEdit,
-	onSwap,
 	onDelete,
 }) => (
 	<div className="absolute right-1 top-1">
@@ -30,10 +28,6 @@ export const ChordActionsMenu: React.FC<ChordActionsMenuProps> = ({
 				<DropdownMenuItem onClick={onEdit}>
 					<Edit2 className="mr-2 h-4 w-4" />
 					Edit
-				</DropdownMenuItem>
-				<DropdownMenuItem onClick={onSwap}>
-					<Shuffle className="mr-2 h-4 w-4" />
-					Swap
 				</DropdownMenuItem>
 				<DropdownMenuItem onClick={onDelete} className="text-destructive">
 					<X className="mr-2 h-4 w-4" />
