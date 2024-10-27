@@ -56,7 +56,7 @@ const SetPracticeGoalDialog = () => {
 					className="flex h-[48px] items-center justify-start gap-2 rounded-[--radius] border border-border bg-background p-2 px-3 text-sm font-medium text-muted-foreground hover:bg-secondary/30 hover:text-card-foreground"
 				>
 					<CircleCheck className="w-6" />
-					<div>Set Goal</div>
+					<div>Set Your Goal</div>
 				</Button>
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[425px]">

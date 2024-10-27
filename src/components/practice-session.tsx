@@ -6,10 +6,12 @@ import SessionReviewModal from '@/components/session-review-modal';
 import ChordProgressionDisplay from '@/components/chord-progression-display';
 import ScaleDisplay from './scale-display';
 import { Card } from './ui/card';
+import { useMetronome } from '@/lib/hooks/useMetronome';
 
 interface PracticeSessionProps {}
 
 const PracticeSession: React.FC<PracticeSessionProps> = () => {
+	useMetronome();
 	const [isConfigOpen, setIsConfigOpen] = React.useState(false);
 	const [isReviewOpen, setIsReviewOpen] = React.useState(false);
 	const [currentChordIndex, setCurrentChordIndex] = React.useState(0);

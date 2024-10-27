@@ -187,10 +187,8 @@ export default function SessionConfig({
 											'5/4',
 											'6/8',
 											'7/8',
-											'8/8',
 											'9/8',
 											'11/8',
-											'12/8',
 											'13/8',
 										].map((time) => (
 											<SelectItem key={time} value={time}>

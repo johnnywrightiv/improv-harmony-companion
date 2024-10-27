@@ -24,6 +24,7 @@ interface UserState {
 		audioPreferences: {
 			defaultVolume: number;
 			defaultTempo: number;
+			toneSet: 'click' | 'clave' | 'blip' | 'beep';
 		};
 		notifications: {
 			newLoops: boolean;
@@ -60,6 +61,7 @@ const initialState: UserState = {
 		audioPreferences: {
 			defaultVolume: 70,
 			defaultTempo: 100,
+			toneSet: 'click',
 		},
 		notifications: {
 			newLoops: true,
@@ -114,6 +116,15 @@ const userSlice = createSlice({
 			state.stats.goalTracking.currentWeeklyProgress =
 				action.payload.weeklyProgress;
 		},
+		updateAudioPreferences: (
+			state,
+			action: PayloadAction<Partial<UserState['settings']['audioPreferences']>>
+		) => {
+			state.settings.audioPreferences = {
+				...state.settings.audioPreferences,
+				...action.payload,
+			};
+		},
 	},
 });
 
@@ -123,6 +134,7 @@ export const {
 	updateUserStats,
 	setPracticeGoal,
 	updateGoalProgress,
+	updateAudioPreferences,
 } = userSlice.actions;
 
 export default userSlice.reducer;

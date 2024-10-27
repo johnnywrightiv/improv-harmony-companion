@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	Select,
@@ -14,11 +14,30 @@ import TimerProgress from './timer-progress';
 export const MusicalControlsBar: React.FC = () => {
 	const dispatch = useDispatch();
 	const { config } = useSelector((state: RootState) => state.sessions);
+	const [tempTempo, setTempTempo] = useState(config.tempo.toString());
+
+	useEffect(() => {
+		setTempTempo(config.tempo.toString());
+	}, [config.tempo]);
 
 	const handleTempoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const value = parseInt(e.target.value);
-		if (value >= 40 && value <= 208) {
+		const inputValue = e.target.value;
+		setTempTempo(inputValue);
+
+		const value = parseInt(inputValue);
+		if (!isNaN(value) && value >= 40 && value <= 208) {
 			dispatch(updateConfig({ tempo: value }));
+		}
+	};
+
+	const handleTempoBlur = () => {
+		const value = parseInt(tempTempo);
+		if (isNaN(value) || value < 40) {
+			setTempTempo('40');
+			dispatch(updateConfig({ tempo: 40 }));
+		} else if (value > 208) {
+			setTempTempo('208');
+			dispatch(updateConfig({ tempo: 208 }));
 		}
 	};
 
@@ -58,10 +77,8 @@ export const MusicalControlsBar: React.FC = () => {
 								'5/4',
 								'6/8',
 								'7/8',
-								'8/8',
 								'9/8',
 								'11/8',
-								'12/8',
 								'13/8',
 							].map((time) => (
 								<SelectItem key={time} value={time}>
@@ -140,11 +157,14 @@ export const MusicalControlsBar: React.FC = () => {
 					</label>
 					<div className="mx-2 flex items-center gap-1 md:gap-2">
 						<input
-							type="number"
+							type="text"
+							inputMode="numeric"
+							pattern="[0-9]*"
 							min="40"
 							max="208"
-							value={config.tempo}
+							value={tempTempo}
 							onChange={handleTempoChange}
+							onBlur={handleTempoBlur}
 							className="w-[60px] rounded-md border border-input bg-card px-2 py-2 text-sm md:w-[80px] md:px-3"
 						/>
 						<span className="hidden text-xs text-muted-foreground sm:block md:text-sm">

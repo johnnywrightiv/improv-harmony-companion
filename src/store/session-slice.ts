@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk } from './store';
 
+type ToneSet = 'click' | 'clave' | 'blip' | 'beep';
+
 interface SessionState {
 	config: {
 		isActive: boolean;
@@ -26,6 +28,7 @@ interface SessionState {
 		tempo: number;
 		sessionComments: string;
 		sessionRating: number;
+		toneSet: ToneSet;
 	};
 	timer: {
 		status: 'playing' | 'paused' | 'stopped';
@@ -75,11 +78,12 @@ const initialState: SessionState = {
 		scaleType: 'major',
 		timeSignature: '4/4',
 		chordsNotes: '',
-		useMetronome: false,
+		useMetronome: true,
 		sessionDuration: 30,
 		tempo: 120,
 		sessionComments: '',
 		sessionRating: 0,
+		toneSet: 'click',
 	},
 	timer: {
 		status: 'stopped',
