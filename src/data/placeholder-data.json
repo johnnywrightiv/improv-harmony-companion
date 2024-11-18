@@ -92,7 +92,7 @@
 		{
 			"loopId": "loop_001",
 			"userId": "user_001",
-			"name": "Jazz Loop",
+			"name": "ii-V-I Loop",
 			"config": {
 				"keySignature": "C",
 				"scale": "Dorian",
@@ -107,36 +107,36 @@
 			"tags": ["practice", "ii-V-I", "beginner"]
 		},
 		{
-			"loopId": "loop_001",
+			"loopId": "loop_002",
 			"userId": "user_001",
-			"name": "Jazz Loop",
+			"name": "Up Tempo Loop",
 			"config": {
-				"keySignature": "C",
-				"scale": "Dorian",
+				"keySignature": "D",
+				"scale": "Mixolydian",
 				"chordProgression": ["Dm7", "G7", "Cmaj7"],
-				"tempo": 100,
+				"tempo": 130,
 				"timeSignature": "4/4",
 				"swing": 0,
-				"instrument": "piano"
+				"instrument": "guitar"
 			},
-			"genre": "Jazz",
+			"genre": "Funk",
 			"isShared": false,
 			"tags": ["practice", "ii-V-I", "beginner"]
 		},
 		{
-			"loopId": "loop_001",
+			"loopId": "loop_003",
 			"userId": "user_001",
-			"name": "Jazz Loop",
+			"name": "Chill Loop",
 			"config": {
-				"keySignature": "C",
-				"scale": "Dorian",
-				"chordProgression": ["Dm7", "G7", "Cmaj7"],
-				"tempo": 100,
+				"keySignature": "A",
+				"scale": "Minor",
+				"chordProgression": ["Am7", "G7", "Cmaj7"],
+				"tempo": 92,
 				"timeSignature": "4/4",
 				"swing": 0,
 				"instrument": "piano"
 			},
-			"genre": "Jazz",
+			"genre": "Hip Hop",
 			"isShared": false,
 			"tags": ["practice", "ii-V-I", "beginner"]
 		},
@@ -164,8 +164,8 @@
 			"userId": "user_001",
 			"loopId": "loop_001",
 			"name": "Weekend Session",
-			"duration": 3600,
-			"date": "2024-10-13",
+			"duration": 1200,
+			"date": "2024-11-07",
 			"review": {
 				"notes": "Long weekend practice",
 				"rating": 5
@@ -177,7 +177,7 @@
 			"loopId": "loop_001",
 			"name": "Late Practice",
 			"duration": 1500,
-			"date": "2024-10-14",
+			"date": "2024-11-08",
 			"review": {
 				"notes": "Quick but productive",
 				"rating": 4
@@ -189,7 +189,7 @@
 			"loopId": "loop_001",
 			"name": "Evening Practice",
 			"duration": 1800,
-			"date": "2024-10-15",
+			"date": "2024-11-09",
 			"review": {
 				"notes": "Good session",
 				"rating": 4
@@ -201,7 +201,7 @@
 			"loopId": "loop_001",
 			"name": "Afternoon Session",
 			"duration": 2700,
-			"date": "2024-10-16",
+			"date": "2024-11-10",
 			"review": {
 				"notes": "Extended practice",
 				"rating": 4
@@ -212,8 +212,8 @@
 			"userId": "user_001",
 			"loopId": "loop_001",
 			"name": "Morning Practice",
-			"duration": 1800,
-			"date": "2024-10-17",
+			"duration": 2400,
+			"date": "2024-11-11",
 			"review": {
 				"notes": "Regular practice",
 				"rating": 4
@@ -224,8 +224,8 @@
 			"userId": "user_001",
 			"loopId": "loop_001",
 			"name": "Weekend Practice",
-			"duration": 2400,
-			"date": "2024-10-19",
+			"duration": 1800,
+			"date": "2024-11-12",
 			"review": {
 				"notes": "Extended practice session",
 				"rating": 5
@@ -237,7 +237,7 @@
 			"loopId": "loop_001",
 			"name": "Late Night Session",
 			"duration": 1500,
-			"date": "2024-10-20",
+			"date": "2024-11-13",
 			"review": {
 				"notes": "Focus on chord progressions",
 				"rating": 4
@@ -249,7 +249,7 @@
 			"loopId": "loop_001",
 			"name": "Quick Practice",
 			"duration": 900,
-			"date": "2024-10-21",
+			"date": "2024-11-14",
 			"review": {
 				"notes": "Brief warmup",
 				"rating": 3
@@ -261,7 +261,7 @@
 			"loopId": "loop_001",
 			"name": "Afternoon Practice",
 			"duration": 2400,
-			"date": "2024-10-22",
+			"date": "2024-11-15",
 			"review": {
 				"notes": "Extended rhythm work",
 				"rating": 5
@@ -273,7 +273,7 @@
 			"loopId": "loop_001",
 			"name": "Evening Jazz Practice",
 			"duration": 1200,
-			"date": "2024-10-23",
+			"date": "2024-11-16",
 			"review": {
 				"notes": "Short but focused session",
 				"rating": 4
@@ -285,7 +285,19 @@
 			"loopId": "loop_001",
 			"name": "Morning Jazz Practice",
 			"duration": 1800,
-			"date": "2024-10-24",
+			"date": "2024-11-17",
+			"review": {
+				"notes": "Good progress on scales",
+				"rating": 4
+			}
+		},
+		{
+			"sessionId": "session_011",
+			"userId": "user_001",
+			"loopId": "loop_001",
+			"name": "Morning Jazz Practice",
+			"duration": 3000,
+			"date": "2024-11-18",
 			"review": {
 				"notes": "Good progress on scales",
 				"rating": 4
@@ -297,7 +309,55 @@
 			"loopId": "loop_001",
 			"name": "Morning Jazz Practice",
 			"duration": 1200,
-			"date": "2024-10-25",
+			"date": "2024-11-19",
+			"review": {
+				"notes": "Good progress on scales",
+				"rating": 4
+			}
+		},
+		{
+			"sessionId": "session_011",
+			"userId": "user_001",
+			"loopId": "loop_001",
+			"name": "Morning Jazz Practice",
+			"duration": 3700,
+			"date": "2024-11-20",
+			"review": {
+				"notes": "Good progress on scales",
+				"rating": 4
+			}
+		},
+		{
+			"sessionId": "session_011",
+			"userId": "user_001",
+			"loopId": "loop_001",
+			"name": "Morning Jazz Practice",
+			"duration": 2700,
+			"date": "2024-11-21",
+			"review": {
+				"notes": "Good progress on scales",
+				"rating": 4
+			}
+		},
+		{
+			"sessionId": "session_011",
+			"userId": "user_001",
+			"loopId": "loop_001",
+			"name": "Morning Jazz Practice",
+			"duration": 1800,
+			"date": "2024-11-22",
+			"review": {
+				"notes": "Good progress on scales",
+				"rating": 4
+			}
+		},
+		{
+			"sessionId": "session_011",
+			"userId": "user_001",
+			"loopId": "loop_001",
+			"name": "Morning Jazz Practice",
+			"duration": 2400,
+			"date": "2024-11-23",
 			"review": {
 				"notes": "Good progress on scales",
 				"rating": 4

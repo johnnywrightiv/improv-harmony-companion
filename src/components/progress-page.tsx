@@ -102,23 +102,30 @@ const ProgressPage = () => {
 		),
 	};
 
-	// Calculate practice data for chart
 	const practiceData = React.useMemo(() => {
 		const now = new Date();
-		const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+		const oneWeekAgo = new Date(now.getTime() - 9 * 24 * 60 * 60 * 1000);
 
-		return Array.from({ length: 7 }, (_, i) => {
+		return Array.from({ length: 10 }, (_, i) => {
 			const date = new Date(oneWeekAgo.getTime() + i * 24 * 60 * 60 * 1000);
-			const sessionsForDay = userSessions.filter(
-				(session) =>
-					new Date(session.date).toDateString() === date.toDateString()
-			);
+
+			// Format both session dates and current date for consistency
+			const dateKey = date.toISOString().split('T')[0];
+
+			const sessionsForDay = userSessions.filter((session) => {
+				const sessionDateKey = new Date(session.date)
+					.toISOString()
+					.split('T')[0];
+				return sessionDateKey === dateKey;
+			});
+
 			const minutes = sessionsForDay.reduce(
 				(sum, session) => sum + session.duration / 60,
 				0
 			);
+
 			return {
-				date: date.toISOString().split('T')[0],
+				date: dateKey,
 				minutes: minutes,
 			};
 		});
@@ -207,11 +214,11 @@ const ProgressPage = () => {
 									<XAxis dataKey="date" />
 									<YAxis />
 									<Tooltip />
-									<Bar dataKey="minutes" fill="#8884d8" opacity={0.5} />
+									<Bar dataKey="minutes" fill="#bf3b57" opacity={0.5} />
 									<Line
 										type="monotone"
 										dataKey="minutes"
-										stroke="#8884d8"
+										stroke="#bf3b57"
 										strokeWidth={2}
 									/>
 								</ComposedChart>
